@@ -1,0 +1,157 @@
+@charset "UTF-8";
+
+/* gallery_detail CSS */
+
+	#detailWrapper{
+		width:80%;
+		margin:0 auto;
+		height:auto;
+		padding-top:100px;
+	}
+	#detailWrapper .gallery_info{
+		width:50%;
+		height:auto;
+		float:left;
+	}
+	#detailWrapper .gallery_info p{
+		text-align:left;
+		margin:0;
+	}
+	#detailWrapper .gallery_info p.gd_category{
+		font-size:18px;
+	}
+	#detailWrapper .gallery_info p.gd_title{
+		font-size:50px;
+		font-weight:600;
+		line-height:48px;
+		margin-bottom:50px;
+	}
+	
+	#detailWrapper .gallery_info p.gd_content{
+		font-size:16px;
+		line-height:25px;
+		margin-bottom:20px;
+		opacity:0.7;
+	}
+	#detailWrapper .gallery_info p.gd_hashtag{
+	}
+	
+	#detailWrapper .artist_info .profileBtn {
+		width:150px;
+		height:50px;
+		background-color:transparent;
+		color:#fff;
+		border:1px solid #fff;
+		border-radius:50px;
+		transition: background-color 3s;
+  		transition-delay: 1s;
+	}
+	#detailWrapper .artist_info .profileBtn:hover{
+		background-color:#fff;
+		color:#000;
+	}
+	
+	#imageWrapper{
+		width:80%;
+		margin:0 auto;
+		height:auto;
+	}
+	#imageWrapper div{
+		margin-bottom:50px;
+	}
+	#imageWrapper img{
+		width:100%;
+		background-size:cover;
+	}
+	 /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+	
+	
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%; /* Could be more or less, depending on screen size */                          
+    }
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    #detailWrapper .artist_info{
+		width:26%;
+		height:auto;
+		float:right;
+		/* border:1px solid #333; */
+	}
+	.card {
+	  position: absolute;
+	  clip-path: circle(25px at 90% 20%);
+	  padding: 45px 30px;
+	  transition: all ease-in-out 0.3s;
+	  background-color: #ffffff;
+	}
+	.card .card__infoicon {
+	  position: absolute;
+	  right: 32px;
+   	  top: 20px;
+	  font-size: 25px;
+	  color: #000000;
+	  transition: ease-out 0.3s;
+	}
+	.card__title {
+	  margin: 0;
+	  font-size: 25px;
+	  line-height: 1.8;
+	}
+	
+	.card__title span{
+		font-weight:600;
+	}
+	.card__description {
+	  margin: 0;
+	  font-size: 16px;
+	  line-height:20px;
+	  margin-bottom:10px;
+	}
+	.card span.sns_id{
+		position: relative;
+	    top: -7px;
+	}
+	.card:hover, .card:focus {
+	  clip-path: circle(75%);
+	  border-radius: 20px;
+	  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.12), 0px 3px 18px rgba(0, 0, 0, 0.08);
+	  background: #ffffff;
+	  color: #000000;
+	  outline: none;
+	}
+	.card:hover .card__infoicon, .card:focus .card__infoicon {
+	  opacity: 0;
+	}
+	.card:focus {
+	  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.12), 0px 3px 18px rgba(0, 0, 0, 0.08), 0px 0px 0px 4px rgba(0, 0, 0, 0.2);
+	}
+	
+

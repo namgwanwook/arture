@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin_member">
+	<resultMap id="adminMemberResult" type="MemberVO">
+		<result property="id" column="id" />
+        <result property="pwd" column="pwd" />
+        <result property="name" column="name" />
+        <result property="gender" column="gender" />
+        <result property="email" column="email" />
+        <result property="profileImage" column="profileImage" />
+        <result property="profileText" column="profileText" />
+        <result property="sns_i" column="sns_i" />
+        <result property="sns_f" column="sns_f" />
+        <result property="sns_b" column="sns_b" />
+        <result property="joinDate" column="joinDate" />
+	</resultMap> 
+
+	<select id="selectAllMembers" resultMap="adminMemberResult">
+      <![CDATA[
+         select * from o_member	order by joinDate desc	 	
+      ]]>
+	</select>
+	
+	<update id="updatePwd" parameterType="MemberVO">
+		<![CDATA[
+	     update o_member
+	     set pwd=#{pwd}
+	     where
+	     id=#{id}
+      ]]>
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		<![CDATA[
+			delete from o_member where id=#{id}
+		]]>
+	</delete>
+    
+</mapper>
