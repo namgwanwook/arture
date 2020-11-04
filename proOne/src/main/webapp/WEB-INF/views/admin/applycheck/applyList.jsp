@@ -10,10 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <style>
-   .cls1 {text-decoration:none;}
-   .cls2{text-align:center; font-size:30px;}
-  </style>
+<link rel="stylesheet" href="${contextPath}/resources/css/admin.css"/>
   <meta charset="UTF-8">
   <title>신청서 리스트창</title>
 </head>
@@ -21,13 +18,11 @@
 <script type="text/javascript">
 
 
-}
-
 </script>
 <body>
-<h1 align="center">admin - 신청서 목록입니다</h1>
-<table align="center" border="1"  width="80%"  >
-		<tr height="10" align="center" bgcolor="lightgreen">
+<h1 class="label">admin - 신청서 목록입니다</h1>
+<table align="center" border="1"  width="100%"  >
+		<tr class="list_title">
 			<td width="10%">NO.</td>
 			<td width="70%">TITLE</td>
 			<td width="20%">ID</td>

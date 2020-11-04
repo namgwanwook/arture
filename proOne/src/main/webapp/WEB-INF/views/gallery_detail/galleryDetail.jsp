@@ -123,7 +123,7 @@
 			  <c:forEach var="item" items="${imageFileList}" varStatus="status" >
 			  	<div>
 			  		<input  type= "hidden"   name="originalFileName" value="${item.imageFileName }" />
-			  		<img src="${contextPath}/download.do?galleryNO=${gallery.galleryNO}&imageFileName=${item.imageFileName}" id="preview"  />
+			  		<img src="${contextPath}/imageList.do?galleryNO=${gallery.galleryNO}&imageFileName=${item.imageFileName}" id="preview"  />
 			  	</div>
 				</c:forEach>
 			 </c:if>

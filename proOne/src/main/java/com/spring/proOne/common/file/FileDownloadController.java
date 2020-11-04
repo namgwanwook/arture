@@ -43,6 +43,27 @@ public class FileDownloadController {
 		out.close();
 	}
 	
+	@RequestMapping("/imageList.do")
+	   protected void imageList(@RequestParam("imageFileName") String imageFileName,
+	                     @RequestParam("galleryNO") String galleryNO,
+	                          HttpServletResponse response)throws Exception {
+	      OutputStream out = response.getOutputStream();
+	      String downFile = CURR_IMAGE_REPO_PATH + "\\" +galleryNO+"\\"+ imageFileName;
+	      File file = new File(downFile);
+
+	      response.setHeader("Cache-Control", "no-cache");
+	      response.addHeader("Content-disposition", "attachment; fileName=" + imageFileName);
+	      FileInputStream in = new FileInputStream(file);
+	      byte[] buffer = new byte[1024 * 8];
+	      while (true) {
+	         int count = in.read(buffer); 
+	         if (count == -1) 
+	            break;
+	         out.write(buffer, 0, count);
+	      }
+	      in.close();
+	      out.close();
+	   }
 	
 	@RequestMapping("/thumbnails.do")
 	protected void thumbnails(@RequestParam("fileName") String fileName, @RequestParam("id") String id, @RequestParam("originalFileName") String originalfile,
