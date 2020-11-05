@@ -34,7 +34,7 @@ $(document).ready(function () {
 </head>
 <body>
 	<div id="headerWrapper">
-		<div class="menu">
+ 		<div class="menu">
 			<section class="landing-page">
 				<div class="menu-btn"><i class="fas fa-bars"></i></div>
 				<div class="overlay"></div>
@@ -42,8 +42,8 @@ $(document).ready(function () {
 					<ul class="menu-wrapper">
 						<li><a href="${contextPath }/main/main.do">Main</a></li>
 						<li><a href="${contextPath }/gallery/gallery.do">Gallery</a></li>
-						<%-- <li><a href="${contextPath }/mypage/myPageMain.do?id=${member.id}">Profile</a></li> --%>
-						<li><a href="${contextPath }/apply/main.do">Contact</a></li>
+						<li><a href="${contextPath }/mypage/myPageMain.do?id=${member.id}">Profile</a></li>
+						<li><a href="${contextPath }/applyForm/applyForm.do">Contact</a></li>
 					</ul>
 					<div class="menu-underlay"></div>
 				</div>
@@ -59,7 +59,7 @@ $(document).ready(function () {
 			<c:choose>
 					<c:when test="${isLogOn == true && member != null }">
 						<img src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"/>
-						<a href="${contextPath }/mypage/myPageMain.do?id=${member.id}"><span>${member.name}'s Profile</span></a>
+						<a href="${contextPath }/mypage/myPageMain.do"><span>${member.name}'s Profile</span></a>
 						<a href="${contextPath }/member/logout.do">Log Out</a>
 						<c:if test="${member.id == 'admin'}">
 							<a href="${contextPath }/admin/notice/noticeList.do" class="admin">Admin</a>

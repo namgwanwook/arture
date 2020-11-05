@@ -21,4 +21,5 @@ public interface MyPageDAO {
 	public List<GalleryVO> myGallery(String id) throws DataAccessException;//내 게시글 불러오기
 	public boolean confirmPassword(String id,String pwd)throws DataAccessException;//비밀번호확인
 	public void deletemygallery(FavoriteVO favoriteVO)throws DataAccessException;//내 게시글 삭제
+	public int selectOverlappedFavorite(FavoriteVO favoriteVO)throws DataAccessException;//좋아요 중복확인
 }

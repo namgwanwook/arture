@@ -27,20 +27,9 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	
-	function openProfile(){
-		var myModal = document.getElementById('myModal');
-		myModal.style.display="block";
-	}
-	
-	function closeProfile(){
-		// Get the modal
-		document.getElementsByClassName("close")[0].style.display="block";
-		document.getElementById('myModal').style.display = "none";
-	}
-		
 
      function backToList(obj){
-	    obj.action="${contextPath}/member/listMembers.do";
+	    obj.action="${contextPath}/gallery/gallery.do";
 	    obj.submit();
      }
  
@@ -61,7 +50,55 @@
 	         reader.readAsDataURL(input.files[0]);
 	     }
 	 }  
+	 
+ 	 function fn_favorite(url,galleryNO,id){
+		 	
+		    var form = document.createElement("form");
+			var i_id = document.createElement("input");
+			var i_galleryNO = document.createElement("input");
+			var favoriteBtn = document.getElementById("favoriteBtn").style.disabled=false;
+			
+			i_id.name="id";
+			i_id.value=id;
 
+			i_galleryNO.name="galleryNO";
+			i_galleryNO.value=galleryNO;
+
+			form.appendChild(i_id);
+			form.appendChild(i_galleryNO);
+
+			document.body.appendChild(form); 
+		    form.method="post";
+		    form.action=url;
+		    form.submit();
+		 }	 
+	/*  function fn_favorite(galleryNO,id){
+		    var _id=$(id);
+		  	var _galleryNO = $(galleryNO);
+		    $.ajax({
+		       type:"post",
+		       async:false,  
+		       url:"${contextPath}/mypage/addFavorite.do",
+		       dataType:"text",
+		       data: {id:_id},
+		       success:function (data,textStatus){
+		          if(data=='false'){
+		       	    alert("사용가능한 ID입니다.");
+		       	    $('#btnOverlapped').prop("disabled", true);
+		       	    $('#_member_id').prop("disabled", true);
+		       	    $('#id').val(_id);
+		          }else{
+		        	  alert("이미 사용중인 ID입니다.");
+		          }
+		       },
+		       error:function(data,textStatus){
+		          alert("에러가 발생했습니다.");ㅣ
+		       },
+		       complete:function(data,textStatus){
+		          //alert("작업을완료 했습니다");
+		       }
+		    });  //end ajax	 
+		 }	 */
  </script>
 
 </head>
@@ -81,16 +118,16 @@
 				  <span class="card__infoicon">
 				    <i class="fa fa-info"></i>
 				  </span>
-				  <h1 class="card__title"><span>Artist </span>${member.name}</h1>
+				  <h1 class="card__title"><span>Artist </span>${artist.name}</h1>
 				  <p class="card__description">저는 이순신입니다. 즐거운 감상하세요^_^</p>
-				  <c:if test="${not empty member.sns_i && member.sns_i !='null' }">
-					<img src="${contextPath}/resources/image/insta_b.png"/><span class="sns_id"><a href="#">  ${member.sns_i}</a></span>
+				  <c:if test="${not empty artist.sns_i && artist.sns_i !='null' }">
+					<img src="${contextPath}/resources/image/insta_b.png"/><span class="sns_id"><a href="#">  ${artist.sns_i}</a></span>
 					</c:if>
-					<c:if test="${not empty member.sns_f && member.sns_f !='null' }">
-					<img src="${contextPath}/resources/image/facebook_b.png"/><span class="sns_id">  ${member.sns_f} </span>
+					<c:if test="${not empty artist.sns_f && artist.sns_f !='null' }">
+					<img src="${contextPath}/resources/image/facebook_b.png"/><span class="sns_id">  ${artist.sns_f} </span>
 					</c:if>
-					<c:if test="${not empty member.sns_b && member.sns_b !='null' }">
-					<img src="${contextPath}/resources/image/blog_b.png"/><span class="sns_id">  ${member.sns_b} </span>
+					<c:if test="${not empty artist.sns_b && artist.sns_b !='null' }">
+					<img src="${contextPath}/resources/image/blog_b.png"/><span class="sns_id">  ${artist.sns_b} </span>
 				</c:if>
 				</div>
 				
@@ -129,8 +166,9 @@
 			 </c:if>
 		
 	</div>
-	
-	
+	<input type="button" id="favoriteBtn" value="좋아요" onClick="fn_favorite('${contextPath}/mypage/addFavorite.do','${gallery.galleryNO}','${member.id}')"/>
+	<%-- <input type="button" id="favoriteBtn" value="좋아요" onClick="fn_favorite('${gallery.galleryNO}','${member.id}')"/> --%>
+	<input type="button" value="리스트로 돌아가기" onClick="backToList(this.form)">
 	
 	
 	<%-- <form name="frmArticle" method="post" action="${contextPath}"

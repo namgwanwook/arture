@@ -1,4 +1,4 @@
-package com.spring.proOne.common.file;
+ package com.spring.proOne.common.file;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,7 +45,7 @@ public class FileDownloadController {
 	
 	@RequestMapping("/imageList.do")
 	   protected void imageList(@RequestParam("imageFileName") String imageFileName,
-	                     @RequestParam("galleryNO") String galleryNO,
+	                     @RequestParam("galleryNO") int galleryNO,
 	                          HttpServletResponse response)throws Exception {
 	      OutputStream out = response.getOutputStream();
 	      String downFile = CURR_IMAGE_REPO_PATH + "\\" +galleryNO+"\\"+ imageFileName;
