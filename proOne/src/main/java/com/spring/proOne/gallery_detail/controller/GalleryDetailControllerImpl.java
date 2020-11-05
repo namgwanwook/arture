@@ -43,7 +43,7 @@ public class GalleryDetailControllerImpl implements GalleryDetailController{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		mav.addObject("member", memberVO);
+		mav.addObject("artist", memberVO);
 		mav.addObject("gallery", galleryVO);
 		mav.addObject("galleryMap", galleryMap);
 		return mav;

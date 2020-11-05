@@ -49,7 +49,7 @@ public class MyPageControllerImpl implements MyPageController {
 	
 	memberVO = mypageservice.selectMyInfo(memberVO.getId()); //세션에있던 memberVO 객체를 이용해 DB에 저장된 memberVO 객체로 초기화 한다.
 	
-	session.setAttribute("memberInfo",memberVO);
+	session.setAttribute("member",memberVO);
 	
 	String myID=memberVO.getId();
     List<GalleryVO> favoritelist=mypageservice.myFavorite(myID); //내가 좋아요를 누른 겔러리들
@@ -114,7 +114,7 @@ public class MyPageControllerImpl implements MyPageController {
 		}
 
 		session = multipartRequest.getSession();
-		memberVO = (MemberVO) session.getAttribute("memberInfo");
+		memberVO = (MemberVO) session.getAttribute("member");
 		String id = memberVO.getId();
 		usermap.put("profileImage",imageFileName);
 		usermap.put("id", id);

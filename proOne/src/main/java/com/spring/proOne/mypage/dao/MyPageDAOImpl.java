@@ -45,9 +45,8 @@ public class MyPageDAOImpl implements MyPageDAO{
 		for(FavoriteVO g : myFavoriteList) {
 			GalleryVO v = sqlSession.selectOne("mapper.mypage.favoritegallery", g.getGalleryNO());
 			favoriteGallary.add(v);
-			}		
+			}
 		}
-			
 		return favoriteGallary;
 	}
 

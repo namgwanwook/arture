@@ -9,76 +9,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
-	#myinfo{
-	text-align: left;
-    margin-left: 30px;
-	}
-	#preview{
-	border-radius: 120px;
-    float: left;
-	}
-	#m_preview{
-	border-radius: 120px;
-    float: left;
-	}
-	p{
-	text-align: center;
-	}
-	        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: pink;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%; /* Could be more or less, depending on screen size */                          
-        }
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        tr{
-        width: 100%;
-        }
-        td{
-        width: 100%;
-        }
-        table{
-        width: 80%;
-        }
-        #imagenamespace{
-        width:1px;
-        }
-        
-</style>
+<link rel="stylesheet" href="${contextPath}/resources/css/mypage.css"/>
 <title>Insert title here</title>
 
 <script type="text/javascript">
-function fn_remove(url,id,galleryNO){
+function fn_remove(url,id,galleryNO,num){
 	var answer=confirm("삭제하시겠습니까?");
 	if(answer==true){
+		if(num=='2'){
+			
+		}
 		var form = document.createElement("form");
 		var i_id = document.createElement("input");
 		var i_galleryNO = document.createElement("input");
@@ -113,7 +53,7 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-        	var image = document.getElementById('m_preview')
+        	var image = document.getElementById('m_preview');
         	image.setAttribute('src',e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
@@ -129,17 +69,34 @@ function Goduke() {
     	goduke.setAttribute('value','duke.png');
 }
 
+function confirmPassword(){
+	if(document.getElementById("password").value!=document.getElementById("pwd").value){
+		alert("잘못된 비밀번호입니다.")
+	}else{
+		var pass = document.getElementById('confirmPassword');
+		var userinfo = document.getElementById('userinfo');
+		pass.style.display = 'none';
+		userinfo.style.display = 'block';
+	}
+}
+
 </script>
 </head>
 <body>
 
+<div id="confirmPassword">
+	비밀번호를 확인해주세요
+	<input id="password" type="password" size="10"><input type="submit" onclick="confirmPassword()">
+</div>
+
+<div id="userinfo">
 <h1>나의 정보</h1>
 <div id="myinfo">
-		    <img src="${contextPath}/thumbnails.do?fileName=${memberInfo.profileImage}&id=${memberInfo.id}&originalFileName=${memberInfo.profileImage}" id="preview"  />
-		    <p>이미지 ${memberInfo.profileImage}아이디 ${memberInfo.id}오리지날${memberInfo.profileImage}</p>
+		    <img src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}" id="preview"  />
+		    <p>이미지 ${member.profileImage}아이디 ${member.id}오리지날${member.profileImage}</p>
 		    <br>
-	<p>이름 : ${memberInfo.name }
-	<p>자신을 소개 : ${memberInfo.profileText}
+	<p>이름 : ${member.name } </p>
+	<p>자기소개 : ${member.profileText} </p>
 	<br><br><br>
 	
 	<!-- 모달 시작입니다요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -151,30 +108,30 @@ function Goduke() {
     <table align="center">
     <tr>
 			<td align="right">이름:&nbsp; </td>
-			<td><input type="text" size="5" value="${memberInfo.name }" disabled name="name" /> </td>
+			<td><input type="text" size="5" value="${member.name }" disabled name="name" /> </td>
 		</tr>
 		<tr>
 			<td align="right">성별:&nbsp;  </td>
-			<td><input type="text" size="67" value="${memberInfo.gender }"  maxlength="100" name="gender" disabled/></td>
+			<td><input type="text" size="67" value="${member.gender }"  maxlength="100" name="gender" disabled/></td>
 		</tr>
 		<tr>
 			<td align="right">이메일:&nbsp;  </td>
-			<td><input type="text" size="67" value="${memberInfo.email }" maxlength="100" name="email" /></td>
+			<td><input type="text" size="67" value="${member.email }" maxlength="100" name="email" /></td>
 		</tr>
 		<tr>
 			<td align="right">Instagrm:&nbsp;  </td>
-			<td><input type="text" size="67" value="${memberInfo.sns_i }" maxlength="100" name="sns_i" /></td>
+			<td><input type="text" size="67" value="${member.sns_i }" maxlength="100" name="sns_i" /></td>
 		</tr>
 		<tr>
 			<td align="right">facebook:&nbsp;  </td>
-			<td><input type="text" size="67" value="${memberInfo.sns_f }" maxlength="100" name="sns_f" /></td>
+			<td><input type="text" size="67" value="${member.sns_f }" maxlength="100" name="sns_f" /></td>
 		</tr>
 		<tr>
 			<td align="right">blog:&nbsp;  </td>
-			<td><input type="text" size="67" value="${memberInfo.sns_b }" maxlength="100" name="sns_b" /></td>
+			<td><input type="text" size="67" value="${member.sns_b }" maxlength="100" name="sns_b" /></td>
 		</tr>
 			<td align="right" valign="top"><br>프로필 컨텐츠:&nbsp; </td>
-			<td><textarea name="profileText" rows="10" cols="65" maxlength="4000" >${memberInfo.profileText }</textarea> </td>
+			<td><textarea name="profileText" rows="10" cols="65" maxlength="4000" >${member.profileText }</textarea> </td>
 		</tr>
 		<tr>
 			<td align="right">프로필 이미지:  </td>
@@ -188,8 +145,9 @@ function Goduke() {
 			<td align="right"> </td>
 			<td>
 			 <input  type= "hidden"  id="goduke" name="goduke" value="#" />
-			 <input  type= "hidden"   name="originalFileName" value="${memberInfo.profileImage }" />
-				<input type="hidden" value="${memberInfo.id }" name="id"/>
+			 <input  type= "hidden"   name="originalFileName" value="${member.profileImage }" />
+				<input type="hidden" value="${member.id }" name="id" id="id"/>
+				<input type="hidden" value="${member.pwd }" name="pwd" id="pwd"/>
 				<input type=submit value="수정하기" />
 				
 			</td>
@@ -211,19 +169,19 @@ function Goduke() {
 		<!-- 좋아요 리스트 증감 변수 -->
 		<c:set var="a" value="${ a + 1}"/>
 		
-			<a href="${contextPath }/gallery/detail.do?num=${favoritelist.galleryNO}">
+			<a href="${contextPath }/gallery/detail.do?num=${favorite.galleryNO}">
 				<div class="row">
 				  <div class="col-sm-6 col-md-4" style="width: 350px">
 				    <div class="thumbnail">
 				      <div class="caption"> 
-				      <img src="${contextPath }/resources/image/${favoritelist.imageFileName}" height="240px" width="290px">
-				        <p>제목:${favoritelist.title }</p>
-				        <p>아이디: ${favoritelist.id }</p>
-				        <p>카테고리: ${favoritelist.category }</p>
-				        <p>해시태크: ${favoritelist.hashtag }</p>
+				      <img src="${contextPath }/resources/image/${favorite.imageFileName}" height="240px" width="290px">
+				        <p>제목:${favorite.title }</p>
+				        <p>아이디: ${favorite.id }</p>
+				        <p>카테고리: ${favorite.category }</p>
+				        <p>해시태크: ${favorite.hashtag }</p>
 				        <!-- 좋아요 값 출력 -->
-					    <p>좋아요:${like.get(a-1)}</p><input type=button value="좋아요취소" onClick="fn_remove('${contextPath}/mypage/cancelFavorite.do', 
- 																	'${favorite.id}','${favorite.galleryNO}')" />
+					    <p>좋아요:${like.get(a)}</p><input type=button value="좋아요취소" onClick="fn_remove('${contextPath}/mypage/cancelFavorite.do', 
+ 																	'${favorite.id}','${favorite.galleryNO}','1')" />
 				      </div>
 				    </div>
 				  </div>
@@ -265,13 +223,13 @@ function Goduke() {
    </tr>
 </table>
 <input type=button value="게시글삭제" onClick="fn_remove('${contextPath}/mypage/deleteMyGallery.do', 
- 																	'${myGallery.id}','${myGallery.galleryNO}')" />
+ 																	'${myGallery.id}','${myGallery.galleryNO}','2')" />
  
 
 </c:forEach>
 
 <br><br><br>
 
-
+</div>
 </body>
 </html>

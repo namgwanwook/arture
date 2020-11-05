@@ -40,7 +40,7 @@
 		
 
      function backToList(obj){
-	    obj.action="${contextPath}/member/listMembers.do";
+	    obj.action="${contextPath}/artist/listartists.do";
 	    obj.submit();
      }
  
@@ -81,16 +81,16 @@
 				  <span class="card__infoicon">
 				    <i class="fa fa-info"></i>
 				  </span>
-				  <h1 class="card__title"><span>Artist </span>${member.name}</h1>
+				  <h1 class="card__title"><span>Artist </span>${artist.name}</h1>
 				  <p class="card__description">저는 이순신입니다. 즐거운 감상하세요^_^</p>
-				  <c:if test="${not empty member.sns_i && member.sns_i !='null' }">
-					<img src="${contextPath}/resources/image/insta_b.png"/><span class="sns_id"><a href="#">  ${member.sns_i}</a></span>
+				  <c:if test="${not empty artist.sns_i && artist.sns_i !='null' }">
+					<img src="${contextPath}/resources/image/insta_b.png"/><span class="sns_id"><a href="#">  ${artist.sns_i}</a></span>
 					</c:if>
-					<c:if test="${not empty member.sns_f && member.sns_f !='null' }">
-					<img src="${contextPath}/resources/image/facebook_b.png"/><span class="sns_id">  ${member.sns_f} </span>
+					<c:if test="${not empty artist.sns_f && artist.sns_f !='null' }">
+					<img src="${contextPath}/resources/image/facebook_b.png"/><span class="sns_id">  ${artist.sns_f} </span>
 					</c:if>
-					<c:if test="${not empty member.sns_b && member.sns_b !='null' }">
-					<img src="${contextPath}/resources/image/blog_b.png"/><span class="sns_id">  ${member.sns_b} </span>
+					<c:if test="${not empty artist.sns_b && artist.sns_b !='null' }">
+					<img src="${contextPath}/resources/image/blog_b.png"/><span class="sns_id">  ${artist.sns_b} </span>
 				</c:if>
 				</div>
 				
@@ -144,7 +144,7 @@
 			</tr>
 			<tr>
 				<td width="150" align="center" bgcolor="#FF9933">작성자</td>
-				<td><input type=text value="${member.name }" name="writer"
+				<td><input type=text value="${artist.name }" name="writer"
 					disabled /></td>
 			</tr>
 			<tr>
@@ -223,17 +223,17 @@
 			</tr>
 			<tr>
 				<td width="150" align="center" bgcolor="#FF9933">인스타그램</td>
-				<td><input type=text value="${member.sns_i }" name="sns_i"
+				<td><input type=text value="${artist.sns_i }" name="sns_i"
 					id="i_hashtag" disabled /></td>
 			</tr>
 			<tr>
 				<td width="150" align="center" bgcolor="#FF9933">페이스북</td>
-				<td><input type=text value="${member.sns_f}" name="sns_f"
+				<td><input type=text value="${artist.sns_f}" name="sns_f"
 					id="i_hashtag" disabled /></td>
 			</tr>
 			<tr>
 				<td width="150" align="center" bgcolor="#FF9933">네이버블로그</td>
-				<td><input type=text value="${member.sns_b}" name="sns_b"
+				<td><input type=text value="${artist.sns_b}" name="sns_b"
 					id="i_hashtag" disabled /></td>
 			</tr>
 			<tr id="tr_btn">

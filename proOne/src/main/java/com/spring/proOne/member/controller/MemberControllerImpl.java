@@ -101,7 +101,6 @@ public class MemberControllerImpl implements MemberController {
 		
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(member);
-		System.out.println("멤버컨트롤러 로그인 아이디확인"+memberVO.getId());
 		if(memberVO != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", memberVO);
@@ -127,7 +126,6 @@ public class MemberControllerImpl implements MemberController {
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
-		System.out.println("들어오나요??");
 		mav.setViewName("redirect:/main/main.do");
 		return mav;
 	}

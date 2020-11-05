@@ -57,7 +57,7 @@
 			<c:choose>
 					<c:when test="${isLogOn == true && member != null }">
 						<img src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"/>
-						<a href="${contextPath }/mypage/myPageMain.do?id=${member.id}"><span>${member.name}'s Profile</span></a>
+						<a href="${contextPath }/mypage/myPageMain.do"><span>${member.name}'s Profile</span></a>
 						<a href="${contextPath }/member/logout.do">Log Out</a>
 						<c:if test="${member.id == 'admin'}">
 							<a href="${contextPath }/admin/notice/noticeList.do" class="admin">Admin</a>
