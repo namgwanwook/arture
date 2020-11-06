@@ -32,7 +32,7 @@
         float: left;
         background-color: yellow;
         border: 0px solid #bcbcbc;
-        font-size:10px;
+        font-size:18px;
       }
       #content {
         width: 75%;

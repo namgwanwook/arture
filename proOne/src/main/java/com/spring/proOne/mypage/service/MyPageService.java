@@ -19,4 +19,5 @@ public interface MyPageService {
 	public void cancelfavorite(FavoriteVO favoriteVO)throws Exception;//좋아요취소 
 	public void insertfavorite(FavoriteVO favoriteVO)throws Exception;//좋아요추가 
 	public void deletemygallery(FavoriteVO favoriteVO) throws Exception;//내 게시글 삭제
+	public int selectOverlappedFavorite(FavoriteVO favoriteVO)throws Exception; // 좋아요 중복확인
 }

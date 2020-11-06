@@ -36,14 +36,14 @@ public class GalleryDetailControllerImpl implements GalleryDetailController{
 			throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		galleryVO = galleryDetailService.viewGalleryDetail(galleryNO);
-		System.out.println(galleryNO);
+		System.out.println("galleryNO : "+galleryNO);
 		String id = galleryVO.getId();
 		MemberVO memberVO = memberService.selectMemberById(id);
 		Map galleryMap = galleryDetailService.viewGalleryImages(galleryNO);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		mav.addObject("member", memberVO);
+		mav.addObject("artist", memberVO);
 		mav.addObject("gallery", galleryVO);
 		mav.addObject("galleryMap", galleryMap);
 		return mav;

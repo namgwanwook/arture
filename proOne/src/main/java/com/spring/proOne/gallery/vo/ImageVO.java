@@ -12,7 +12,7 @@ public class ImageVO {
 	private String imageFileName;
 	private Date regDate;
 	private int applyNO;
-	
+
 	public int getImageNO() {
 		return imageNO;
 	}

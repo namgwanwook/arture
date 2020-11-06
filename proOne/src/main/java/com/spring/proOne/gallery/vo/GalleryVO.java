@@ -18,6 +18,10 @@ public class GalleryVO {
 	// 외래키
 	private String id;
 	
+	public GalleryVO(){
+		System.out.println("galleryVO 생성");
+	}
+	
 	public int getGalleryNO() {
 		return galleryNO;
 	}

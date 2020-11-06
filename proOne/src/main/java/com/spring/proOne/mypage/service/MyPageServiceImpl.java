@@ -67,5 +67,10 @@ public class MyPageServiceImpl implements MyPageService{
 		myPageDAO.deletemygallery(favoriteVO);
 		
 	}
+
+	@Override
+	public int selectOverlappedFavorite(FavoriteVO favoriteVO) throws Exception {
+		return myPageDAO.selectOverlappedFavorite(favoriteVO);
+	}
 	
 }

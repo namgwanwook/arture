@@ -60,6 +60,15 @@
     ]]>
   </select> 
   
+   <!-- 좋아요 중복확인 -->
+  <select id="selectOverlappedFavorite" parameterType="favoriteVO" resultType="int">
+   	 <![CDATA[
+	   select decode(count(*),0,'0',1,'1')
+	   from o_favorite
+	   where id = #{id} and galleryNO=#{galleryNO}
+	  ]]>
+	</select>
+  
   <!-- 내 게시글 불러오기 -->
    <select id ="selectmygallery" resultMap="galleryResult"  parameterType="String">
       <![CDATA[
