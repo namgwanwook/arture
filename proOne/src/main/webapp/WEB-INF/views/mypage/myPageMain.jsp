@@ -16,9 +16,6 @@
 function fn_remove(url,id,galleryNO,num){
 	var answer=confirm("삭제하시겠습니까?");
 	if(answer==true){
-		if(num=='2'){
-			
-		}
 		var form = document.createElement("form");
 		var i_id = document.createElement("input");
 		var i_galleryNO = document.createElement("input");
@@ -159,6 +156,37 @@ function confirmPassword(){
 		<!-- 모달 끛 --입니다요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 </div>
 
+<br><br><br>
+================================================================================
+<h1>나의 갤러리</h1>
+================================================================================
+<c:forEach var="myGallery" items="${myGallery}">
+		
+		<!-- 좋아요 리스트 증감 변수 -->
+		<c:set var="a" value="${ a + 1}"/>
+		
+			<a href="${contextPath }/gallery/detail.do?num=${myGallery.galleryNO}">
+				<div class="row">
+				  <div class="col-sm-6 col-md-4" style="width: 350px">
+				    <div class="thumbnail">
+				      <div class="caption"> 
+				      <img src="${contextPath }/resources/image/${myGallery.imageFileName}" height="240px" width="290px">
+				        <p>제목:${myGallery.title }</p>
+				        <p>아이디: ${myGallery.id }</p>
+				        <p>카테고리: ${myGallery.category }</p>
+				        <p>해시태크: ${myGallery.hashtag }</p>
+				        <!-- 좋아요 값 출력 -->
+					    <p>좋아요:${like.get(a)}</p><input type=button value="좋아요취소" onClick="fn_remove('${contextPath}/mypage/cancelFavorite.do', 
+ 																	'${myGallery.id}','${myGallery.galleryNO}','1')" />
+				      </div>
+				    </div>
+				  </div>
+				</div>	
+			</a>	 
+ 
+ 
+</c:forEach>
+
 <br><br><br>	
 
 ================================================================================
@@ -191,42 +219,7 @@ function confirmPassword(){
  
 </c:forEach>
 
-<br><br><br>
-================================================================================
-<h1>나의 갤러리</h1>
-================================================================================
-<c:forEach var="myGallery" items="${myGallery}">
-<table border=0 width=100% cellpadding=10 cellspacing=10>
-  <tr>
-    <td>
-	  타이틀:
-   </td>
-    <td>
-	   <strong>${myGallery.title}</strong>
-   </td>
-   </tr>
-  <tr>
-    <td>
-	 컨텐츠:
-   </td>
-    <td>
-	   <strong>${myGallery.content}</strong>
-   </td>
-   </tr>
-  <tr>
-    <td>
-	 이미지:
-   </td>
-    <td>
-	   <strong>${myGallery.imageFileName}</strong>
-   </td>
-   </tr>
-</table>
-<input type=button value="게시글삭제" onClick="fn_remove('${contextPath}/mypage/deleteMyGallery.do', 
- 																	'${myGallery.id}','${myGallery.galleryNO}','2')" />
- 
 
-</c:forEach>
 
 <br><br><br>
 
