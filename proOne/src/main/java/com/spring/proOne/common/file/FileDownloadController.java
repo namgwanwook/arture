@@ -1,11 +1,9 @@
-package com.spring.proOne.common.file;
+ package com.spring.proOne.common.file;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -65,18 +63,14 @@ public class FileDownloadController {
 	      out.close();
 	   }
 	
-	
 	@RequestMapping("/thumbnails.do")
-	protected void thumbnails(@RequestParam("fileName") String fileName, @RequestParam("id") String id, @RequestParam("originalFileName") String originalfile,
-			                 HttpServletResponse response) throws Exception {
+	protected void thumbnails(@RequestParam("fileName") String fileName, @RequestParam("id") String id, HttpServletResponse response) throws Exception {
 		
 		if(fileName.equals("duke.png")) {
 			OutputStream out = response.getOutputStream();
 			String filePath=PROFILE_IMGAE_REPO_PATH+"\\"+fileName;
 			File image=new File(filePath);
-			
-			int lastIndex = fileName.lastIndexOf(".");
-			String imageFileName = fileName.substring(0,lastIndex);
+
 			if (image.exists()) { 
 				Thumbnails.of(image).size(121,154).outputFormat("png").toOutputStream(out);
 			}
@@ -88,8 +82,6 @@ public class FileDownloadController {
 		String filePath=PROFILE_IMGAE_REPO_PATH+"\\"+id+"\\"+fileName;
 		File image=new File(filePath);
 		
-		int lastIndex = fileName.lastIndexOf(".");
-		String imageFileName = fileName.substring(0,lastIndex);
 		if (image.exists()) { 
 			Thumbnails.of(image).size(121,154).outputFormat("png").toOutputStream(out);
 		}

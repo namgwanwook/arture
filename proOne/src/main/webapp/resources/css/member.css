@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+input:focus {
+	outline:none;
+}
 
 /* 로그인창 CSS */
 	#loginWrapper{
@@ -39,7 +41,7 @@
 	#loginWrapper form input.input1{
 		width:80%;
 		height:50px;
-		background-color:transparent;
+		background-color:transparent!important;
 		border:none;
 		color:#fff;
 	}

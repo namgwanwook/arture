@@ -27,7 +27,7 @@
 		<!-- 좋아요 리스트 증감 변수 -->
 		<c:set var="a" value="${ a + 1}"/>
 		
-			<a href="${contextPath }/gallery/detail.do?num=${galleryList.galleryNO}">
+			<a href="${contextPath }/gallery_detail/galleryDetail.do?galleryNO=${galleryList.galleryNO}">
 				<div class="row">
 				  <div class="col-sm-6 col-md-4" style="width: 350px">
 				    <div class="thumbnail">

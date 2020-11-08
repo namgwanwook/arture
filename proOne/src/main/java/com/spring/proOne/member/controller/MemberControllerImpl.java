@@ -101,6 +101,7 @@ public class MemberControllerImpl implements MemberController {
 		
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(member);
+
 		if(memberVO != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", memberVO);
@@ -114,7 +115,7 @@ public class MemberControllerImpl implements MemberController {
 			}
 		}else {
 			rAttr.addAttribute("result","loginFailed");
-			mav.setViewName("redirect:/main/main.do");
+			mav.setViewName("redirect:/member/loginForm.do");
 		}
 		return mav;
 	}

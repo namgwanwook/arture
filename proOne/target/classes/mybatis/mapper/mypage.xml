@@ -60,6 +60,15 @@
     ]]>
   </select> 
   
+   <!-- 좋아요 중복확인 -->
+  <select id="selectOverlappedFavorite" parameterType="favoriteVO" resultType="int">
+   	 <![CDATA[
+	   select decode(count(*),0,'0',1,'1')
+	   from o_favorite
+	   where id = #{id} and galleryNO=#{galleryNO}
+	  ]]>
+	</select>
+  
   <!-- 내 게시글 불러오기 -->
    <select id ="selectmygallery" resultMap="galleryResult"  parameterType="String">
       <![CDATA[
@@ -75,6 +84,24 @@
 	  SELECT count(*)
 	  FROM o_member
 	  where id=#{id} AND pwd=#{pwd}
+    ]]>
+</select>
+
+ <!-- 좋아요받은 수 -->
+<select id="countfavorite" parameterType="String" resultType="int">
+ <![CDATA[
+	  SELECT count(*)
+	  FROM o_favorite
+	  where id=#{id}
+    ]]>
+</select>
+
+ <!-- 작성한 게시글 수 -->
+<select id="countgallery" parameterType="String" resultType="int">
+ <![CDATA[
+	  SELECT count(*)
+	  FROM o_gallery
+	  where id=#{id}
     ]]>
 </select>
  
@@ -100,6 +127,13 @@
 			</if>
 			where id=#{id}
 	</update>
+	
+ <!--프로필 이미지 수정  -->
+  	<update id="updateProfileimage"  parameterType="java.util.Map">
+			update o_member
+			set profileImage=#{profileImage}
+			where id=#{id}
+	</update>	
 	
 <!-- 회원탈퇴  -->	
  <delete id="deleteMember"  parameterType="String">

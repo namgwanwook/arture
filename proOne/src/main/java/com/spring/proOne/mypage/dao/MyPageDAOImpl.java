@@ -28,8 +28,12 @@ public class MyPageDAOImpl implements MyPageDAO{
 
 	@Override//내정보 수정
 	public void updateMyInfo(Map myinfomap) throws DataAccessException {
-		System.out.println(myinfomap.get("profileImage"));
 		sqlSession.update("mapper.mypage.updateProfile",myinfomap);
+	}
+	
+	@Override
+	public void updateProFileImage(Map myinfomap) throws DataAccessException {
+		sqlSession.update("mapper.mypage.updateProfileimage",myinfomap);
 	}
 
 	@Override//회원정보삭제
@@ -90,5 +94,22 @@ public class MyPageDAOImpl implements MyPageDAO{
 		sqlSession.delete("mapper.mypage.deletemygallery",favoriteVO);
 		sqlSession.delete("mapper.mypage.deletefavorite",favoriteVO.getId());
 	}
+
+	@Override//좋아요확인
+	public int selectOverlappedFavorite(FavoriteVO favoriteVO) throws DataAccessException {
+		System.out.println("db조회결과"+sqlSession.selectOne("mapper.mypage.selectOverlappedFavorite", favoriteVO));
+		return sqlSession.selectOne("mapper.mypage.selectOverlappedFavorite", favoriteVO);
+		
+	}
+
+	@Override//받은좋아요와 작성개시글 수 가져오기
+	public Map count(String id) throws DataAccessException {
+		Map count = new HashMap();
+		count.put("countgallery",sqlSession.selectOne("mapper.mypage.countgallery", id));
+		count.put("countfavorite",sqlSession.selectOne("mapper.mypage.countfavorite", id));
+		return count;
+	}
+
+
 	
 }

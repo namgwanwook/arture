@@ -85,9 +85,11 @@
     
     <!-- id 중복확인 -->
     <select id="selectOverlappedID" parameterType="String" resultType="String">
+     <![CDATA[
 	   select decode(count(*),1, 'true', 0, 'false')
 	   from o_member
 	   where id = #{id}
+	  ]]>
 	</select>
 	
 </mapper>
