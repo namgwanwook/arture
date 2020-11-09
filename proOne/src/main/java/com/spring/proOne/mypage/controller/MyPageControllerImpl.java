@@ -117,26 +117,44 @@ public class MyPageControllerImpl implements MyPageController {
 		return mav;
 
 	}
-
+	
 	@Override
 	@RequestMapping(value="/mypage/addFavorite.do" ,method = {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView addFavorite(@RequestParam("id")String id,@RequestParam("galleryNO") int galleryNO, HttpServletRequest request, HttpServletResponse response)
+	public ResponseEntity addFavorite(@RequestParam("id")String id, @RequestParam("galleryNO") int galleryNO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		ModelAndView mav = new ModelAndView();
+		ResponseEntity resEntity = null;
 		FavoriteVO favoriteVO = new FavoriteVO();
 		favoriteVO.setId(id);
 		favoriteVO.setGalleryNO(galleryNO);
-		if(mypageservice.selectOverlappedFavorite(favoriteVO)== 0 ) {
-			System.out.println("좋아요 중복없음. 추가완료");
+		int result = mypageservice.selectOverlappedFavorite(favoriteVO);
+		if(result==0) {
 			mypageservice.insertfavorite(favoriteVO);
+			resEntity = new ResponseEntity("true", HttpStatus.OK);
+			System.out.println("result : " + result);
 		}else {
-			System.out.println("좋아요 중복됨. 추가거부");
+			resEntity = new ResponseEntity("false", HttpStatus.OK);
+			System.out.println("result : " + result);
 		}
-		mav.setViewName("redirect:/gallery/gallery.do");
-	
-		return mav;
+		return resEntity;
 	}
+	
+	@RequestMapping(value="/mypage/selectOverlappedFavorite.do" ,method = {RequestMethod.POST,RequestMethod.GET})
+	public ResponseEntity selectOverlappedFavorite(@RequestParam("id")String id, @RequestParam("galleryNO") int galleryNO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		ResponseEntity resEntity = null;
+		FavoriteVO favoriteVO = new FavoriteVO();
+		favoriteVO.setId(id);
+		favoriteVO.setGalleryNO(galleryNO);
+		int result = mypageservice.selectOverlappedFavorite(favoriteVO);
 
+		if(result==1) {
+			resEntity = new ResponseEntity("true", HttpStatus.OK);
+		}else {
+			resEntity = new ResponseEntity("false", HttpStatus.OK);
+		}
+		return resEntity;
+	}
+	
 	@Override//내 게시글 삭제
 	@RequestMapping(value="/mypage/deletemygallery.do" ,method = {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView deleteMyGallery(String id, int galleryNO, HttpServletRequest request,

@@ -122,9 +122,7 @@ function Goduke() {
 <div id="myinfo">
 
 		    <img src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}" id="preview"  />
-
 		    <p>이미지 ${member.profileImage}아이디 ${member.id}오리지날${member.profileImage}</p>
-
 		    <br>
 
 	<p>이름 : ${member.name }
@@ -206,15 +204,10 @@ function Goduke() {
 		<tr>
 
 			<td align="right">프로필 이미지:  </td>
-
 			<td> 
-
 				<input type="file" accept="image/png"  name="profileImage"  onchange="readURL(this);" />
-
 				<img  id="m_preview" src="#"   width=200 height=200/>
-
 				<input type ="button" onclick="Goduke()" value="듀크로 돌아가기" />
-
 			</td>
 
 		</tr>
@@ -273,7 +266,7 @@ function Goduke() {
 
 		
 
-			<a href="${contextPath }/gallery/gallery_detail.do?galleryNO=${favorite.galleryNO}">
+			
 
 				<div class="row">
 
@@ -282,9 +275,9 @@ function Goduke() {
 				    <div class="thumbnail">
 
 				      <div class="caption"> 
-
+						<a href="${contextPath }/gallery/gallery_detail.do?galleryNO=${favorite.galleryNO}">
 				      <img src="${contextPath }/resources/image/${favorite.imageFileName}" height="240px" width="290px">
-
+						</a>
 				        <p>제목:${favorite.title }</p>
 
 				        <p>아이디: ${favorite.id }</p>
@@ -295,7 +288,7 @@ function Goduke() {
 
 				        <!-- 좋아요 값 출력 -->
 
-					   <p>좋아요:${like.get(a)}</p><input type=button value="좋아요취소" onClick="fn_remove('${contextPath}/mypage/cancelFavorite.do', 
+					   <p>좋아요:${like.get(a)}</p><input type=button value="좋아요취소" onClick="fn_remove('${contextPath}/mypage/cancelfavorite.do', 
 
  																	'${favorite.id}','${favorite.galleryNO}')" /> 
 
@@ -307,7 +300,7 @@ function Goduke() {
 
 				</div>	
 
-			</a>	 
+				 
 
  
 

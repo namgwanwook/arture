@@ -10,8 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface MyPageController {
 	public ModelAndView myPageMain(HttpServletRequest request, HttpServletResponse response)throws Exception;
-	public ModelAndView addFavorite(@RequestParam("id")String id,@RequestParam("galleryNO")int galleryNO,HttpServletRequest request, HttpServletResponse response)throws Exception; 
+	public ResponseEntity addFavorite(@RequestParam("id")String id,@RequestParam("galleryNO")int galleryNO,HttpServletRequest request, HttpServletResponse response)throws Exception; 
 	public ModelAndView cancelFavorite(@RequestParam("id")String id, @RequestParam("galleryNO")int galleryNO,HttpServletRequest request, HttpServletResponse response)throws Exception; 
 	public ModelAndView deleteMyGallery(@RequestParam("id")String id, @RequestParam("galleryNO")int galleryNO,HttpServletRequest request, HttpServletResponse response)throws Exception; 
-	public ResponseEntity modUserInfo(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)throws Exception; 
+	public ResponseEntity modUserInfo(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)throws Exception;
 }
