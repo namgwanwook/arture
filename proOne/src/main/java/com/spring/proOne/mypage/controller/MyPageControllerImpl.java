@@ -194,7 +194,7 @@ public class MyPageControllerImpl implements MyPageController {
 	}
 	
 	@Override//내정보 수정
-	@RequestMapping(value="/mypage/modUserInfo.do" ,method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/mypage/modUserInfo.do" ,method = RequestMethod.POST)
 	public ResponseEntity modUserInfo(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		ResponseEntity resEnt=null;
@@ -222,9 +222,6 @@ public class MyPageControllerImpl implements MyPageController {
 				}
 			}
 		}
-
-
-		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {

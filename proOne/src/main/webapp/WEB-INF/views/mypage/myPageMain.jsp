@@ -50,7 +50,7 @@
 	margin: 15% auto;
 	padding: 20px;
 	border: 1px solid black;
-	width: 50%;
+	width: 30%;
 }
 /* The Close Button */
 .close {
@@ -58,12 +58,24 @@
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
+	position: fixed;
 }
 
 .close:hover, .close:focus {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
+}
+td{
+	vertical-align:top;
+}
+.aside{
+	 text-align: end;
+}
+.modinput{
+	width: 100%;
+	margin: 0px 0px 7px 15px;
+	resize: none;
 }
 /*end Modal */
 
@@ -93,9 +105,10 @@
 	float: left;
 }
 
-.imageWrapper .profile {
+.imageWrapper #profile {
 	width: 100%;
 	height: 100%;
+	cursor: pointer;
 }
 
 .imageWrapper button {
@@ -118,7 +131,7 @@
 	line-height: 60px;
 }
 
-.fa-cog {
+i {
 	font-size: 18px;
 	cursor: pointer;
 }
@@ -150,6 +163,7 @@
 	 margin:2.5%;
 	 float:left;
 }
+
 </style>
 
 <script type="text/javascript">
@@ -179,11 +193,6 @@ function fn_remove(url,id,galleryNO){
 function openModal(){
 	var myModal = document.getElementById('myModal');
 	myModal.style.display = "block";
-}
-
-function closeModal(){
-	var myModal = document.getElementById('myModal');
-	myModal.style.display = "none";
 }
 
 function readURL(input) {
@@ -230,6 +239,13 @@ function inputimage(){
 	
 }
 
+window.onclick = function(event) {
+	var myModal = document.getElementById('myModal');
+    if (event.target == myModal) {
+    	myModal.style.display = "none";
+    }
+}
+
 </script>
 
 </head>
@@ -243,9 +259,7 @@ function inputimage(){
 					name="profileImage" enctype="multipart/form-data"
 					onchange="readURL(this)" style="display: none" />
 				<button onclick="inputimage()">
-					<img
-						src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"
-						class="profile"></img>
+					<img id="profile" src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"></img>
 				</button>
 			</div>
 			<section class="userinfo">
@@ -269,63 +283,51 @@ function inputimage(){
 
 		<!-- 모달 시작입니다요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-		<div id="myModal" class="modal">
-			<div class="modal-content">
-				<span class="close" onClick="closeModal()">&times;</span>
-				<form name="modUserInfo" method="post"
-					action="${contextPath}/mypage/modUserInfo.do"
-					enctype="multipart/form-data">
-					<table>
-						<tr>
-							<td align="right">이름:&nbsp;</td>
-							<td><input type="text" size="5" value="${member.name }"
-								disabled name="name" /></td>
-						</tr>
-						<tr>
-							<td align="right">성별:&nbsp;</td>
-							<td><input type="text" size="67" value="${member.gender }"
-								maxlength="100" name="gender" disabled /></td>
-						</tr>
-						<tr>
-							<td align="right">이메일:&nbsp;</td>
-							<td><input type="text" size="67" value="${member.email }"
-								maxlength="100" name="email" /></td>
-						</tr>
-						<tr>
-							<td align="right">Instagrm:&nbsp;</td>
-							<td><input type="text" size="67" value="${member.sns_i }"
-								maxlength="100" name="sns_i" /></td>
-						</tr>
-						<tr>
-							<td align="right">facebook:&nbsp;</td>
-							<td><input type="text" size="67" value="${member.sns_f }"
-								maxlength="100" name="sns_f" /></td>
-						</tr>
-						<tr>
-							<td align="right">blog:&nbsp;</td>
-							<td><input type="text" size="67" value="${member.sns_b }"
-								maxlength="100" name="sns_b" /></td>
-						</tr>
-						<td align="right" valign="top"><br>프로필 컨텐츠:&nbsp;</td>
-						<td><textarea name="profileText" rows="10" cols="65"
-								maxlength="4000">${member.profileText }</textarea></td>
-						</tr>
-						<tr>
-							<td><input type="button" onclick="Goduke()" value="듀크로 돌아가기" />
-							</td>
-						</tr>
-						<tr>
-							<td align="right"></td>
-							<td><input type="hidden" value="${member.profileImage }"
-								name="profileImage" id="goduke" /> <input type="hidden"
-								value="${member.id }" name="id" id="id" /> <input type="hidden"
-								value="${member.pwd }" name="pwd" id="pwd" /> <input type=submit
-								value="수정하기" /></td>
-						</tr>
-					</table>
-				</form>
-			</div>
-		</div>
+<div id="myModal" class="modal">
+	<div class="modal-content">
+		<form name="modUserInfo" method="post" action="${contextPath}/mypage/modUserInfo.do" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td class="aside">이름</td>
+					<td><input class="modinput" type="text" size="50" value="${member.name }"	disabled name="name" /></td>
+				</tr>
+				<tr>
+					<td class="aside">성별</td>
+					<td><input class="modinput" type="text" size="50" value="${member.gender }" maxlength="100" name="gender" disabled /></td>
+				</tr>
+				<tr>
+					<td class="aside">이메일</td>
+					<td><input class="modinput" type="text" size="50" value="${member.email }" maxlength="100" name="email" /></td>
+				</tr>
+				<tr>
+					<td class="aside">Instagrm</td>
+					<td><input class="modinput" type="text" size="50" value="${member.sns_i }" maxlength="100" name="sns_i" /></td>
+				</tr>
+				<tr>
+					<td class="aside">facebook</td>
+					<td><input class="modinput" type="text" size="50" value="${member.sns_f }" maxlength="100" name="sns_f" /></td>
+				</tr>
+				<tr>
+					<td class="aside">blog</td>
+					<td><input class="modinput" type="text" size="50" value="${member.sns_b }" maxlength="100" name="sns_b" /></td>
+				</tr>
+					<td class="aside"><p>소개</p></td>
+					<td><textarea class="modinput" name="profileText" rows="10" cols="52" resize="none" maxlength="4000">${member.profileText }</textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="hidden" value="${member.profileImage }" name="profileImage" id="goduke" /> 
+						<input type="hidden" value="${member.id }" name="id" id="id" /> 
+						<input type="hidden" value="${member.pwd }" name="pwd" id="pwd" />
+						<i class="fas fa-user-circle" onclick="Goduke()"></i> 
+						<input type=submit value="수정하기" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
 		<!-- 모달 끛 --입니다요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 
