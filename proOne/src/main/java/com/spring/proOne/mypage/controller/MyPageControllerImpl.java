@@ -90,44 +90,42 @@ public class MyPageControllerImpl implements MyPageController {
 
 	}
 
-	@Override//좋아요추가하기
-	   @RequestMapping(value="/mypage/addFavorite.do" ,method = {RequestMethod.POST,RequestMethod.GET})
-	   public ResponseEntity addFavorite(@RequestParam("id")String id,@RequestParam("galleryNO") int galleryNO, HttpServletRequest request, HttpServletResponse response)
-	         throws Exception {
-	      String message = null;
-	      ResponseEntity resEntity = null;
-	      HttpHeaders responseHeaders = new HttpHeaders();
-	      responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-	      FavoriteVO favoriteVO = new FavoriteVO();
-	      favoriteVO.setId(id);
-	      favoriteVO.setGalleryNO(galleryNO);
-	      
-	      try {
-	         if(mypageservice.selectOverlappedFavorite(favoriteVO)== 0 ) {
-	            System.out.println("좋아요 중복없음. 추가완료");
-	            mypageservice.insertfavorite(favoriteVO);
-	            message  = "<script>";
-	            message +=" alert('좋아요 리스트에 추가되었습니다.');";
-	            message += " location.href='"+request.getContextPath()+"/gallery_detail/galleryDetail.do?galleryNO="+galleryNO +"';";
-	            message += " </script>";
-	         }else {
-	            System.out.println("좋아요 중복됨. 추가거부");
-	            message  = "<script>";
-	            message +=" alert('이미 좋아요를 누른 갤러리입니다.');";
-	            message += " location.href='"+request.getContextPath()+"/gallery_detail/galleryDetail.do?galleryNO="+galleryNO +"';";
-	            message += " </script>";
-	         }
+	@Override//좋아요 추가
+	@RequestMapping(value="/mypage/addFavorite.do" ,method = {RequestMethod.POST,RequestMethod.GET})
+	public ResponseEntity addFavorite(@RequestParam("id")String id, @RequestParam("galleryNO") int galleryNO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		ResponseEntity resEntity = null;
+		FavoriteVO favoriteVO = new FavoriteVO();
+		favoriteVO.setId(id);
+		favoriteVO.setGalleryNO(galleryNO);
+		int result = mypageservice.selectOverlappedFavorite(favoriteVO);
+		if(result==0) {
+			mypageservice.insertfavorite(favoriteVO);
+			resEntity = new ResponseEntity("true", HttpStatus.OK);
+			System.out.println("result : " + result);
+		}else {
+			resEntity = new ResponseEntity("false", HttpStatus.OK);
+			System.out.println("result : " + result);
+		}
+		return resEntity;
+	}
+	
+	@RequestMapping(value="/mypage/selectOverlappedFavorite.do" ,method = {RequestMethod.POST,RequestMethod.GET})
+	public ResponseEntity selectOverlappedFavorite(@RequestParam("id")String id, @RequestParam("galleryNO") int galleryNO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		ResponseEntity resEntity = null;
+		FavoriteVO favoriteVO = new FavoriteVO();
+		favoriteVO.setId(id);
+		favoriteVO.setGalleryNO(galleryNO);
+		int result = mypageservice.selectOverlappedFavorite(favoriteVO);
 
-	      }catch(Exception e) {
-	         message  = "<script>";
-	          message +=" alert(' ۾             ߻  ߽  ϴ .  ٽ   õ     ּ   ');";
-	          message += " location.href='"+request.getContextPath()+"/gallery_detail/galleryDetail.do?galleryNO="+galleryNO +"';";
-	          message += " </script>";
-	         e.printStackTrace();
-	      }
-	      resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-	      return resEntity;
-	   }
+		if(result==1) {
+			resEntity = new ResponseEntity("true", HttpStatus.OK);
+		}else {
+			resEntity = new ResponseEntity("false", HttpStatus.OK);
+		}
+		return resEntity;
+	}
 
 	@Override//내 게시글 삭제
 	@RequestMapping(value="/mypage/deletemygallery.do" ,method = {RequestMethod.POST,RequestMethod.GET})
