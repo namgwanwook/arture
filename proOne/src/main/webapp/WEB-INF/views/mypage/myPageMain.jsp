@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" isELIgnored="false"%>
 
-    pageEncoding="UTF-8"   isELIgnored="false"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	 
-
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <%
 
   request.setCharacterEncoding("UTF-8");
 
-%>   
+%>
 
 <!DOCTYPE html>
 
@@ -19,12 +18,139 @@
 <head>
 
 <meta charset="UTF-8">
-	<!-- style.css로 링크 연결 -->
+<!-- style.css로 링크 연결 -->
 <link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
 <link rel="stylesheet" href="${contextPath }/resources/css/mypage.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <title>Insert title here</title>
+<style>
+.mypage {
+	width: 80%;
+	height: auto;
+	margin: 0px auto;
+}
 
- 
+/* Modal */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+	background-color: gray;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid black;
+	width: 50%;
+}
+/* The Close Button */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+/*end Modal */
+
+/* profileimage */
+#m_preview {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	position: absolute;
+}
+
+.profileimage {
+	width: 60%;
+	height: auto;
+	margin: auto;
+	background: pink;
+}
+
+/* profileimage */
+.mypage .myinfo {
+	width: 100%;
+	height: auto;
+}
+
+.mypage .myinfo .imageWrapper {
+	width: 20%;
+	float: left;
+}
+
+.imageWrapper .profile {
+	width: 100%;
+	height: 100%;
+}
+
+.imageWrapper button {
+	background: #fff;
+	width: 150px;
+	border-radius: 50%;
+	height: 150px;
+	overflow: hidden;
+	border: 1px solid #ddd;
+}
+
+.mypage .myinfo .userinfo {
+	width: 50%;
+	float: left;
+	text-align: left;
+}
+
+#username {
+	font-size: 25px;
+	line-height: 60px;
+}
+
+.fa-cog {
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.mypage .myinfo .userinfo ul {
+	display: inline-block;
+	margin: 20px 0px;
+}
+
+.mypage .myinfo .userinfo ul li {
+	float: left;
+	margin-right: 30px;
+}
+
+.title_box {
+	float: left;
+	width: 100%;
+	height: 35px;
+	border-bottom: 2px solid #fff;
+}
+
+.title_box p {
+	text-align: left;
+	font-size: 25px;
+	font-weight: bold;
+}
+#image_box{
+	 width:20%;
+	 margin:2.5%;
+	 float:left;
+}
+</style>
 
 <script type="text/javascript">
 function fn_remove(url,id,galleryNO){
@@ -109,152 +235,165 @@ function inputimage(){
 </head>
 
 <body>
-<div class="mypage">
-<!--  -->
-<div class="myinfo">
-	<div class="userinfo">
-		<div class="profileimage">
-			<div class="imagerapper">
-				<input type="file" id="proinput" accept="image/png"  name="profileImage" enctype="multipart/form-data"  onchange="readURL(this)" style="display: none"  />
-				<button onclick="inputimage()"><img src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}" id="profile" ></img></button>			
+	<div class="mypage">
+		<!--  -->
+		<div class="myinfo">
+			<div class="imageWrapper">
+				<input type="file" id="proinput" accept="image/png"
+					name="profileImage" enctype="multipart/form-data"
+					onchange="readURL(this)" style="display: none" />
+				<button onclick="inputimage()">
+					<img
+						src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"
+						class="profile"></img>
+				</button>
 			</div>
 			<section class="userinfo">
 				<div>
-					<p id="username">${member.name}</p>
-					<button id="myBtn" onClick="openModal()">프로필 관리</button>
+					<p id="username">${member.name}
+						<span><i class="fas fa-cog" onClick="openModal()"></i></span>
+					</p>
 				</div>
 				<ul>
-					<li>게시물   ${count.countgallery}</li><li>좋아요  ${count.countfavorite}</li>
+					<li>게시물 <span>${count.countgallery}</span></li>
+					<li>좋아요 <span>${count.countfavorite}</span></li>
+					<li>가입일자 <span>${member.joinDate}</span></li>
 				</ul>
 				<div>${member.profileText}</div>
 			</section>
 		</div>
-	</div>
-</div>
 
-	<br><br><br>
-	
-	<!-- 모달 시작입니다요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	
-	<div id="myModal" class="modal">
-		<div class="modal-content">
-			<span class="close" onClick="closeModal()">&times;</span>
-			  <form name="modUserInfo" method="post"  action="${contextPath}/mypage/modUserInfo.do"   enctype="multipart/form-data">
-    <table>
-    <tr>
-			<td align="right">이름:&nbsp; </td>
-			<td><input type="text" size="5" value="${member.name }" disabled name="name" /> </td>
-		</tr>
-		<tr>
-			<td align="right">성별:&nbsp;  </td>
-			<td><input type="text" size="67" value="${member.gender }"  maxlength="100" name="gender" disabled/></td>
-		</tr>
-		<tr>
-			<td align="right">이메일:&nbsp;  </td>
-			<td><input type="text" size="67" value="${member.email }" maxlength="100" name="email" /></td>
-		</tr>
-		<tr>
-			<td align="right">Instagrm:&nbsp;  </td>
-			<td><input type="text" size="67" value="${member.sns_i }" maxlength="100" name="sns_i" /></td>
-		</tr>
-		<tr>
-			<td align="right">facebook:&nbsp;  </td>
-			<td><input type="text" size="67" value="${member.sns_f }" maxlength="100" name="sns_f" /></td>
-		</tr>
-		<tr>
-			<td align="right">blog:&nbsp;  </td>
-			<td><input type="text" size="67" value="${member.sns_b }" maxlength="100" name="sns_b" /></td>
-		</tr>
-			<td align="right" valign="top"><br>프로필 컨텐츠:&nbsp; </td>
-			<td><textarea name="profileText" rows="10" cols="65" maxlength="4000" >${member.profileText }</textarea> </td>
-		</tr>
-		<tr>
-			<td> 
-				<input type ="button" onclick="Goduke()" value="듀크로 돌아가기" />
-			</td>
-		</tr>
-		<tr>
-			<td align="right"> </td>
-			<td>
-			<input type="hidden" value="${member.profileImage }" name="profileImage" id="goduke"/>
-			 <input type="hidden" value="${member.id }" name="id" id="id"/>
-			 <input type="hidden" value="${member.pwd }" name="pwd" id="pwd"/>
-				<input type=submit value="수정하기" />
-			</td>
-		</tr>
-    </table>
-  </form>
+		<br>
+		<br>
+		<br>
+
+		<!-- 모달 시작입니다요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+		<div id="myModal" class="modal">
+			<div class="modal-content">
+				<span class="close" onClick="closeModal()">&times;</span>
+				<form name="modUserInfo" method="post"
+					action="${contextPath}/mypage/modUserInfo.do"
+					enctype="multipart/form-data">
+					<table>
+						<tr>
+							<td align="right">이름:&nbsp;</td>
+							<td><input type="text" size="5" value="${member.name }"
+								disabled name="name" /></td>
+						</tr>
+						<tr>
+							<td align="right">성별:&nbsp;</td>
+							<td><input type="text" size="67" value="${member.gender }"
+								maxlength="100" name="gender" disabled /></td>
+						</tr>
+						<tr>
+							<td align="right">이메일:&nbsp;</td>
+							<td><input type="text" size="67" value="${member.email }"
+								maxlength="100" name="email" /></td>
+						</tr>
+						<tr>
+							<td align="right">Instagrm:&nbsp;</td>
+							<td><input type="text" size="67" value="${member.sns_i }"
+								maxlength="100" name="sns_i" /></td>
+						</tr>
+						<tr>
+							<td align="right">facebook:&nbsp;</td>
+							<td><input type="text" size="67" value="${member.sns_f }"
+								maxlength="100" name="sns_f" /></td>
+						</tr>
+						<tr>
+							<td align="right">blog:&nbsp;</td>
+							<td><input type="text" size="67" value="${member.sns_b }"
+								maxlength="100" name="sns_b" /></td>
+						</tr>
+						<td align="right" valign="top"><br>프로필 컨텐츠:&nbsp;</td>
+						<td><textarea name="profileText" rows="10" cols="65"
+								maxlength="4000">${member.profileText }</textarea></td>
+						</tr>
+						<tr>
+							<td><input type="button" onclick="Goduke()" value="듀크로 돌아가기" />
+							</td>
+						</tr>
+						<tr>
+							<td align="right"></td>
+							<td><input type="hidden" value="${member.profileImage }"
+								name="profileImage" id="goduke" /> <input type="hidden"
+								value="${member.id }" name="id" id="id" /> <input type="hidden"
+								value="${member.pwd }" name="pwd" id="pwd" /> <input type=submit
+								value="수정하기" /></td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		</div>
-	</div>
 		<!-- 모달 끛 --입니다요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 
-<br><br><br>
-================================================================================
-<h1>나의 갤러리</h1>
-================================================================================
-<c:forEach var="myGallery" items="${myGallery}">
-		
-			<a href="${contextPath }/gallery/detail.do?num=${myGallery.galleryNO}">
-				<div class="row">
-				  <div class="col-sm-6 col-md-4" style="width: 350px">
-				    <div class="thumbnail">
-				      <div class="caption"> 
-				      <img src="${contextPath }/resources/image/${myGallery.imageFileName}" height="240px" width="290px">
-				        <p>제목:${myGallery.title }</p>
-				        <p>아이디: ${myGallery.id }</p>
-				        <p>카테고리: ${myGallery.category }</p>
-				        <p>해시태크: ${myGallery.hashtag }</p>
-				        
-					   <input type=button value="삭제" onClick="fn_remove('${contextPath}/mypage/cancelFavorite.do','${myGallery.id}','${myGallery.galleryNO}')" />
-				      </div>
-				    </div>
-				  </div>
-				</div>	
-			</a>	 
- 
- 
-</c:forEach>
+		<br>
+		<br>
+		<br>
+		<div class="title_box">
+			<p>My Gallery</p>
+		</div>
 
-<br><br><br>	
+		<c:forEach var="myGallery" items="${myGallery}">
 
- 
 
-================================================================================
-
-<h1>내가 좋아하는 겔러리</h1>
-
-================================================================================
-
-<c:forEach var="favorite" items="${favoritelist}">
-<div id="favoriteinfo">
-		
-		<c:set var="a" value="${ a + 1}"/>
-			<a href="${contextPath }/gallery/gallery_detail.do?galleryNO=${favorite.galleryNO}">
-
-				<div class="row">
-				  <div class="col-sm-6 col-md-4" style="width: 350px">
-				    <div class="thumbnail">
-				      <div class="caption"> 
-				      <img src="${contextPath }/resources/image/${favorite.imageFileName}" height="240px" width="290px">
-			</a>	      
-				        <p>제목:${favorite.title }</p>
-				        <p>아이디: ${favorite.id }</p>
-				        <p>카테고리: ${favorite.category }</p>
-				        <p>해시태크: ${favorite.hashtag }</p>
-				        
-					   <p>좋아요:${like.get(a)}</p>
-				      </div>
-				    </div>
-				  </div>
+			<div class="row">
+				<div class="col-sm-6 col-md-4" id="image_box">
+					<div class="thumbnail">
+						<div class="caption">
+							<a
+								href="${contextPath }/gallery_detail/galleryDetail.do?galleryNO=${myGallery.galleryNO}">
+								<img
+								src="${contextPath }/download.do?fileName=${myGallery.imageFileName}&id=${myGallery.galleryNO }"
+								height="240px" width="290px">
+							</a>
+							<p>제목:${myGallery.title }</p>
+							<p>아이디: ${myGallery.id }</p>
+							<p>카테고리: ${myGallery.category }</p>
+							<p>해시태크: ${myGallery.hashtag }</p>	
+						</div>
+						<i class="far fa-trash-alt" onClick="fn_remove('${contextPath}/mypage/deletemygallery.do','${myGallery.id}','${myGallery.galleryNO}')"></i>
+					</div>
 				</div>
- <input type=button value="좋아요취소" onClick="fn_remove('${contextPath}/mypage/cancelFavorite.do','${member.id}','${favorite.galleryNO}')" /> 
+			</div>
 
- 
-</div>
-</c:forEach>
-</div>
 
-</div>
+
+		</c:forEach>
+
+		<br>
+		<br>
+		<br>
+
+
+		<div class="title_box">
+			<p>Favorite</p>
+		</div>
+
+		<c:forEach var="favorite" items="${favoritelist}">
+			<div id="favoriteinfo">
+				<div class="row">
+					<c:set var="a" value="${ a + 1}" />
+					<div class="col-sm-6 col-md-4"  id="image_box">
+						<div class="thumbnail">
+							<div class="caption">
+								<a
+									href="${contextPath }/gallery_detail/galleryDetail.do?galleryNO=${favorite.galleryNO}">
+									<img
+									src="${contextPath }/download.do?fileName=${favorite.imageFileName}&id=${favorite.galleryNO }"
+									height="240px" width="290px">
+								</a>
+							</div>
+						</div>
+						<i class="far fa-trash-alt" onClick="fn_remove('${contextPath}/mypage/cancelFavorite.do','${member.id}','${favorite.galleryNO}')"></i>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+		
+	</div>
+
 </body>
 </html>

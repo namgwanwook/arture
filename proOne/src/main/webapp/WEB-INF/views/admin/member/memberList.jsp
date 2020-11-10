@@ -8,7 +8,32 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 리스트</title>
-<link rel="stylesheet" href="${contextPath}/resources/css/admin.css"/>
+<style>
+	img {
+		float: left;
+		width: 50px;
+    	height: 50px; 
+    	border-radius: 70%;
+    	margin: 26px 20px 10px 20px ;
+	}
+	.memList{
+		text-align:left;
+		background-color:pink;
+		padding-bottom: 10px;
+	}
+	.memList .mem_id{
+		font-size:20px;
+		font-weight:bold;
+		margin-left:20px;
+	}
+	.memList .mem_name{
+		font-size:14px;
+		font-weight:normal;
+	}
+	.memList .mem_email{
+		margin-top:-10px;
+	}
+</style>
 </head>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <script type="text/javascript" >
@@ -131,10 +156,10 @@ function fn_remove(ID){
 
 </script>
 <body>
-<h1 class="label">회원 관리</h1>
-	<table id="contents" align="center" border="1">
-		<tr class="list_title">
-			<td class="pl20"width="60%" align="left">이름</td>
+<h1>회원 관리</h1>
+	<table id="contents" align="center" border="1"  width="80%"  >
+		<tr height="10" align="center">
+			<td width="60%" align="left" padding-left="5px">이름</td>
 			<td width="15%">가입날짜</td>
 			<td width="25%">관리</td>
 		</tr>

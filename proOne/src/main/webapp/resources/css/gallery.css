@@ -1,20 +1,62 @@
 @charset "UTF-8";
-body{
-	background-color: black;
-}
-header,footer{
-	width: 100%; 
-	height: 100px; 
-	background-color: gray;
-}
 section{
-	width: 80%;
-	margin:0 auto;
-	padding-top: 50px;
-	overflow: hidden;
+	width: 100%;
+	height: auto;
 }
-.row{
-	padding-bottom:60px;
-	padding-left: 7%;
-	float: left;
+
+.thumbnail-form{
+	width: 70%;
+	margin: auto;
 }
+.thumbnail {
+  height: 430px;
+  width: 330px;
+  float: left;
+  margin:50px 50px 50px 50px;
+  border: solid 2px white;
+  border-radius:10px; 
+} 
+p{
+	text-align : left;
+}
+/* 검색창 스타일 */
+input:focus {
+    outline: none;
+}
+.search{
+	width: 600px;
+	margin: auto;
+}
+input::placeholder {
+    color: white;
+}
+input#keyword{
+	width: 300px;
+    height: 50px;
+    background-color: transparent; 
+    text-decoration: none;
+    border: none;
+    border-bottom: solid 3px white;
+    font-size: 30px;
+   	color: white;
+}
+.fa-search{
+	color: white;
+}
+
+
+/* 이미지 스타일 */
+.gallery-img{
+	width: 330px;
+	height: 200px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+}
+
+
+.caption{
+	margin-left: 24px;
+}
+
+
+

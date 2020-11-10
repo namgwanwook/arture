@@ -65,7 +65,7 @@
 </head>
 <body>
    <h1 style="text-align:center">신청하기</h1>
-   <form name="apply_form.do" method="post" action="${contextPath}/applyForm/addNewArticle.do" enctype="multipart/form-data">
+   <form name="apply_form.do" method="post" action="${contextPath}/applyForm/addNewArticle.do" enctype="multipart/form-data" accept-charset="UTF-8">
       <table border="0" align="center">
          <tr>
             <td align="right">작성자</td>
@@ -100,7 +100,7 @@
             </select>
          </tr>
          <tr>
-            <td align="center"><input multiple="multiple" type="file" name="imageFileName" /></td>
+            <td align="center"><input multiple="multiple" type="file" name="file" accept="image/png,image/jpg,image/jpeg" /></td>
             <!-- <td><input type="text" name="src" /></td> -->
          </tr>
          

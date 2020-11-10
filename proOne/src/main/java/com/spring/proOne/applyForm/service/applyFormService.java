@@ -8,7 +8,6 @@ import com.spring.proOne.applyForm.vo.ArticleVO;
 public interface applyFormService {
 	/* public List listArticles() throws Exception; */
 	public int addNewArticle(Map<String, Object> articleMap);
-	public ArticleVO viewArticle(int articleNO);
-	public void modArticle(Map<String, Object> articleMap);
-	public void removeArticle(int articleNO);
+//	public ArticleVO viewArticle(int applyNO);
+//	public void modArticle(Map<String, Object> articleMap);
 }
