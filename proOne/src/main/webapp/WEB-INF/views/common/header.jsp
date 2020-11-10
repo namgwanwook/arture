@@ -28,7 +28,7 @@ $(document).ready(function () {
 	cursor.over(".line-1", {
 		borderColor: "rgba(255,255,255,.38)",
 		broderWidth: 2
-	}); */
+	});*/
 });
 </script>
 </head>

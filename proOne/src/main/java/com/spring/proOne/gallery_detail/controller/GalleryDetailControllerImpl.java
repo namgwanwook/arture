@@ -19,6 +19,7 @@ import com.spring.proOne.gallery.vo.ImageVO;
 import com.spring.proOne.gallery_detail.service.GalleryDetailService;
 import com.spring.proOne.member.service.MemberService;
 import com.spring.proOne.member.vo.MemberVO;
+import com.spring.proOne.mypage.vo.FavoriteVO;
 
 @Controller("galleryDetailController")
 public class GalleryDetailControllerImpl implements GalleryDetailController{
@@ -48,6 +49,7 @@ public class GalleryDetailControllerImpl implements GalleryDetailController{
 		mav.addObject("galleryMap", galleryMap);
 		return mav;
 	}
+	
 	// 다중이미지 보여주기
 	/*
 	 * @RequestMapping(value="/gallery_detail/galleryDetail.do" ,method =

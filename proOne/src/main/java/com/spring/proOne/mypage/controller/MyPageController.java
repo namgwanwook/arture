@@ -14,4 +14,6 @@ public interface MyPageController {
 	public ModelAndView cancelFavorite(@RequestParam("id")String id, @RequestParam("galleryNO")int galleryNO,HttpServletRequest request, HttpServletResponse response)throws Exception; 
 	public ModelAndView deleteMyGallery(@RequestParam("id")String id, @RequestParam("galleryNO")int galleryNO,HttpServletRequest request, HttpServletResponse response)throws Exception; 
 	public ResponseEntity modUserInfo(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)throws Exception;
+	public ResponseEntity modprofileimage(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)throws Exception;
+
 }

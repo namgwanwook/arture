@@ -12,6 +12,7 @@ import com.spring.proOne.gallery.vo.GalleryVO;
 public interface MyPageService {
 	public MemberVO selectMyInfo(String id) throws Exception;//내정보 불러오기
 	public void updateMyInfo(Map myinfomap)throws Exception;//내정보 수정
+	public void updateProFileImage(Map myinfomap)throws Exception;//프로필 이미지 수정
 	public void deleteMyInfo(String id)throws Exception;//회원 탈퇴-좋아요삭제 
 	public List<GalleryVO> myFavorite(String id)throws Exception;//좋아요누른 게시글 가져오기
 	public List<GalleryVO> myGallery(String id)throws Exception;//내 게시글 불러오기
@@ -20,4 +21,5 @@ public interface MyPageService {
 	public void insertfavorite(FavoriteVO favoriteVO)throws Exception;//좋아요추가 
 	public void deletemygallery(FavoriteVO favoriteVO) throws Exception;//내 게시글 삭제
 	public int selectOverlappedFavorite(FavoriteVO favoriteVO)throws Exception; // 좋아요 중복확인
+	public Map count(String id) throws Exception;
 }

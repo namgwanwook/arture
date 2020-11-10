@@ -86,6 +86,24 @@
 	  where id=#{id} AND pwd=#{pwd}
     ]]>
 </select>
+
+ <!-- 좋아요받은 수 -->
+<select id="countfavorite" parameterType="String" resultType="int">
+ <![CDATA[
+	  SELECT count(*)
+	  FROM o_favorite
+	  where id=#{id}
+    ]]>
+</select>
+
+ <!-- 작성한 게시글 수 -->
+<select id="countgallery" parameterType="String" resultType="int">
+ <![CDATA[
+	  SELECT count(*)
+	  FROM o_gallery
+	  where id=#{id}
+    ]]>
+</select>
  
   <!-- 좋아요 추가 -->
  <insert id="insertfavorite" parameterType="favoriteVO">
@@ -109,6 +127,13 @@
 			</if>
 			where id=#{id}
 	</update>
+	
+ <!--프로필 이미지 수정  -->
+  	<update id="updateProfileimage"  parameterType="java.util.Map">
+			update o_member
+			set profileImage=#{profileImage}
+			where id=#{id}
+	</update>	
 	
 <!-- 회원탈퇴  -->	
  <delete id="deleteMember"  parameterType="String">
