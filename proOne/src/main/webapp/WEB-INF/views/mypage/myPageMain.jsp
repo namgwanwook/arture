@@ -163,6 +163,12 @@ i {
 	 margin:2.5%;
 	 float:left;
 }
+p{
+	padding-top : 4px;
+}
+.thumbnail{
+	text-align: left;
+}
 
 </style>
 
@@ -255,11 +261,11 @@ window.onclick = function(event) {
 		<!--  -->
 		<div class="myinfo">
 			<div class="imageWrapper">
-				<input type="file" id="proinput" accept="image/png"
+				<input type="file" id="proinput" accept="image/*"
 					name="profileImage" enctype="multipart/form-data"
 					onchange="readURL(this)" style="display: none" />
 				<button onclick="inputimage()">
-					<img id="profile" src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"></img>
+					<img id="profile" src="${contextPath}/downProfile.do?profileImage=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"></img>
 				</button>
 			</div>
 			<section class="userinfo">
@@ -356,7 +362,8 @@ window.onclick = function(event) {
 							<p>카테고리: ${myGallery.category }</p>
 							<p>해시태크: ${myGallery.hashtag }</p>	
 						</div>
-						<i class="far fa-trash-alt" onClick="fn_remove('${contextPath}/mypage/deletemygallery.do','${myGallery.id}','${myGallery.galleryNO}')"></i>
+						<c:set var="likeNum" value="${ likeNum + 1}"/>
+						<i class="fas fa-heart"> ${like.get(likeNum-1)}</i><i class="far fa-trash-alt" onClick="fn_remove('${contextPath}/mypage/deletemygallery.do','${myGallery.id}','${myGallery.galleryNO}')"></i>
 					</div>
 				</div>
 			</div>

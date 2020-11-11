@@ -177,7 +177,7 @@ function fn_remove(ID){
 				<c:forEach var="member" items="${memberList }">
 					<tr align="center" class="tr_list">
 						<td class="memList">
-							<img src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}">
+							<img src="${contextPath}/downProfile.do?profileImage=${member.profileImage}&id=${member.id}"></img>
 							<p class="mem_id">${member.id}<span class="mem_name"> (${member.name })</span></p>
 							<p class="mem_email">${member.email }</p>
 						</td>

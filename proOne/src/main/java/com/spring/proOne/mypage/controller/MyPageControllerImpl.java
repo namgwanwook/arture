@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.proOne.mypage.service.MyPageService;
 import com.spring.proOne.mypage.vo.FavoriteVO;
 import com.spring.proOne.member.vo.MemberVO;
+import com.spring.proOne.gallery.service.GalleryService;
 import com.spring.proOne.gallery.vo.GalleryVO;
 
  
@@ -39,6 +40,8 @@ public class MyPageControllerImpl implements MyPageController {
 
 	@Autowired
 	MyPageService mypageservice;
+	@Autowired
+	GalleryService galleryservice;
 	@Autowired
 	MemberVO memberVO;
 
@@ -60,10 +63,16 @@ public class MyPageControllerImpl implements MyPageController {
     List<GalleryVO> favoritelist = mypageservice.myFavorite(id); //내가 좋아요를 누른 겔러리들
 	List<GalleryVO> myGallery = mypageservice.myGallery(id);  // 내가 작성한 갤러리들
 	Map count = mypageservice.count(id);//내가 받은 좋아요 갯수와 작성한 게시글 수
+	
+	List like = new ArrayList<Integer>();
+	for(int i=0;i<myGallery.size();i++) {			
+		like.add(galleryservice.like(i));
+	}
 
 	String viewName=(String)request.getAttribute("viewName");
 	ModelAndView mav = new ModelAndView();
 	mav.setViewName(viewName);
+	mav.addObject("like", like);
 	mav.addObject("favoritelist", favoritelist);
 	mav.addObject("myGallery", myGallery);
 	mav.addObject("count", count);
