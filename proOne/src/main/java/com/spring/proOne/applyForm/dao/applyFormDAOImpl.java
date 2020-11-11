@@ -15,62 +15,35 @@ import com.spring.proOne.gallery.vo.ImageVO;
 public class applyFormDAOImpl implements applyFormDAO{
 	@Autowired
 	private SqlSession sqlSession;
-	
-	/*
-	 * @Override public List<ArticleVO> selectAllArticlesList() throws Exception {
-	 * List<ArticleVO> articlesList =
-	 * sqlSession.selectList("mapper.applyForm.selectAllArticlesList"); return
-	 * articlesList; }
-	 */
 
 	@Override
 	public int insertNewArticle(Map<String, Object> articleMap) {
-		int articleNO = selectNewArticleNO();
-		articleMap.put("applyNO", articleNO);
 		sqlSession.insert("mapper.applyForm.insertNewArticle", articleMap);
-		return articleNO;
+		int applyNO = sqlSession.selectOne("mapper.applyForm.selectNewapplyNO");
+		return applyNO;
 	}
 
-	private int selectNewArticleNO() {
-		// TODO Auto-generated method stub
-		System.out.println(sqlSession.selectOne("mapper.applyForm.selectNewArticleNO"));
-		int articleMAX = sqlSession.selectOne("mapper.applyForm.selectNewArticleNO");
-		System.out.println("어플라이 DAO 아티클맥스 값 :"+articleMAX);
-		return articleMAX;
-	}
-
-	@Override
-	public ArticleVO selectArticle(int articleNO) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("mapper.applyForm.selectArticle", articleNO);
-	}
-
-	@Override
-	public void updateArticle(Map articleMap) {
-		// TODO Auto-generated method stub
-		sqlSession.update("mapper.applyForm.updateArticle", articleMap);
-	}
-
-	@Override
-	public void deleteArticle(int articleNO) {
-		// TODO Auto-generated method stub
-		sqlSession.delete("mapper.applyForm.deleteArticle", articleNO);
-	}
+	
 
 	@Override
 	public void insertNewImage(Map<String, Object> articleMap) {
 		// TODO Auto-generated method stub
 		List<ImageVO> imageFileList = (ArrayList)articleMap.get("imageFileList");
-		int articleNO = (Integer)articleMap.get("articleNO");
-		int imageFileNO = selectNewImageFileNO();
-		for (ImageVO imageVO : imageFileList) {
-			imageVO.setImageNO(++imageFileNO);
-			imageVO.setApplyNO(articleNO);
+		
+		int applyNO = sqlSession.selectOne("mapper.applyForm.selectNewapplyNO",articleMap.get("id"));
+		System.out.println("이미지 파일 리스트에 넣을 applyNO : " + applyNO);
+		
+		for (int i=0; i< imageFileList.size();i++) {
+			System.out.println("i : "+i);
+			imageFileList.get(i).setApplyNO(applyNO);
+	
+			System.out.println("각각의 getApplyNO "+imageFileList.get(i).getApplyNO());
+			System.out.println("각각의 getImageFileName "+imageFileList.get(i).getImageFileName());
 		}
-		sqlSession.insert("mapper.applyForm.insertNewImage", imageFileList);
+		
+		for (ImageVO Ivo : imageFileList) {
+			sqlSession.insert("mapper.applyForm.insertNewImage", Ivo);
+		}
 	}
 
-	private int selectNewImageFileNO() {
-		return sqlSession.selectOne("mapper.applyForm.selectNewImageFileNO");
-	}
 }

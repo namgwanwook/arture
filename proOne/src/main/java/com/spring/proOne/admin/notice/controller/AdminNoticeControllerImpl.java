@@ -33,7 +33,6 @@ public class AdminNoticeControllerImpl implements AdminNoticeController{
 	@RequestMapping(value="/noticeList.do" ,method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		// TODO Auto-generated method stub
-		System.out.println("controller --------------");
 		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -41,7 +40,6 @@ public class AdminNoticeControllerImpl implements AdminNoticeController{
 		List<NoticeVO> noticeList = noticeService.listNotieces();
 		
 		mav.addObject("noticeList", noticeList);
-		System.out.println("------------- controller");
 		return mav;
 	}
 	

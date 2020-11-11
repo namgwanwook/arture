@@ -11,8 +11,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-
+<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet"> -->
+<link rel="stylesheet" href="${contextPath}/resources/css/member.css"/>
   <meta charset="UTF-8">
 <title>로그인창</title>
 <c:choose>
@@ -25,52 +25,7 @@
 	</c:when>
 </c:choose>
 </head>
-<style>
 
-#loginWrapper{
-	width:100%;
-	height:900px;
-	background:url('../../resources/image/login_bg.jpg');
-	color:#fff;
-}
-#loginWrapper form{
-	width:500px;
-	height:500px;
-	position:absolute;
-	top:50%;
-	left:50%;
-	transform: translateX(-50%);
-}
-#loginWrapper form td{
-	display:block;
-	width:300px;
-	height:50px;
-	border:1px solid #fff;
-	border-radius:50px;
-	margin-bottom:20px;
-	font-family: 'Noto Sans', sans-serif;
-}
-#loginWrapper form td.td1{
-	border:none;
-	background-color:#f9224e;
-}
-#loginWrapper form td.td1 input{
-	background-color:transparent;
-	border:none;
-	color:#fff;
-	font-size:18px;
-	line-height:50px;
-}
-#loginWrapper form input.input1{
-	width:80%;
-	height:50px;
-	background-color:transparent;
-	border:none;
-	color:#fff;
-}
-
-
-</style>
 <body>
 <div id="loginWrapper">
 	<form name="frmLogin" method="post"  action="${contextPath}/member/login.do">

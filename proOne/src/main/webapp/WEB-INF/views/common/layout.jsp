@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"%>
-    <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
+<link rel="stylesheet" href="${contextPath}/resources/css/reset.css"/>
 <style>
 	body{
 		margin: 0;
@@ -22,10 +23,10 @@
         border: 0px solid #bcbcbc;
       }
       #header {
-        padding: 5px;
-        margin-bottom: 5px;
-        border: 0px solid #bcbcbc;
-         background-color: transparent;
+      	width:100%;
+		height:100px;
+		margin:0 auto;
+        background-color: transparent; 
       }
       #content {
         width: 100%;

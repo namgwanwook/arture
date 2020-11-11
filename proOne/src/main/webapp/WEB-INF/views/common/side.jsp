@@ -26,6 +26,7 @@
 		<a href="${contextPath}/admin/notice/noticeList.do" class="no-underline">공지사항 관리</a><br> 
 		<a href="${contextPath}/admin/member/memberList.do" class="no-underline">회원 관리</a><br> 
 		<a href="${contextPath}/admin/applycheck/applyList.do" class="no-underline">작품 신청 관리</a><br>
+		<a href="${contextPath}/admin/gallery/galleryList.do" class="no-underline">승인된 작품 관리</a><br>
 	</h1>
 
 

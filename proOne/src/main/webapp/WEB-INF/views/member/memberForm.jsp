@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${contextPath}/resources/css/member.css"/>
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script>
 function fn_overlapped(){
@@ -46,70 +47,7 @@ function fn_overlapped(){
 </script>
 <title>회원 가입창</title>
 
-<style>
-	#joinWrapper{
-		width:100%;
-		height:900px;
-	}
-	#joinWrapper form{
-		width:500px;
-		height:500px;
-		position:absolute;
-		top:150px;
-		left:50%;
-		transform: translateX(-50%);
-		text-align:left;
-	}
-	#joinWrapper form p {
-		font-size:18px;
-		font-weight:bold;
-	}
-	#joinWrapper form td input{
-		display:block;
-		width: 500px;
-		height:30px;
-		border:none;
-		border-bottom:3px solid gray;
-		background-color:transparent;
-		margin-bottom:10px;
-		color:#fff;
-	}
-	#joinWrapper form td input:focus{
-		border-bottom:3px solid #fff;
-	}
-	#joinWrapper form td.td1 input{
-		width:200px;
-		height:50px;
-		margin:0 auto;
-		border:none;
-		border-radius:50px;
-		background-color:#f9224e;
-		font-size:18px;
-		line-height:50px;
-		border-bottom:none;
-		margin-top:50px;
-		cursor:pointer;
-	}
-	#joinWrapper form input.radio{
-		display:inline-block;
-		width:50px;
-		height:20px;
-	}
-	#joinWrapper form input.overlapped_btn{
-		display:inline-block;
-		width:100px;
-		height:35px;
-		background-color:gray;
-		border-radius:35px;
-		border:none;
-		border-bottom:0;
-		cousor:pointer;
-		
-	}
-	#joinWrapper form input.radio span{
-		line-height:20px;
-	}
-</style>
+
 
 </head>
 

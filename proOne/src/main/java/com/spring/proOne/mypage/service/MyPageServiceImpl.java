@@ -28,6 +28,11 @@ public class MyPageServiceImpl implements MyPageService{
 	public void updateMyInfo(Map myinfomap) throws Exception {//내정보 수정
 		myPageDAO.updateMyInfo(myinfomap);
 	}
+	
+	@Override
+	public void updateProFileImage(Map myinfomap) throws Exception {
+		myPageDAO.updateProFileImage(myinfomap);
+	}
 
 	@Override
 	public void deleteMyInfo(String id) throws Exception {//회원탈퇴-좋아요 삭제
@@ -66,6 +71,16 @@ public class MyPageServiceImpl implements MyPageService{
 	public void deletemygallery(FavoriteVO favoriteVO) throws Exception {//내 게시글 삭제
 		myPageDAO.deletemygallery(favoriteVO);
 		
+	}
+
+	@Override
+	public int selectOverlappedFavorite(FavoriteVO favoriteVO) throws Exception {//좋아요 확인
+		return myPageDAO.selectOverlappedFavorite(favoriteVO);
+	}
+
+	@Override
+	public Map count(String id) throws Exception {//받은좋아요와 작성한게시글수
+		return myPageDAO.count(id);
 	}
 	
 }

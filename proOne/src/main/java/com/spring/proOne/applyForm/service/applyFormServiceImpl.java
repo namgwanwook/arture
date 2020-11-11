@@ -24,27 +24,26 @@ public class applyFormServiceImpl implements applyFormService{
 
 	@Override
 	public int addNewArticle(Map<String, Object> articleMap) {
-		int articleNO = applyFormDAO.insertNewArticle(articleMap);
-		articleMap.put("articleNO",	articleNO);
+		int applyNO = applyFormDAO.insertNewArticle(articleMap);
+		articleMap.put("applyNO",	applyNO);
 		applyFormDAO.insertNewImage(articleMap);
-		return articleNO;
+		
+		// 아무튼 applyNO넘겨줘야함
+		return applyNO;
 	}
 	
-	@Override
-	public ArticleVO viewArticle(int articleNO) {
-		ArticleVO articleVO = applyFormDAO.selectArticle(articleNO);
-		return articleVO;
-	}
+//	@Override
+//	public ArticleVO viewArticle(int applyNO) {
+//		ArticleVO articleVO = applyFormDAO.selectArticle(applyNO);
+//		return articleVO;
+//	}
 
-	@Override
-	public void modArticle(Map<String, Object> articleMap) {
-		applyFormDAO.updateArticle(articleMap);
-	}
+//	@Override
+//	public void modArticle(Map<String, Object> articleMap) {
+//		applyFormDAO.updateArticle(articleMap);
+//	}
 
-	@Override
-	public void removeArticle(int articleNO) {
-		applyFormDAO.deleteArticle(articleNO);
-	}
+	
 
 
 

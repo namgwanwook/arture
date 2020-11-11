@@ -43,6 +43,42 @@ public class applyFormControllerImpl implements applyFormController{
 	applyFormService applyFormService;
 	@Autowired
 	ArticleVO articleVO;
+
+	
+	
+	
+	private List<String> upload(MultipartHttpServletRequest multipartRequest) throws Exception{
+		multipartRequest.setCharacterEncoding("utf-8");
+		List<MultipartFile> MPfileList = multipartRequest.getFiles("file");
+		System.out.println("MultopartFileList : " + MPfileList);
+		List<String> fileList = new ArrayList<String>();
+		
+		
+		for (MultipartFile mf : MPfileList) {
+			String fileName = mf.getName();
+			String originFileName = mf.getOriginalFilename();
+			System.out.println("originFileName : " + originFileName);
+			System.out.println("fileName : " + fileName);
+			fileList.add(originFileName);
+			
+			File file = new File(GALLERY_IMAGE_REPO +"\\temp"+ "\\");
+			
+
+			
+			System.out.println("upload FILE : " + file);
+			
+			if(file.exists()) {
+				if(file.getParentFile().mkdirs()) {
+					file.createNewFile();
+				}
+			}
+			mf.transferTo(new File(GALLERY_IMAGE_REPO+"\\"+"temp\\"+originFileName));
+			
+		}
+		
+		return fileList;
+	}
+	
 	
 	@Override
 	@RequestMapping(value="/applyForm/addNewArticle.do", method=RequestMethod.POST)
@@ -54,6 +90,8 @@ public class applyFormControllerImpl implements applyFormController{
 		String imageFileName = null;
 		
 		Map<String, Object> articleMap = new HashMap<String, Object>();
+		
+		// applyForm에서 등록된 정보들 받아오기
 		Enumeration enu = multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()) {
 			String name= (String)enu.nextElement();
@@ -62,18 +100,26 @@ public class applyFormControllerImpl implements applyFormController{
 			articleMap.put(name, value);
 		}
 		
+		//id 구해오기
 		HttpSession session = multipartRequest.getSession();
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		String id =memberVO.getId();
+		String id =((MemberVO)session.getAttribute("member")).getId();
+		System.out.println("ID를 왜 구해오는거죠??? " + id);
 		articleMap.put("id", id);
 		
+		// 첨부된 파일 리스트를 upload Method를 이용해서 받아옴
 		List<String> fileList = upload(multipartRequest);
+		System.out.println("첨부된 파일 리스트 --->>" + fileList);
+		
+		
 		List<ImageVO> imageFileList = new ArrayList<ImageVO>();
+		System.out.println("ImageVO의 imageFileList-------->>"+imageFileList);
+		
 		if(fileList != null && fileList.size() != 0) {
-			for (String fileName:fileList) {
+			for (String fileName : fileList) {
 				ImageVO imageVO = new ImageVO();
 				imageVO.setImageFileName(fileName);
 				imageFileList.add(imageVO);
+				System.out.println(imageVO.getImageFileName());
 			}
 			articleMap.put("imageFileName", imageFileList.get(0).getImageFileName());
 			articleMap.put("imageFileList", imageFileList);
@@ -85,14 +131,19 @@ public class applyFormControllerImpl implements applyFormController{
 
 		try {
 			int i=0;
-			int articleNO = applyFormService.addNewArticle(articleMap);
+			int applyNO = applyFormService.addNewArticle(articleMap);
 			
 			if(imageFileList != null && imageFileList.size() != 0) {
 				for(ImageVO imageVO : imageFileList) {
 					imageFileName = imageVO.getImageFileName();
-
+					
+					System.out.println("이미지 파일 잘 들어가나요? "+ imageFileName);
 					File srcFile = new File(GALLERY_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
-					File destDir = new File(GALLERY_IMAGE_REPO+"\\"+articleNO);
+					
+					System.out.println("srcFile : " + srcFile);
+					
+					File destDir = new File(GALLERY_IMAGE_REPO+"\\"+applyNO);
+					System.out.println("destDir : "+destDir);
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);
 					i++;
 				}
@@ -122,6 +173,8 @@ public class applyFormControllerImpl implements applyFormController{
 		return resEnt;
 	}
 	
+	
+	
 	@RequestMapping(value="/applyForm/*Form.do", method=RequestMethod.GET)
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
@@ -130,131 +183,51 @@ public class applyFormControllerImpl implements applyFormController{
 		return mav;
 	}
 	
-	private List<String> upload(MultipartHttpServletRequest multipartRequest) throws Exception{
-		List<String> fileList = new ArrayList<String>();
-		Iterator<String> fileNames = multipartRequest.getFileNames();
-		while(fileNames.hasNext()) {
-			String fileName = fileNames.next();
-			MultipartFile mFile = multipartRequest.getFile(fileName);
-			String originalFileName = mFile.getOriginalFilename();
-			
-			System.out.println("originalname : " + originalFileName);
-			
-			fileList.add(originalFileName);
-			File file = new File(GALLERY_IMAGE_REPO+"\\"+fileName);
-			System.out.println(mFile.getSize());
-			System.out.println(file);
-			if(mFile.getSize() != 0) {
-				System.out.println("test1");
-				if(!file.exists()) {
-					System.out.println("test2");
-					if(file.getParentFile().mkdirs()){
-						file.createNewFile();
-					}
-				}
-				mFile.transferTo(new File(GALLERY_IMAGE_REPO+"\\"+"temp"+"\\"+originalFileName));
-			}
-		}
-		return fileList;
-	}
 	
-	@Override
-	@RequestMapping(value="/applyForm/viewArticle.do", method=RequestMethod.GET)
-	public ModelAndView viewArticle(int articleNO, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		articleVO = applyFormService.viewArticle(articleNO);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		mav.addObject("article", articleVO);
-		return mav;
-	}
+	//필요없음
+//	@Override
+//	@RequestMapping(value="/applyForm/viewArticle.do", method=RequestMethod.GET)
+//	public ModelAndView viewArticle(int applyNO, HttpServletRequest request, HttpServletResponse response)
+//			throws Exception {
+//		String viewName = (String)request.getAttribute("viewName");
+//		articleVO = applyFormService.viewArticle(applyNO);
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName(viewName);
+//		mav.addObject("article", articleVO);
+//		return mav;
+//	}
 
-	@Override
-	@RequestMapping(value="/applyForm/modArticle.do", method=RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
-			throws Exception {
-		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String, Object> articleMap = new HashMap<String, Object>();
-		Enumeration enu = multipartRequest.getParameterNames();
-		
-		while(enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
-			String value = multipartRequest.getParameter(name);
-			articleMap.put(name, value);
-		}
-		
-		List<String> imageFileName = upload(multipartRequest);
-		HttpSession session = multipartRequest.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String id = memberVO.getId();
-		articleMap.put("id",id);
-		articleMap.put("imageFileName", imageFileName);
-		String articleNO =(String)articleMap.get("articleNO");
-		String message;
-		
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type","text/html; charset=utf-8");
-		
-		try {
-			applyFormService.modArticle(articleMap);
-			if (imageFileName != null && imageFileName.size() != 0) {
-				File srcFile = new File(GALLERY_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
-				File destDir = new File(GALLERY_IMAGE_REPO+"\\"+articleNO);
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);
-				
-				String originalFileName = (String) articleMap.get("originalFileName");
-				File oldFile = new File(GALLERY_IMAGE_REPO+"\\"+articleNO+"\\"+originalFileName);
-				oldFile.delete();
-			}
-			message = "<script>";
-			message += " alert('수정 되었습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+articleNO+"';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch(Exception e) {
-			File srcFile = new File(GALLERY_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
-			srcFile.delete();
-			message = "<script>";
-			message += " alert('수정이 취소 되었습니다.');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+articleNO+"';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		}
-		return resEnt;
-	}
 
-	@Override
-	@RequestMapping(value="/applyForm/removeArticle.do", method= RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity removeArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type",	"text/html;charset=utf-8");
-		try {
-			applyFormService.removeArticle(articleNO);
-			File destDir = new File(GALLERY_IMAGE_REPO+"\\"+articleNO);
-			FileUtils.deleteDirectory(destDir);
-			
-			message = "<script>";
-			message += " alert('삭제 되었습니다.');";
-			message += " location.href='" + request.getContextPath()+"/board/listArticles.do';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch(Exception e) {
-			message = "<script>";
-			message += " alert('삭제가 취소되었습니다.');";
-			message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		}
-		return resEnt;
-	}
+//
+//	@Override
+//	@RequestMapping(value="/applyForm/removeArticle.do", method= RequestMethod.POST)
+//	@ResponseBody
+//	public ResponseEntity removeArticle(@RequestParam("applyNO") int applyNO, HttpServletRequest request, HttpServletResponse response)
+//			throws Exception {
+//		response.setContentType("text/html;charset=utf-8");
+//		String message;
+//		ResponseEntity resEnt = null;
+//		HttpHeaders responseHeaders = new HttpHeaders();
+//		responseHeaders.add("Content-Type",	"text/html;charset=utf-8");
+//		try {
+//			applyFormService.removeArticle(applyNO);
+//			File destDir = new File(GALLERY_IMAGE_REPO+"\\"+applyNO);
+//			FileUtils.deleteDirectory(destDir);
+//			
+//			message = "<script>";
+//			message += " alert('삭제 되었습니다.');";
+//			message += " location.href='" + request.getContextPath()+"/board/listArticles.do';";
+//			message += " </script>";
+//			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+//		} catch(Exception e) {
+//			message = "<script>";
+//			message += " alert('삭제가 취소되었습니다.');";
+//			message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
+//			message += " </script>";
+//			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+//			e.printStackTrace();
+//		}
+//		return resEnt;
+//	}
 	
 }

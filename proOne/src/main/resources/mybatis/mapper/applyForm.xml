@@ -12,66 +12,36 @@
 		<result property="hashtag" column="hashtag"></result>
 		<result property="id" column="id"></result>
 	</resultMap>
+	<resultMap id="ImageVO" type="imageVO">
+		<result property="imageNO" column="imageNO"></result>
+		<result property="imageFileName" column="imageFileName"></result>
+		<result property="regDate" column="regDate"></result>
+		<result property="applyNO" column="applyNO"></result>
+	</resultMap>
 	
-	<!-- <select id="selectAllArticlesList" resultMap="articleResult">
-		<![CDATA[
-			select applyNO, parentNO, title, content, imagefilename, category, hashtag, id
-			from o_applyform
-			START WITH parentNo=0
-			CONNECT BY PRIOR applyNO=parentNo
-			ORDER SIBLINGS BY applyNO DESC
-		]]>
-	</select> -->
-	
-	
-	<select id="selectNewArticleNO" resultType="int">
-		<![CDATA[
-			select max(applyNO)+1 from o_applyform
-		]]>
-	</select>
-	
-	<select id="selectArticle" resultType="articleVO" parameterType="int">
-		<![CDATA[
-			select * from o_applyform where applyNO=#{applyNO}
-		]]>
-	</select>
-	
-	<update id="updateArticle" parameterType="java.util.Map">
-		update o_applyform
-		set title=#{title}, content=#{content}
-		<if test="imageFileName != '' and imageFileName != null">
-			, imageFileName=#{imageFileName}
-		</if>
-		where  applyNO = #{applyNO}
-	</update>
-	
-	<delete id="deleteArticle" parameterType="int">
-		<![CDATA[
-			delete from o_applyform
-			where applyNO in (
-				SELECT applyNO From o_applyform
-				START WITH applyNO = #{applyNO}
-				CONNECT BY PRIOR applyNO = parentNO )
-		]]>
-	</delete>
 	
 	<insert id="insertNewArticle" parameterType="java.util.Map">
+		<selectKey resultType="int" keyProperty="applyNO" order="BEFORE">
+	    	select apply_no.nextval from dual
+	    </selectKey>
 		<![CDATA[
 		insert into o_applyform (applyNO,title,content,imageFileName,category,hashtag,id)
 		 values(#{applyNO}, #{title}, #{content}, #{imageFileName}, #{category}, #{hashtag} , #{id})
 		]]>
 	</insert>
 	
-	<insert id="insertNewImage" parameterType="java.util.Map">
-		<foreach item="item" collection="list" open="insert all" separator=" " close = "select * from dual">
-			into o_imageFile(imageNO, imageFileName, applyNO, regDate)
-			values (#{item.imageNO}, #{item.imageFileName}, #{item.applyNO}, sysdate)
-		</foreach>
+	<insert id="insertNewImage" parameterType="ImageVO">
+		<selectKey resultType="int" keyProperty="imageNO" order="BEFORE">
+	    	select image_no.nextval from dual
+	    </selectKey>
+			insert into o_imageFile(imageNO, imageFileName, applyNO)
+			values (#{imageNO}, #{imageFileName}, #{applyNO})
 	</insert>
 	
-	<select id="selectNewImageFileNO" resultType="int">
+	<select id="selectNewapplyNO" resultType="int">
 		<![CDATA[
-			select nvl(max(imageNO),0) from o_imageFile
+			select max(applyNO) from o_applyform
 		]]>
 	</select>
+
 </mapper>

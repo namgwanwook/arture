@@ -20,10 +20,8 @@
         border: 0px solid #bcbcbc;
       }
       #header {
-        padding: 5px;
-        margin-bottom: 5px;
         border: 0px solid #bcbcbc;
-         background-color: lightgreen;
+        background-color: #000;
       }
       #sidebar-left {
         width: 15%;
@@ -32,9 +30,9 @@
         margin-right: 5px;
         margin-bottom: 5px;
         float: left;
-         background-color: yellow;
+        background-color: yellow;
         border: 0px solid #bcbcbc;
-        font-size:10px;
+        font-size:18px;
       }
       #content {
         width: 75%;

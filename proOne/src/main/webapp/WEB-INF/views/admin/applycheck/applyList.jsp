@@ -17,11 +17,28 @@
   <meta charset="UTF-8">
   <title>신청서 리스트창</title>
 </head>
+
+
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <script type="text/javascript">
 
-
+function fn_goto_applyView(url, applyNO){
+	
+      var form = document.createElement("form");
+      var apply = document.createElement("input");
+      
+      apply.name="applyNO";
+      apply.value= applyNO;
+      
+      form.appendChild(apply);
+      document.body.appendChild(form); 
+      
+      form.method="post";
+      form.action=url;
+      form.submit();
+	   
 }
+
 
 </script>
 <body>
@@ -33,7 +50,7 @@
 			<td width="20%">ID</td>
 		</tr>
 		<c:choose>
-			<c:when test="${applyList == NULL || applyList.size() == 0 }">
+			<c:when test="${applysList == NULL || applysList.size() == 0 }">
 				<tr height="10">
 					<td colspan="3">
 						<p align="center">
@@ -42,13 +59,12 @@
 					</td>
 				</tr>
 			</c:when>
-			<c:when test="${applyList !=null && applyList.size()>0}">
-				<c:forEach var="apply" items="${applyList }">
+			<c:when test="${applysList !=null && applysList.size()>0}">
+				<c:forEach var="apply" items="${applysList }">
 					<tr align="center">
-						<td width="10%">${apply.no}</td>
+						<td width="10%">${apply.applyNO}</td>
 						<td align='left' width="55%"><span
-							style="padding-right: 30px"></span> <a class='cls1'
-							href="${contextPath}/admin/notice/noticeView.do?noticeNO=${apply.no }">${apply.title }</a>
+							style="padding-right: 30px"></span> <a class='cls1'	href="#" onclick="fn_goto_applyView('${contextPath}/admin/applycheck/applyView.do', ${apply.applyNO })">${apply.title }</a>
 						</td>
 						<td width="15%">${apply.id }</td>				
 					</tr>
