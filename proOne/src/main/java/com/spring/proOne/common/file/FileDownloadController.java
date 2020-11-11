@@ -15,7 +15,7 @@ import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 public class FileDownloadController {
-	private static String CURR_IMAGE_REPO_PATH = "C:\\o_image\\galleryimage";
+	private static String GALLERY_IMAGE_REPO_PATH = "C:\\o_image\\galleryimage";
 	private static String PROFILE_IMGAE_REPO_PATH = "C:\\o_image\\profileimage";
 	
 	
@@ -24,7 +24,7 @@ public class FileDownloadController {
 		                 	@RequestParam("id") String id,
 			                 HttpServletResponse response) throws Exception {
 		OutputStream out = response.getOutputStream();
-		String filePath=CURR_IMAGE_REPO_PATH+"\\"+id+"\\"+fileName;
+		String filePath=GALLERY_IMAGE_REPO_PATH+"\\"+id+"\\"+fileName;
 		File image=new File(filePath);
 
 		response.setHeader("Cache-Control","no-cache");
@@ -46,7 +46,7 @@ public class FileDownloadController {
 	                     @RequestParam("galleryNO") int galleryNO,
 	                          HttpServletResponse response)throws Exception {
 	      OutputStream out = response.getOutputStream();
-	      String downFile = CURR_IMAGE_REPO_PATH + "\\" +galleryNO+"\\"+ imageFileName;
+	      String downFile = GALLERY_IMAGE_REPO_PATH + "\\" +galleryNO+"\\"+ imageFileName;
 	      File file = new File(downFile);
 
 	      response.setHeader("Cache-Control", "no-cache");
@@ -63,41 +63,12 @@ public class FileDownloadController {
 	      out.close();
 	   }
 	
-	@RequestMapping("/thumbnails.do")
-	protected void thumbnails(@RequestParam("fileName") String fileName, @RequestParam("id") String id, HttpServletResponse response) throws Exception {
-		
-		if(fileName.equals("duke.png")) {
-			OutputStream out = response.getOutputStream();
-			String filePath=PROFILE_IMGAE_REPO_PATH+"\\"+fileName;
-			File image=new File(filePath);
-
-			if (image.exists()) { 
-				Thumbnails.of(image).size(121,154).outputFormat("png").toOutputStream(out);
-			}
-			byte[] buffer = new byte[1024 * 8];
-			out.write(buffer);
-			out.close();				
-		}else {
-		OutputStream out = response.getOutputStream();
-		String filePath=PROFILE_IMGAE_REPO_PATH+"\\"+id+"\\"+fileName;
-		File image=new File(filePath);
-		
-		if (image.exists()) { 
-			Thumbnails.of(image).size(121,154).outputFormat("png").toOutputStream(out);
-		}
-		byte[] buffer = new byte[1024 * 8];
-		out.write(buffer);
-		out.close();	
-		}
-
-	}
-	
 	@RequestMapping("/mainImage.do")
 	protected void mainImage(@RequestParam("imageFileName") String imageFileName,
 							@RequestParam("galleryNO") int galleryNO,
 							HttpServletResponse response) throws Exception {
 		OutputStream out = response.getOutputStream();
-		String filePath=CURR_IMAGE_REPO_PATH+"\\"+galleryNO+"\\"+imageFileName;
+		String filePath=GALLERY_IMAGE_REPO_PATH+"\\"+galleryNO+"\\"+imageFileName;
 		File image = new File(filePath);
 		
 		System.out.println("경로 받아오기!!! : "+filePath);
@@ -118,24 +89,33 @@ public class FileDownloadController {
 	}
 	
 	@RequestMapping("/downProfile.do")
-	protected void downProfile(@RequestParam("profileImage") String profileImage,
-		                 	@RequestParam("id") String prifileId,
-			                 HttpServletResponse response) throws Exception {
-		OutputStream out = response.getOutputStream();
-		String filePath=CURR_IMAGE_REPO_PATH+"\\member_image\\"+prifileId+"\\"+profileImage;
-		File image=new File(filePath);
-
-		response.setHeader("Cache-Control","no-cache");
-		response.addHeader("Content-disposition", "attachment; fileName="+profileImage);
-		FileInputStream in=new FileInputStream(image); 
-		byte[] buffer=new byte[1024*8];
-		while(true){
-			int count=in.read(buffer);
-			if(count==-1) 
-				break;
-			out.write(buffer,0,count);
-		}
-		in.close();
-		out.close();
-	}
+	   protected void downProfile(@RequestParam("profileImage") String profileImage,
+	         @RequestParam("id") String prifileId,
+	         HttpServletResponse response) throws Exception {
+	      OutputStream out = response.getOutputStream();
+	      
+	      String defaultPath="C:\\o_image\\profileimage\\duke.png";
+	      String filePath="C:\\o_image\\profileimage\\"+prifileId+"\\"+profileImage;
+	      
+	      File image;
+	      
+	      if(profileImage.equals("duke.png")) {
+	         image=new File(defaultPath);
+	      }else {
+	         image=new File(filePath);
+	      }
+	      
+	      response.setHeader("Cache-Control","no-cache");
+	      response.addHeader("Content-disposition", "attachment; fileName="+profileImage);
+	      FileInputStream in=new FileInputStream(image); 
+	      byte[] buffer=new byte[1024*8];
+	      while(true){
+	         int count=in.read(buffer);
+	         if(count==-1) 
+	            break;
+	         out.write(buffer,0,count);
+	      }
+	      in.close();
+	      out.close();
+	   }
 }

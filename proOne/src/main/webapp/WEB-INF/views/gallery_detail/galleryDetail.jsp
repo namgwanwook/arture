@@ -155,14 +155,10 @@
 		<div id="buttonWrapper">
 		 <c:if test="${not empty isLogOn && isLogOn !='null'}">
 		 
-		 <i id="heartBtn" class="fas fa-heart" onClick="push()">
-		 <input type="button" id="addFavorite" onClick="fn_favorite('${member.id}','${gallery.galleryNO}')"/>
-		 </i>
+		 <i id="heartBtn" class="fas fa-heart" onClick="fn_favorite('${member.id}','${gallery.galleryNO}')"></i>
 		</c:if>
 		
-		<i class="fas fa-undo" onClick="back()">
-		<input id="backToListBtn" type="button" onClick="backToList()">
-		</i>
+		<i class="fas fa-undo" onClick="backToList()"></i>
 		</div>
 		
 	</div>

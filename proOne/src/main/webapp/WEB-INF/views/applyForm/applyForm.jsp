@@ -89,22 +89,17 @@
             </label>
             <select id="category" name="category">
                <option value="">-- 선택하세요 --</option>
-               <optgroup label="category_parent1">
-                  <option value="category_child1">category_child1</option>
-                  <option value="category_child2">category_child2</option>
-               </optgroup>
-               <optgroup label="category_parent2">
-                  <option value="category_child3">category_child1</option>
-                  <option value="category_child4">category_child2</option>
-               </optgroup>
+                  <option value="category_child1">순수 미술</option>
+                  <option value="category_child2">디자인</option>
+                  <option value="category_child3">공예</option>
+                  <option value="category_child4">사진</option>
+                  <option value="category_child5">패션</option>
+                  <option value="category_child6">기타</option>
             </select>
          </tr>
          <tr>
             <td align="center"><input multiple="multiple" type="file" name="file" accept="image/png,image/jpg,image/jpeg" /></td>
-            <!-- <td><input type="text" name="src" /></td> -->
          </tr>
-         
-         
          <tr>
             <td align="right"></td>
             <td colspan="2"><input type="submit" value="보내기" /></td>

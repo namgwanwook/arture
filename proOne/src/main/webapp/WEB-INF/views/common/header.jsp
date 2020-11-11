@@ -58,7 +58,7 @@ $(document).ready(function () {
 		<div class="member">
 			<c:choose>
 					<c:when test="${isLogOn == true && member != null }">
-						<img src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"/>
+						<img id="profile" src="${contextPath}/downProfile.do?profileImage=${member.profileImage}&id=${member.id}"></img>
 						<a href="${contextPath }/mypage/myPageMain.do"><span>${member.name}'s Profile</span></a>
 						<a href="${contextPath }/member/logout.do">Log Out</a>
 						<c:if test="${member.id == 'admin'}">

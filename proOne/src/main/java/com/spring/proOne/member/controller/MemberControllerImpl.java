@@ -32,23 +32,6 @@ public class MemberControllerImpl implements MemberController {
 	HttpSession session;
 
 	@Override
-	@RequestMapping(value="/member/listMembers.do", method=RequestMethod.GET)
-	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView();
-		
-		if(session.getAttribute("isLogOn") != null) {
-			List membersList = memberService.listMembers();
-			mav.addObject("membersList", membersList);
-			mav.setViewName(viewName);
-		} else {
-			mav.setViewName("redirect:/member/loginForm.do");
-		}
-		return mav;
-	}
-
-	@Override
 	@RequestMapping(value="/member/addMember.do", method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -76,10 +59,6 @@ public class MemberControllerImpl implements MemberController {
 		}
 		
 		return mav;
-		/*
-		 * res = new ResponseEntity(message, responseHeaders, HttpStatus.OK); return
-		 * res;
-		 */
 	}
 	
 
@@ -111,7 +90,7 @@ public class MemberControllerImpl implements MemberController {
 			if(action!=null) {
 				mav.setViewName("redirect:"+action);
 			}else {
-				mav.setViewName("redirect:/member/listMembers.do");
+				mav.setViewName("redirect:/main/main.do");
 			}
 		}else {
 			rAttr.addAttribute("result","loginFailed");
