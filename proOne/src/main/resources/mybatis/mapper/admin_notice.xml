@@ -11,9 +11,11 @@
         <result property="writeDate" column="writeDate" />
 	</resultMap> 
 
-	<select id="selectAllNotices" resultMap="noticeResult">
+	<select id="selectAllNotices" resultMap="noticeResult" parameterType="java.util.Map">
       <![CDATA[
-         select * from o_notice	order by noticeNO desc	 	
+         select noticeno, title, content, writedate 
+         from (select rownum as rnum, noticeno, title, content, writedate from o_notice order by noticeno desc) 
+         where rnum BETWEEN(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10 	
       ]]>
 	</select>
 	
@@ -45,6 +47,12 @@
 	<select id="selectNotice" resultMap="noticeResult" parameterType="int">
       <![CDATA[
          select * from o_notice	where noticeNO=#{no}	 	
+      ]]>
+	</select>
+	
+	<select id="countNotices" resultType="int">
+	  <![CDATA[
+         select count(noticeNO) from o_notice	 	
       ]]>
 	</select>
     

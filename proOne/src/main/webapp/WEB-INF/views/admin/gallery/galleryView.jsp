@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
 <link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
 <meta charset="UTF-8">
-<title>신청서 검토</title>
+<title>승인된 작품 상세페이지</title>
 <style>
 	#tr_btn_modify{
        display:none;
@@ -25,20 +25,20 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <script type="text/javascript" >
 function backToList(obj){
-	obj.action="${contextPath}/admin/applycheck/applyList.do";
+	obj.action="${contextPath}/admin/gallery/galleryList.do";
 	obj.submit();
   }
 
-function fn_reject_application(url, applyNO){
-	var answer=confirm("거절하시겠습니까?");
+function fn_remove_gallery(url, galleryNO){
+	var answer=confirm(galleryNO+"번 게시물\n정말로 삭제하시겠습니까?");
 	   if(answer==true){
 	      var form = document.createElement("form");
-	      var application = document.createElement("input");
+	      var gallery = document.createElement("input");
 	      
-	      application.name="applyNO";
-	      application.value= applyNO;
+	      gallery.name="galleryNO";
+	      gallery.value= galleryNO;
 	      
-	      form.appendChild(application);
+	      form.appendChild(gallery);
 	      document.body.appendChild(form); 
 	      
 	      form.method="post";
@@ -47,23 +47,6 @@ function fn_reject_application(url, applyNO){
 	   }
 }
 
-function fn_accept_application(url, applyNO){
-	var answer=confirm("승인하시겠습니까?");
-	   if(answer==true){
-	      var form = document.createElement("form");
-	      var application = document.createElement("input");
-	      
-	      application.name="applyNO";
-	      application.value= applyNO;
-	      
-	      form.appendChild(application);
-	      document.body.appendChild(form); 
-	      
-	      form.method="post";
-	      form.action=url;
-	      form.submit();
-	   }
-}
 </script>
 <body>
 	<form name="frmArticle" method="post"  >
@@ -73,7 +56,7 @@ function fn_accept_application(url, applyNO){
       			접수 번호
    				</td>
    				<td >
-    				<input type="text"  value="${application.applyNO }"  disabled />
+    				<input type="text"  value="${gallery.galleryNO }"  disabled />
    				</td>
   			</tr>
 			<tr>
@@ -81,7 +64,7 @@ function fn_accept_application(url, applyNO){
      			 제목 
    				</td>
    				<td>
-    				<input type=text value="${application.title }"  name="title"  id="i_title" disabled />
+    				<input type=text value="${gallery.title }"  name="title"  id="i_title" disabled />
    				</td>   
   			</tr>
   			<tr>
@@ -89,7 +72,7 @@ function fn_accept_application(url, applyNO){
      			 내용
    				</td>
    				<td>
-    				<textarea rows="20" cols="60"  name="content"  id="i_content"  disabled />${application.content }</textarea>
+    				<textarea rows="20" cols="60"  name="content"  id="i_content"  disabled />${gallery.content }</textarea>
     				
    				</td>  
   			</tr>
@@ -111,7 +94,7 @@ function fn_accept_application(url, applyNO){
 						</td>
 						<td>
 							<input type="hidden" name="originalFileName" value="${item.imageFileName }" /> 
-							<img src="${contextPath}/imageList.do?galleryNO=${application.applyNO}&imageFileName=${item.imageFileName}" id="preview" /><br>
+							<img src="${contextPath}/imageList.do?galleryNO=${gallery.galleryNO}&imageFileName=${item.imageFileName}" id="preview" /><br>
 						</td>
 					</tr>
 					
@@ -120,8 +103,7 @@ function fn_accept_application(url, applyNO){
 
 			<tr  id="tr_btn">
 		   		<td colspan="2" align="center">
-			      	<input type=button value="승인" onClick="fn_accept_application('${contextPath}/admin/applycheck/acceptApplyForm.do', ${application.applyNO })">
-			      	<input type=button value="거절" onClick="fn_reject_application('${contextPath}/admin/applycheck/rejectApplyForm.do', ${application.applyNO })">
+			      	<input type=button value="갤러리 삭제" onClick="fn_remove_gallery('${contextPath}/admin/gallery/removeGallery.do', ${gallery.galleryNO })">
 			    	<input type=button value="목록" onClick="backToList(this.form)">
 		   		</td>
 		  	</tr>

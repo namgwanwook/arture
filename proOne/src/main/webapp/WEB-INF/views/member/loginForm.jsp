@@ -28,7 +28,7 @@
 
 <body>
 <div id="loginWrapper">
-	<form name="frmLogin" method="post"  action="${contextPath}/member/login.do">
+	<form name="frmLogin" method="post"  action="${contextPath}/member/login.do" autocomplete="off">
 	   <table align="center" >
 	      <tr align="center">
 		      <td>

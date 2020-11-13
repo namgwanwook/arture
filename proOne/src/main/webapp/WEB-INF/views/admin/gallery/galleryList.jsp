@@ -24,35 +24,34 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <script type="text/javascript">
 
-function fn_goto_applyView(url, applyNO){
-	
-      var form = document.createElement("form");
-      var apply = document.createElement("input");
-      
-      apply.name="applyNO";
-      apply.value= applyNO;
-      
-      form.appendChild(apply);
-      document.body.appendChild(form); 
-      
-      form.method="post";
-      form.action=url;
-      form.submit();
+function fn_goto_galleryView(url, galleryNO){	
+    var form = document.createElement("form");
+    var gallery = document.createElement("input");
+    
+    gallery.name="galleryNO";
+    gallery.value= galleryNO;
+    
+    form.appendChild(gallery);
+    document.body.appendChild(form); 
+    
+    form.method="post";
+    form.action=url;
+    form.submit();
 	   
 }
 
 
 </script>
 <body>
-<h1 class="label">admin - 신청서 목록입니다</h1>
-<table>
+<h1 class="label">admin - 승인된 작품 목록입니다</h1>
+<table align="center" >
 		<tr class="list_title">
 			<td width="10%">NO.</td>
 			<td width="70%">TITLE</td>
 			<td width="20%">ID</td>
 		</tr>
 		<c:choose>
-			<c:when test="${applysList == NULL || applysList.size() == 0 }">
+			<c:when test="${galleriesList == NULL || galleriesList.size() == 0 }">
 				<tr height="10">
 					<td colspan="3">
 						<p align="center">
@@ -61,15 +60,15 @@ function fn_goto_applyView(url, applyNO){
 					</td>
 				</tr>
 			</c:when>
-			<c:when test="${applysList !=null && applysList.size()>0}">
-				<c:forEach var="apply" items="${applysList }">
+			<c:when test="${galleriesList !=null && galleriesList.size()>0}">
+				<c:forEach var="gallery" items="${galleriesList }">
 					<tr align="center">
-						<td width="10%">${apply.applyNO}</td>
+						<td width="10%">${gallery.galleryNO}</td>
 						<td align='left' width="55%">
-							<span style="padding-right: 30px"></span> 
-							<a class='cls1'	href="#" onclick="fn_goto_applyView('${contextPath}/admin/applycheck/applyView.do', ${apply.applyNO })">${apply.title }</a>
+							<span style="padding-right: 30px"></span>
+							<a class='cls1'	href="#" onclick="fn_goto_galleryView('${contextPath}/admin/gallery/galleryView.do', ${gallery.galleryNO})">${gallery.title }</a>
 						</td>
-						<td width="15%">${apply.id }</td>				
+						<td width="15%">${gallery.id }</td>				
 					</tr>
 				</c:forEach>
 			</c:when>

@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
+<link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
 <meta charset="UTF-8">
 <title>공지사항 작성창</title>
 </head>

@@ -7,6 +7,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
+<link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
 <meta charset="UTF-8">
 <title>공지사항 세부사항</title>
 <style>
@@ -51,10 +53,10 @@ function fn_remove_article(url, noticeNO){
 }
 </script>
 <body>
-	<form name="frmArticle" method="post"  >
+	<form name="frmArticle" class="notice_view_form"  method="post"  >
 		<table  border=0  align="center">
   			<tr>
-   				<td width=150 align="center" bgcolor=#FF9933>
+   				<td width=150 align="center" >
       			글번호
    				</td>
    				<td >
@@ -63,7 +65,7 @@ function fn_remove_article(url, noticeNO){
    				</td>
   			</tr>
 			<tr>
-				<td width="150" align="center" bgcolor="#FF9933">
+				<td width="150" align="center">
      			 제목 
    				</td>
    				<td>
@@ -71,7 +73,7 @@ function fn_remove_article(url, noticeNO){
    				</td>   
   			</tr>
   			<tr>
-    			<td width="150" align="center" bgcolor="#FF9933">
+    			<td width="150" align="center">
      			 내용
    				</td>
    				<td>
@@ -82,7 +84,7 @@ function fn_remove_article(url, noticeNO){
  
 
   			<tr>
-	   			<td width="150" align="center" bgcolor="#FF9933">
+	   			<td width="150" align="center">
 	      		등록일자
 			   	</td>
 			   	<td>

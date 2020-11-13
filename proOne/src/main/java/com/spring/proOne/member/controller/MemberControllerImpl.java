@@ -37,7 +37,8 @@ public class MemberControllerImpl implements MemberController {
 			throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+		ModelAndView mav = new ModelAndView("redirect:/main/main.do");
+		System.out.println("id값 잠시 보여드릴게요!! : "+member.getId());
 		String message = null;
 		ResponseEntity res = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
