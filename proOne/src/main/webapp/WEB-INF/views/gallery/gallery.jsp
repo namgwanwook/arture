@@ -16,6 +16,8 @@
 		
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"> 
+	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
 <body>
 	<script>
@@ -43,9 +45,8 @@
 	    }
 	}
 
-    /* 검색창에 값을 입력할 때 마다 실행 */
+    /* 검색 버튼을 클릭하면 실행 */
 	function filter(){
-
         var value, name, item, i, ctn;
 		
         /* 검색창에 있는 값을 저장 */
@@ -54,12 +55,20 @@
         /* thumbnail을 저장 */
         item = document.getElementsByClassName("thumbnail");
         
+        /* 카테고리 미선택,검색창에 값이 없을 때 */
+       	if(choice == null){
+       		alert("카테고리를 선택해주세요.")
+       	}else if(value == null || value == ""){
+       		alert("검색어를 입력해주세요.")
+       	}
+        
         /* thumbnail에 갯수만큼 반복을 돌림 */
         for(i=0;i<item.length;i++){
         	
         	/* choice에 저장된 클래스에 값이 있는지 확인 */
         	name = item[i].getElementsByClassName(choice);
-        	     	
+        	 	
+        	
         	/* 값이 있으면 block 없으면 none으로 화면에 띄워준다 */
           	if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
            		item[i].style.display = "block";
@@ -67,33 +76,48 @@
           		}else{
             	item[i].style.display = "none";
           		}
-      		}
-        
-        var newDIV = undefined;
-        /* 검색결과가 없을 때 추가되는 div */
+      		}       
+ 
+        /* 검색결과가 없을 때 */
 	        if(ctn == undefined){
 	        	alert("결과가 없습니다.")
 	        	document.location.href="${contextPath }/gallery/gallery.do";
-	        }        	       
-      	}
-
-    
-	</script>
-	<section>
-			<!-- 검색창 -->
-			<div class="search">
-				<select id="selectBox" onchange="setValues()">
-					<option>선택</option>
-					<option>제목</option>
-					<option>카테고리</option>
-					<option>해시태그</option>
-					<option>아이디</option>
-				</select>
-		   		<input type="text" placeholder="Search" id="keyword">
-		   		
-	   			<i class="fa fa-search fa-4x" aria-hidden="true" onclick="filter()"></i>		   			
-			</div><!-- end search -->
+	        }   
+        	
+      	}	 
+		
+		$(function(){
+			$(".thumbnail").addClass("nonActive");
+			$(".nonActive").slice(0,6).show();
+			$("#load").click(function(e){
+				console.log($(".nonActive").length);
+				e.preventDefault();
+				$(".nonActive").slice(0,6).removeClass("nonActive");
 			
+				if($(".nonActive").length <= 0){
+					alert("없음");
+				}
+			});
+			
+		});
+		
+	</script>
+
+	<section>
+		<!-- 검색창 -->
+		<div class="search">
+			<select id="selectBox" onchange="setValues()">
+				<option>선택</option>
+				<option>제목</option>
+				<option>카테고리</option>
+				<option>해시태그</option>
+				<option>아이디</option>
+			</select>
+	   		<input type="text" placeholder="Search" id="keyword">
+	   		
+   			<i class="fa fa-search fa-2x" aria-hidden="true" onclick="filter()"></i>		   			
+		</div><!-- end search -->
+		
 			
 		<div class="thumbnail-form">
 			<!-- 갤러리 반복문 실행 -->
@@ -108,7 +132,7 @@
 	      				<img class="gallery-img" src="${contextPath }/download.do?fileName=${galleryList.imageFileName}&id=${galleryList.galleryNO }" alt="이미지" >
 					</a><!-- end gallery-form -->
 					
-	         		<div class="caption">			         		
+	         		<div class="gallery-caption">			         		
 		            	<p>제목:<span class="g_title">${galleryList.title}</span></p>
 		            	<p>아이디:<span class="g_id">${galleryList.id}</span></p>
 			        	<p>카테고리:<span class="g_category">${galleryList.category}</span></p>
@@ -119,7 +143,8 @@
 		      	</div><!-- end thumnail -->
 		      	
 			</c:forEach>
-		</div><!-- end thumnail-form -->	
+		<button id="load">더보기 버튼</button>	
+		</div><!-- end thumnail-form -->
 	</section><!-- end section -->	
 </body>
 </html>

@@ -14,6 +14,66 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/member.css"/>
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script>
+function validate() {
+    var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+    var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    // 이메일이 적합한지 검사할 정규식
+
+    var id = document.getElementById("_member_id");
+    var idCheck = document.getElementById("id");
+    var pwd = document.getElementById("pwd");
+    var email = document.getElementById("email");
+
+
+    // ------------ 이메일 까지 -----------
+
+    if(!check(re,id,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력해주세요")) {
+        return false;
+    }
+
+    if(!check(re,pwd,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력해주세요")) {
+        return false;
+    }
+    if(join.id.value=="") {
+        alert("아이디 중복확인을 해주세요");
+        join.id.focus();
+        return false;
+    }
+    if(join.pwd.value != join.pwdCheck.value) {
+        alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+        join.checkpw.value = "";
+        join.checkpw.focus();
+        return false;
+    }
+
+    if(email.value=="") {
+        alert("이메일을 입력해 주세요");
+        email.focus();
+        return false;
+    }
+    
+    if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
+        return false;
+    }
+
+    if(join.name.value=="") {
+        alert("이름을 입력해 주세요");
+        join.name.focus();
+        return false;
+    }
+    alert("회원가입이 완료되었습니다. 로그인 해주세요.");
+}
+
+function check(re, what, message) {
+    if(re.test(what.value)) {
+        return true;
+    }
+    alert(message);
+    what.value = "";
+    what.focus();
+    //return false;
+}
+
 function fn_overlapped(){
     var _id=$("#_member_id").val();
     if(_id==''){
@@ -29,7 +89,8 @@ function fn_overlapped(){
        success:function (data,textStatus){
           if(data=='false'){
        	    alert("사용가능한 ID입니다.");
-       	    $('#btnOverlapped').prop("disabled", true);
+       	    $('#btnOverlapped').css("background-color","#ff5779");
+       	 	$('#btnOverlapped').prop("disabled", true);
        	    $('#_member_id').prop("disabled", true);
        	    $('#id').val(_id);
           }else{
@@ -37,14 +98,38 @@ function fn_overlapped(){
           }
        },
        error:function(data,textStatus){
-          alert("에러가 발생했습니다.");ㅣ
+          alert("에러가 발생했습니다.");
        },
        complete:function(data,textStatus){
           //alert("작업을완료 했습니다");
        }
     });  //end ajax	 
  }	
+ 
+ $(function(){
+	 
+	 $("#pwd").keyup(function(){
+		 if($("#pwd").val() == "" ){
+			 $("#chk1").css("color","#fff");
+		 }else {
+			 $("#chk1").css("color","#8ce257");
+		 }
+		 
+	 });
+	 $("#pwdCheck").keyup(function(){
+		var pwd1 = $("#pwd").val();	
+		var pwd2 = $("#pwdCheck").val();	
+		if(pwd1 == pwd2){
+			$("#chk1").css("color","#8ce257");
+			$("#chk2").css("color","#8ce257");
+		} else {
+			$("#chk2").css("color","#fff");
+		}
+	 });
+	 
+ });
 </script>
+
 <title>회원 가입창</title>
 
 
@@ -54,35 +139,44 @@ function fn_overlapped(){
 
 <body>
 	<div id="joinWrapper">
-		<form method="post"   action="${contextPath}/member/addMember.do">
+		<form name="join" method="post" onsubmit="return validate();" action="${contextPath}/member/addMember.do" autocomplete="off">
 		<table>
 		   <tr>
 		      <td><p>아이디</p></td>
 		   </tr>
 		   <tr>
-		   	  <td><input type="text" name="_member_id"  id="_member_id"  size="20" /></td>
-			<input type="hidden" name="id"  id="id" />
-					  
-			<td><input class="overlapped_btn" type="button"  id="btnOverlapped" value="중복체크" onClick="fn_overlapped()" /></td>
+		   	  <td><input type="text" name="_member_id"  id="_member_id"  size="20" required/></td>
+			<input type="hidden" name="id"  id="id"/>
+			<td>
+			<input type="button" id="btnOverlapped" value="중복확인" onClick="fn_overlapped()"/>
+			</td>
 		   </tr>
 		   <tr>
 		      <td><p>비밀번호</p></td>
 		    </tr>
 		    <tr>
-		       <td><input type="password" name="pwd"/></td>
+		       <td><input type="password" name="pwd" id="pwd" class="pwd" required/></td>
+		       <td><i class="fas fa-check-circle" id="chk1"></i></td>
+		    </tr>
+		    <tr>
+		      <td><p>비밀번호 확인</p></td>
+		    </tr>
+		    <tr>
+		       <td><input type="password" name="pwdCheck" id="pwdCheck" class="pwd" required/></td>
+		       <td><i class="fas fa-check-circle" id="chk2"></i></td>
 		    </tr>
 		    <tr>
 		       <td><p>이름</p></td>
 		    </tr>
 		    <tr>
-		    	<td><input type="text" name="name"/></td>
+		    	<td><input type="text" name="name" id="name" required/></td>
 		    </tr>
 		    <tr>
 		       <td><p>성별</p></td>
 		    </tr>
 		    <tr>
 		    	<td>
-		    	<input class="radio" type="radio" name="gender" value="남"/><span>남</span>
+		    	<input class="radio" type="radio" name="gender" value="남" checked/><span>남</span>
 		    	<input class="radio" type="radio" name="gender" value="여"/><span>여</span>
 		    	</td>
 		    </tr>
@@ -90,10 +184,10 @@ function fn_overlapped(){
 		       <td><p>이메일</td>
 		    </tr>
 		    <tr>
-		    	<td><input type="text" name="email"/></td>
+		    	<td><input type="text" name="email" id="email" required/></td>
 		    </tr>
 		    <tr>
-		       <td class="td1"><input type="submit" value="Join Us"/></td>
+		       <td class="td1"><input id="submit" type="submit" value="Join Us"/></td>
 		    </tr>
 		</table>
 		</form>

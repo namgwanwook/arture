@@ -42,7 +42,7 @@ $(document).ready(function () {
 					<ul class="menu-wrapper">
 						<li><a href="${contextPath }/main/main.do">Main</a></li>
 						<li><a href="${contextPath }/gallery/gallery.do">Gallery</a></li>
-						<li><a href="${contextPath }/mypage/myPageMain.do?id=${member.id}">Profile</a></li>
+						<li><a href="${contextPath }/mypage/myPageMain.do">Profile</a></li>
 						<li><a href="${contextPath }/applyForm/applyForm.do">Contact</a></li>
 					</ul>
 					<div class="menu-underlay"></div>

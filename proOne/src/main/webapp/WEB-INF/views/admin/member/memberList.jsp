@@ -6,34 +6,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
+<link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
 <meta charset="UTF-8">
 <title>회원 리스트</title>
-<style>
-	img {
-		float: left;
-		width: 50px;
-    	height: 50px; 
-    	border-radius: 70%;
-    	margin: 26px 20px 10px 20px ;
-	}
-	.memList{
-		text-align:left;
-		background-color:pink;
-		padding-bottom: 10px;
-	}
-	.memList .mem_id{
-		font-size:20px;
-		font-weight:bold;
-		margin-left:20px;
-	}
-	.memList .mem_name{
-		font-size:14px;
-		font-weight:normal;
-	}
-	.memList .mem_email{
-		margin-top:-10px;
-	}
-</style>
+
 </head>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <script type="text/javascript" >
@@ -47,8 +24,8 @@ $(function () {
 		let rindex = $(this).parent().parent().index()+1;
 		
 			
-		if($(this).val() == '자세히'){
-			$(this).val('닫기');
+		if($(this).val() == '+'){
+			$(this).val('-');
 			let where;
 			if($(this).attr('gender')=='남'){
 				where = '.div_' + $(this).attr('id') + ' .male';
@@ -74,7 +51,7 @@ $(function () {
 			$(tr[rindex]).show(); 
 				
 		}else{
-			$(this).val('자세히');
+			$(this).val('+');
 			
 			$(tr[rindex]).hide(); 
 		}
@@ -156,10 +133,10 @@ function fn_remove(ID){
 
 </script>
 <body>
-<h1>회원 관리</h1>
-	<table id="contents" align="center" border="1"  width="80%"  >
-		<tr height="10" align="center">
-			<td width="60%" align="left" padding-left="5px">이름</td>
+<h1 class="label">회원 관리</h1>
+	<table id="contents" >
+		<tr class="list_title">
+			<td width="60%" align="left" class="l_name">이름</td>
 			<td width="15%">가입날짜</td>
 			<td width="25%">관리</td>
 		</tr>
@@ -177,13 +154,13 @@ function fn_remove(ID){
 				<c:forEach var="member" items="${memberList }">
 					<tr align="center" class="tr_list">
 						<td class="memList">
-							<img src="${contextPath}/downProfile.do?profileImage=${member.profileImage}&id=${member.id}"></img>
+							<img class="profileImage" src="${contextPath}/downProfile.do?profileImage=${member.profileImage}&id=${member.id}"></img>
 							<p class="mem_id">${member.id}<span class="mem_name"> (${member.name })</span></p>
 							<p class="mem_email">${member.email }</p>
 						</td>
 						<td>${member.joinDate }</td>
 						<td class="td_show">
-							<input class="btn_detail" type="button" value="자세히" id="${member.id}" gender="${member.gender}">
+							<input class="btn_detail" type="button" value="+" id="${member.id}" gender="${member.gender}">
 						</td>				
 					</tr>
 					<tr align="center" class="tr_detail">

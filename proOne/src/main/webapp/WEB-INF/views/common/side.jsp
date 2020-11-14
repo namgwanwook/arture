@@ -11,30 +11,51 @@
 
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
  <style>
-   .no-underline{
+ 	.m_title{
+ 		padding:20px 0 ;
+ 		font-size:20px;
+ 		font-weight:bold;
+ 	}
+  
+   a.menu1{
+   	  line-height:35px;
+   	  font-size:17px;
+   	  text-align:left;
       text-decoration:none;
+      color:#000;
+      margin-left:10px;
+   }
+   .admin_nav{
+   		padding-left: 25%;
+   }
+   
+   .list_nav{
+   		text-align:left;
    }
  </style>
   <meta charset="UTF-8">
   <title>사이드 메뉴</title>
 </head>
 <body>
-	<h1>사이드 메뉴</h1>
+	<h1 class="m_title">MANAGE</h1>
 
-	<h1>
-		<a href="${contextPath}/admin/notice/noticeList.do" class="no-underline">공지사항 관리</a><br> 
-		<a href="${contextPath}/admin/member/memberList.do" class="no-underline">회원 관리</a><br> 
-		<a href="${contextPath}/admin/applycheck/applyList.do" class="no-underline">작품 신청 관리</a><br>
-		<a href="${contextPath}/admin/gallery/galleryList.do" class="no-underline">승인된 작품 관리</a><br>
-	</h1>
-
-
-	<%-- <h1>
-		<a href="${contextPath}/member/listMembers.do"  class="no-underline">회원관리</a><br>
-		<a href="${contextPath}/board/listArticles.do"  class="no-underline">게시판관리</a><br>
-		<a href="#"  class="no-underline">상품관리</a><br>
-	</h1> --%>
+	<div class="admin_nav">
+		<div class="list_nav">
+			<i class="fas fa-clipboard-check"></i><a href="${contextPath}/admin/notice/noticeList.do" class="menu1">공지사항</a><br> 	
+		</div>
+		<div class="list_nav">
+			<i class="fas fa-user"></i><a href="${contextPath}/admin/member/memberList.do" class="menu1">회원 관리</a><br> 		
+		</div>
+		<div class="list_nav">
+			<i class="fas fa-palette"></i><a href="${contextPath}/admin/applycheck/applyList.do" class="menu1">신청된 작품</a><br>
+		</div>
+		<div class="list_nav">
+			<i class="fas fa-tasks"></i><a href="${contextPath}/admin/gallery/galleryList.do" class="menu1">승인된 작품</a><br>
+		</div>
+	</div>
+	
 	
 </body>
 </html>

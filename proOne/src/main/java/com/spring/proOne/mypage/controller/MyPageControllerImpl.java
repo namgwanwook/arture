@@ -53,31 +53,43 @@ public class MyPageControllerImpl implements MyPageController {
 	@Override
 	@RequestMapping(value="/mypage/myPageMain.do" ,method = {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView myPageMain(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-	memberVO = (MemberVO) session.getAttribute("member"); //세션에있는 memberVO 객체를 불러온다.
-	memberVO = mypageservice.selectMyInfo(memberVO.getId()); //세션에있던 memberVO 객체를 이용해 DB에 저장된 memberVO 객체로 초기화 한다.
-	
-	session.setAttribute("member",memberVO);
-	
-	String id = memberVO.getId();
-	
-    List<GalleryVO> favoritelist = mypageservice.myFavorite(id); //내가 좋아요를 누른 겔러리들
-	List<GalleryVO> myGallery = mypageservice.myGallery(id);  // 내가 작성한 갤러리들
-	Map count = mypageservice.count(id);//내가 받은 좋아요 갯수와 작성한 게시글 수
-	
-	List like = new ArrayList<Integer>();
-	for(int i=0;i<myGallery.size();i++) {			
-		like.add(galleryservice.like(i));
-	}
+		ModelAndView mav = new ModelAndView();
+		
+		if(session.getAttribute("isLogOn") != null) {
+		
+		String viewName=(String)request.getAttribute("viewName");
+		
+		memberVO = (MemberVO) session.getAttribute("member"); //세션에있는 memberVO 객체를 불러온다.
+		memberVO = mypageservice.selectMyInfo(memberVO.getId()); //세션에있던 memberVO 객체를 이용해 DB에 저장된 memberVO 객체로 초기화 한다.
+		
+		session.setAttribute("member",memberVO);//세션 초기화
+		
+		String id = memberVO.getId();
+		
+	    List<GalleryVO> favoritelist = mypageservice.myFavorite(id); //내가 좋아요를 누른 겔러리들
+		List<GalleryVO> myGallery = mypageservice.myGallery(id);  // 내가 작성한 갤러리들
+		Map count = mypageservice.count(id);//내가 받은 좋아요 갯수와 작성한 게시글 수
+		
+			List<Integer> likeList = new ArrayList<Integer>();
+			if(myGallery.size()!=0) {
+			for(GalleryVO g : myGallery) {
+				int like =  galleryservice.like(g.getGalleryNO());
+				likeList.add(like);
+				}
+			}
+			
+		mav.setViewName(viewName);
+		mav.addObject("like", likeList);
+		mav.addObject("favoritelist", favoritelist);
+		mav.addObject("myGallery", myGallery);
+		mav.addObject("count", count);
+		} else {
+			String viewName = "redirect:/member/loginForm.do";
+			mav.setViewName(viewName);
+		}
 
-	String viewName=(String)request.getAttribute("viewName");
-	ModelAndView mav = new ModelAndView();
-	mav.setViewName(viewName);
-	mav.addObject("like", like);
-	mav.addObject("favoritelist", favoritelist);
-	mav.addObject("myGallery", myGallery);
-	mav.addObject("count", count);
-
-	return mav;
+		return mav;
+		
 	}
 
 	
@@ -113,13 +125,14 @@ public class MyPageControllerImpl implements MyPageController {
 			resEntity = new ResponseEntity("true", HttpStatus.OK);
 			System.out.println("result : " + result);
 		}else {
+			mypageservice.cancelfavorite(favoriteVO);
 			resEntity = new ResponseEntity("false", HttpStatus.OK);
 			System.out.println("result : " + result);
 		}
 		return resEntity;
 	}
 	
-	@RequestMapping(value="/mypage/selectOverlappedFavorite.do" ,method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/mypage/selectOverlappedFavorite.do" ,method = {RequestMethod.POST,RequestMethod.GET})//해당 게시글 좋아요를 눌렀는지 확인
 	public ResponseEntity selectOverlappedFavorite(@RequestParam("id")String id, @RequestParam("galleryNO") int galleryNO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		ResponseEntity resEntity = null;
@@ -152,7 +165,7 @@ public class MyPageControllerImpl implements MyPageController {
 	}
 
 	@Override
-	@RequestMapping(value="/mypage/modprofileimage.do" ,method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/mypage/modprofileimage.do" ,method = {RequestMethod.POST,RequestMethod.GET})//프로필 이미지 수정
 	public ResponseEntity modprofileimage(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");

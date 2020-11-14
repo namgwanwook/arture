@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
+<link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
 <meta charset="UTF-8">
 <title>신청서 검토</title>
 <style>
@@ -67,7 +69,7 @@ function fn_accept_application(url, applyNO){
 	<form name="frmArticle" method="post"  >
 		<table  border=0  align="center">
   			<tr>
-   				<td width=150 align="center" bgcolor=#FF9933>
+   				<td width=150 align="center">
       			접수 번호
    				</td>
    				<td >
@@ -75,7 +77,7 @@ function fn_accept_application(url, applyNO){
    				</td>
   			</tr>
 			<tr>
-				<td width="150" align="center" bgcolor="#FF9933">
+				<td width="150" align="center">
      			 제목 
    				</td>
    				<td>
@@ -83,7 +85,7 @@ function fn_accept_application(url, applyNO){
    				</td>   
   			</tr>
   			<tr>
-    			<td width="150" align="center" bgcolor="#FF9933">
+    			<td width="150" align="center">
      			 내용
    				</td>
    				<td>
@@ -94,7 +96,7 @@ function fn_accept_application(url, applyNO){
  
 
   			<tr>
-	   			<td width="150" align="center" bgcolor="#FF9933">
+	   			<td width="150" align="center">
 	      		등록일자
 			   	</td>
 			   	<td>
@@ -104,7 +106,7 @@ function fn_accept_application(url, applyNO){
 			<c:if test="${not empty imagesList && imagesList!='null' }">
 				<c:forEach var="item" items="${imagesList}" varStatus="status">
 					<tr>
-						<td width="150" align="center" bgcolor="#FF9933">
+						<td width="150" align="center">
 							이미지${status.count }
 						</td>
 						<td>

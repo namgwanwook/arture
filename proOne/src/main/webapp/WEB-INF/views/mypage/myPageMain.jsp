@@ -25,6 +25,12 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <title>Insert title here</title>
 <style>
+.mt40{
+	margin-top:40px;
+}
+.mt60{
+	margin-top:60px;
+}
 .mypage {
 	width: 80%;
 	height: auto;
@@ -169,10 +175,25 @@ p{
 .thumbnail{
 	text-align: left;
 }
-
+.thumbnail .caption a {
+	display: block;
+    width: 100%;
+    height: 230px;
+    margin-bottom: 20px;
+    overflow:hidden;
+}
+.thumbnail .caption p {
+	line-height: 20px;
+    padding-left: 5px;
+}
+    
+.thumbnail .caption a img {
+	height:100%;
+}
 </style>
 
 <script type="text/javascript">
+
 function fn_remove(url,id,galleryNO){
 	var answer=confirm("삭제하시겠습니까?");
 	if(answer==true){
@@ -265,7 +286,7 @@ window.onclick = function(event) {
 					name="profileImage" enctype="multipart/form-data"
 					onchange="readURL(this)" style="display: none" />
 				<button onclick="inputimage()">
-					<img id="profile" src="${contextPath}/downProfile.do?profileImage=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"></img>
+					<img id="profile" src="${contextPath}/downProfile.do?profileImage=${member.profileImage}&id=${member.id}"></img>
 				</button>
 			</div>
 			<section class="userinfo">
@@ -291,7 +312,7 @@ window.onclick = function(event) {
 
 <div id="myModal" class="modal">
 	<div class="modal-content">
-		<form name="modUserInfo" method="post" action="${contextPath}/mypage/modUserInfo.do" enctype="multipart/form-data">
+		<form name="modUserInfo" method="post" action="${contextPath}/mypage/modUserInfo.do" enctype="multipart/form-data" autocomplete=off>
 			<table>
 				<tr>
 					<td class="aside">이름</td>
@@ -340,7 +361,7 @@ window.onclick = function(event) {
 		<br>
 		<br>
 		<br>
-		<div class="title_box">
+		<div class="title_box mt60">
 			<p>My Gallery</p>
 		</div>
 
@@ -353,9 +374,7 @@ window.onclick = function(event) {
 						<div class="caption">
 							<a
 								href="${contextPath }/gallery_detail/galleryDetail.do?galleryNO=${myGallery.galleryNO}">
-								<img
-								src="${contextPath }/download.do?fileName=${myGallery.imageFileName}&id=${myGallery.galleryNO }"
-								height="240px" width="290px">
+								<img src="${contextPath }/download.do?fileName=${myGallery.imageFileName}&id=${myGallery.galleryNO }">
 							</a>
 							<p>제목:${myGallery.title }</p>
 							<p>아이디: ${myGallery.id }</p>
@@ -377,7 +396,7 @@ window.onclick = function(event) {
 		<br>
 
 
-		<div class="title_box">
+		<div class="title_box mt40">
 			<p>Favorite</p>
 		</div>
 
@@ -390,9 +409,7 @@ window.onclick = function(event) {
 							<div class="caption">
 								<a
 									href="${contextPath }/gallery_detail/galleryDetail.do?galleryNO=${favorite.galleryNO}">
-									<img
-									src="${contextPath }/download.do?fileName=${favorite.imageFileName}&id=${favorite.galleryNO }"
-									height="240px" width="290px">
+									<img src="${contextPath }/download.do?fileName=${favorite.imageFileName}&id=${favorite.galleryNO }" height="240px" width="290px">
 								</a>
 							</div>
 						</div>

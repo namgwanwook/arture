@@ -17,18 +17,33 @@
 <title>로그인창</title>
 <c:choose>
 	<c:when test="${result=='loginFailed' }">
-	  <script>
+		<script>
 	    window.onload=function(){
 	      alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
 	    }
-	  </script>
+		</script>
 	</c:when>
 </c:choose>
 </head>
-
+<style>
+#headerWrapper{
+	background:transparent;
+}
+	.login_bg{
+		position:absolute;
+		top:0;
+		width:100%;
+		height:100%;
+		background:url("${contextPath}/resources/image/login_bg.jpg");
+	    background-size: cover;
+	    opacity:0.4;
+	    z-index:-1;
+	}
+</style>
 <body>
 <div id="loginWrapper">
-	<form name="frmLogin" method="post"  action="${contextPath}/member/login.do">
+	<div class="login_bg"></div>
+	<form name="frmLogin" method="post"  action="${contextPath}/member/login.do" autocomplete="off">
 	   <table align="center" >
 	      <tr align="center">
 		      <td>
@@ -47,6 +62,6 @@
 	      </tr>      
 	   </table>
 	</form>
-</div>
+	</div>
 </body>
 </html>

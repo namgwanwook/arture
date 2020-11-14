@@ -9,43 +9,41 @@
 <meta charset="UTF-8">
 
 <style>
-	body{
-		margin:0;
-		padding:0;
+	body {
+		-ms-overflow-style: none; 
+	  	margin:0;
+	  	padding:0;
 	}
+	
+	/* chrome etc */
+	body::-webkit-scrollbar { 
+	    display: none !important; 
+	}
+	
 	 #container {
         width: 100%;
         margin: 0px auto;        
         text-align:center;
-        border: 0px solid #bcbcbc;
+   
       }
       #header {
-        border: 0px solid #bcbcbc;
         background-color: #000;
       }
       #sidebar-left {
-        width: 15%;
-        height:700px;
-        padding: 5px;
-        margin-right: 5px;
-        margin-bottom: 5px;
+        width: 17%;
+        height:600px;
         float: left;
-        background-color: yellow;
-        border: 0px solid #bcbcbc;
+        background-color: #eee;
         font-size:18px;
       }
       #content {
-        width: 75%;
-        padding: 5px;
-        margin-right: 5px;
+        width: 83%;
         float: left;
         border: 0px solid #bcbcbc;
       }
       #footer {
         clear: both;
-        padding: 5px;
-        border: 0px solid #bcbcbc;
-         background-color: lightblue;
+         background-color: black;
       }
       
     </style>

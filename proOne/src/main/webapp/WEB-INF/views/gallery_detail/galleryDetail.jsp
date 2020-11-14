@@ -58,10 +58,11 @@
  	       success:function (data,textStatus){
  	          if(data=="true"){
  	       	    alert("좋아요 리스트에 추가하였습니다.");
- 	       	    $('#heartBtn').css('color','#f4496c');
- 	       	    $('#addFavorite').prop("disabled", true);
+ 	       	    $('#heartBtn').css('color','#ff5779');
+ 	       	   
  	          }else{
- 	        	  alert("이미 좋아요를 누른 갤러리입니다.");
+ 	        	$('#heartBtn').css('color','#fff');
+ 	        	  alert("취소완료 하였습니다.");
  	          }
  	       },
  	       error:function(data,textStatus){
@@ -82,7 +83,7 @@
  	 	    	      galleryNO:_galleryNO},
  	 	       success:function (data,textStatus){
  	 	          if(data=="true"){
- 	 	       	    $('#heartBtn').css('color','#f4496c');
+ 	 	       	    $('#heartBtn').css('color','#ff5779');
  	 	       	    $('#addFavorite').prop("disabled", true);
  	 	          }
  	 	       },
@@ -117,29 +118,6 @@
 			<p class="gd_hashtag">${gallery.hashtag }</p>
 			 
 		</div>
-<%-- 		<div class="artist_info">
-			<div class="card" tabindex="0">
-				  <span class="card__infoicon">
-				    <i class="fa fa-info"></i>
-				  </span>
-				  <div class="card_image">
-				  	<img src="${contextPath}/thumbnails.do?fileName=${artist.profileImage}&id=${artist.id}&originalFileName=${artist.profileImage}"/>
-				  </div>
-				  <div class="card_profile">
-				  	<h1 class="card__title"><span>Artist </span>${artist.name}</h1>
-				  	<p class="card__description">저는 이순신입니다. 즐거운 감상하세요^_^</p>
-				  	<c:if test="${not empty artist.sns_i && artist.sns_i !='null' }">
-					<p><img src="${contextPath}/resources/image/insta_b.png"/><span class="sns_id"> ${artist.sns_i}</span></p>
-					</c:if>
-					<c:if test="${not empty artist.sns_f && artist.sns_f !='null' }">
-					<p><img src="${contextPath}/resources/image/facebook_b.png"/><span class="sns_id">  ${artist.sns_f} </span></p>
-					</c:if>
-					<c:if test="${not empty artist.sns_b && artist.sns_b !='null' }">
-					<p><img src="${contextPath}/resources/image/blog_b.png"/><span class="sns_id">  ${artist.sns_b} </span></p>
-					</c:if>
-				  </div>
-				</div>
-		</div> --%>
 		
 		<div id="imageWrapper">
 			<c:if test="${not empty imageFileList && imageFileList!='null' }">
@@ -168,7 +146,7 @@
 	    <i class="fa fa-info"></i>
 	  </span>
 	  <div class="card_image">
-	  	<img src="${contextPath}/thumbnails.do?fileName=${artist.profileImage}&id=${artist.id}&originalFileName=${artist.profileImage}"/>
+	  	<img src="${contextPath}/downProfile.do?profileImage=${artist.profileImage}&id=${artist.id }"></img>
 	  </div>
 	  <div class="card_profile">
 	  	<h1 class="card__title"><span>Artist </span>${artist.name}</h1>

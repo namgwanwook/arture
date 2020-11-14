@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
+<link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
 <meta charset="UTF-8">
 <title>승인된 작품 상세페이지</title>
 <style>
@@ -50,7 +52,7 @@ function fn_remove_gallery(url, galleryNO){
 	<form name="frmArticle" method="post"  >
 		<table  border=0  align="center">
   			<tr>
-   				<td width=150 align="center" bgcolor=#FF9933>
+   				<td width=150 align="center">
       			접수 번호
    				</td>
    				<td >
@@ -58,7 +60,7 @@ function fn_remove_gallery(url, galleryNO){
    				</td>
   			</tr>
 			<tr>
-				<td width="150" align="center" bgcolor="#FF9933">
+				<td width="150" align="center">
      			 제목 
    				</td>
    				<td>
@@ -66,7 +68,7 @@ function fn_remove_gallery(url, galleryNO){
    				</td>   
   			</tr>
   			<tr>
-    			<td width="150" align="center" bgcolor="#FF9933">
+    			<td width="150" align="center">
      			 내용
    				</td>
    				<td>
@@ -77,7 +79,7 @@ function fn_remove_gallery(url, galleryNO){
  
 
   			<tr>
-	   			<td width="150" align="center" bgcolor="#FF9933">
+	   			<td width="150" align="center">
 	      		등록일자
 			   	</td>
 			   	<td>
@@ -87,7 +89,7 @@ function fn_remove_gallery(url, galleryNO){
 			<c:if test="${not empty imagesList && imagesList!='null' }">
 				<c:forEach var="item" items="${imagesList}" varStatus="status">
 					<tr>
-						<td width="150" align="center" bgcolor="#FF9933">
+						<td width="150" align="center">
 							이미지${status.count }
 						</td>
 						<td>

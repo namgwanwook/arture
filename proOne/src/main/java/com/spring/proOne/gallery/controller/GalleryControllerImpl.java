@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.spring.proOne.gallery.service.GalleryService;
 import com.spring.proOne.gallery.vo.GalleryVO;
+import com.spring.proOne.mypage.vo.FavoriteVO;
 
 @Controller("galleryController")
 @EnableAspectJAutoProxy
@@ -34,28 +35,25 @@ public class GalleryControllerImpl extends MultiActionController implements Gall
 		String viewName = (String) request.getAttribute("viewName");
 		
 		// 서비스에 갤러리 리스트 받아옴
-		List galleryList = galleryService.listGallerys();			
-		List like = new ArrayList<Integer>();
-		for(int i=0;i<galleryList.size();i++) {			
-			like.add(galleryService.like(i));
+		List<GalleryVO> galleryList = galleryService.listGallerys();	
+		List<Integer> likeList = new ArrayList<Integer>();
+		if(galleryList.size()!=0) {
+		for(GalleryVO g : galleryList) {
+			int like =  galleryService.like(g.getGalleryNO());
+			likeList.add(like);
+			}
 		}
-		System.out.println("라이크값c" + like);
+		
+		
+		
+		
+		
 		ModelAndView mav = new ModelAndView();		
 		mav.addObject("galleryList",galleryList);
-		mav.addObject("like",like);
+		mav.addObject("like",likeList);
 		mav.setViewName(viewName);
 
 		return mav;
 	}
 
-	//디테일 페이지로 이동
-	@Override
-	@RequestMapping(value = "/gallery/detail.do",method = RequestMethod.GET)
-	public ModelAndView detailPage(@RequestParam("num")int num, HttpServletRequest request, HttpServletResponse response){
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		List detailGallery = galleryService.detailGallery(num);
-		mav.addObject("detailGallery",detailGallery);
-		return mav;
-	}
 }

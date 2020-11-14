@@ -146,7 +146,7 @@
  <delete id="deletefavorite" parameterType="String">
  	<![CDATA[
  		delete from o_favorite
- 		where id=#{id}
+ 		where galleryNO=#{galleryNO}
  	]]>
  </delete> 
  

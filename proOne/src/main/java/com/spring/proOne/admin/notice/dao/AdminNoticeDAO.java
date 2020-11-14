@@ -1,6 +1,7 @@
 package com.spring.proOne.admin.notice.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -10,6 +11,8 @@ public interface AdminNoticeDAO {
 
 	List<NoticeVO> selectAllList();
 
+	List<NoticeVO> selectAllList(Map pagingMap);
+
 	int insertNotice(NoticeVO noticeVO) throws DataAccessException;
 
 	int deleteNotice(int no) throws DataAccessException;
@@ -17,5 +20,8 @@ public interface AdminNoticeDAO {
 	int updateNotice(NoticeVO notice);
 
 	NoticeVO selectNotice(int noticeNO);
+
+	int selectTotNotices();
+
 
 }

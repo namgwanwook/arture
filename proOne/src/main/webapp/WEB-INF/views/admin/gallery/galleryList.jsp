@@ -10,6 +10,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
+<link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
  <style>
    .cls1 {text-decoration:none;}
    .cls2{text-align:center; font-size:30px;}
@@ -41,9 +43,9 @@ function fn_goto_galleryView(url, galleryNO){
 
 </script>
 <body>
-<h1 align="center">admin - 승인된 작품 목록입니다</h1>
-<table align="center" border="1"  width="80%"  >
-		<tr height="10" align="center" bgcolor="lightgreen">
+<h1 class="label">admin - 승인된 작품 목록입니다</h1>
+<table align="center" >
+		<tr class="list_title">
 			<td width="10%">NO.</td>
 			<td width="70%">TITLE</td>
 			<td width="20%">ID</td>

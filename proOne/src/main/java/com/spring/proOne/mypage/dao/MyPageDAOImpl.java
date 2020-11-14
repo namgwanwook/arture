@@ -92,12 +92,11 @@ public class MyPageDAOImpl implements MyPageDAO{
 	@Override//내 게시글 삭제
 	public void deletemygallery(FavoriteVO favoriteVO) throws DataAccessException {
 		sqlSession.delete("mapper.mypage.deletemygallery",favoriteVO);
-		sqlSession.delete("mapper.mypage.deletefavorite",favoriteVO.getId());
+		sqlSession.delete("mapper.mypage.deletefavorite",favoriteVO.getGalleryNO());
 	}
 
 	@Override//좋아요확인
 	public int selectOverlappedFavorite(FavoriteVO favoriteVO) throws DataAccessException {
-		System.out.println("db조회결과"+sqlSession.selectOne("mapper.mypage.selectOverlappedFavorite", favoriteVO));
 		return sqlSession.selectOne("mapper.mypage.selectOverlappedFavorite", favoriteVO);
 		
 	}

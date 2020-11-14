@@ -2,17 +2,37 @@ package com.spring.proOne.common.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.spring.proOne.member.vo.MemberVO;
+
 public class ViewNameInterceptor extends HandlerInterceptorAdapter {
+	
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+		HttpSession session = request.getSession();
 		try {
 			String viewName = getViewName(request);
+			MemberVO membervo = (MemberVO) session.getAttribute("member");
+			
+			if(viewName.matches(".*mypage.*")||viewName.matches(".*applyForm.*")||viewName.matches(".*admin.*")) {
+				if(membervo.getId().isEmpty()) {
+					viewName = "forward:/member/loginForm.do";
+				}else if(viewName.matches(".*admin.*")&&!membervo.getId().equals("admin")) {
+					viewName = "forward:/main/main.do";
+				}
+			}
 			request.setAttribute("viewName", viewName);
+			
 		} catch (Exception e) {
-			e.printStackTrace();
+			String viewName = "forward:/member/loginForm.do";
+			request.setAttribute("viewName", viewName);
+			return true;
 		}
 		return true;
 	}

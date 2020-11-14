@@ -8,4 +8,7 @@ public interface MainDAO {
 
 	public List selectGalleryInfo() throws Exception;
 
+	public List selectLike() throws Exception;
+	
+	public List likegallery() throws Exception;
 }

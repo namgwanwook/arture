@@ -10,6 +10,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
+<link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
  <style>
    .cls1 {text-decoration:none;}
    .cls2{text-align:center; font-size:30px;}
@@ -42,9 +44,9 @@ function fn_goto_applyView(url, applyNO){
 
 </script>
 <body>
-<h1 align="center">admin - 신청서 목록입니다</h1>
-<table align="center" border="1"  width="80%"  >
-		<tr height="10" align="center" bgcolor="lightgreen">
+<h1 class="label">admin - 신청서 목록입니다</h1>
+<table>
+		<tr class="list_title">
 			<td width="10%">NO.</td>
 			<td width="70%">TITLE</td>
 			<td width="20%">ID</td>
@@ -63,8 +65,9 @@ function fn_goto_applyView(url, applyNO){
 				<c:forEach var="apply" items="${applysList }">
 					<tr align="center">
 						<td width="10%">${apply.applyNO}</td>
-						<td align='left' width="55%"><span
-							style="padding-right: 30px"></span> <a class='cls1'	href="#" onclick="fn_goto_applyView('${contextPath}/admin/applycheck/applyView.do', ${apply.applyNO })">${apply.title }</a>
+						<td align='left' width="55%">
+							<span style="padding-right: 30px"></span> 
+							<a class='cls1'	href="#" onclick="fn_goto_applyView('${contextPath}/admin/applycheck/applyView.do', ${apply.applyNO })">${apply.title }</a>
 						</td>
 						<td width="15%">${apply.id }</td>				
 					</tr>

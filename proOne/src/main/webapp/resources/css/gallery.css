@@ -1,4 +1,3 @@
-@charset "UTF-8";
 section{
 	width: 100%;
 	height: auto;
@@ -7,6 +6,12 @@ section{
 .thumbnail-form{
 	width: 70%;
 	margin: auto;
+	
+	/* 전이가 일어날 속성값을 정의 */ 
+	transition-property: height; 
+	/* 전이가 발생되는 시간 명시 */ 
+	transition-duration: 0.7s; /* 1000밀리초와 같다 */
+
 }
 .thumbnail {
   height: 430px;
@@ -16,8 +21,14 @@ section{
   border: solid 2px white;
   border-radius:10px; 
 } 
+
+.nonActive{
+	display:none;
+}
 p{
 	text-align : left;
+	font-size: 20px;
+	padding-top: 12px;
 }
 /* 검색창 스타일 */
 input:focus {
@@ -48,15 +59,28 @@ input#keyword{
 /* 이미지 스타일 */
 .gallery-img{
 	width: 330px;
-	height: 200px;
-	border-top-left-radius: 7px;
-	border-top-right-radius: 7px;
+	height: 245px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
 
-.caption{
-	margin-left: 24px;
+.gallery-caption{
+	padding-left: 24px;
 }
 
+option{
+	background-color: gray;
+}
 
-
+select{
+	appearance:none;
+	outline: none;
+	width: 100px;
+	height: 53px;
+	font-size: 25px;
+	background-color: transparent;
+	color: white;
+	border: none;
+	border-bottom: solid;
+}
