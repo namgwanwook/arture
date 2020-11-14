@@ -18,7 +18,6 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 
 	@Override
 	public List<NoticeVO> listNotieces() throws Exception{
-		// TODO Auto-generated method stub
 		List<NoticeVO> noticesList = noticeDAO.selectAllList();
 		return noticesList;
 	}
@@ -41,7 +40,6 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 	
 	@Override
 	public void addNotice(NoticeVO notice) throws Exception{
-		// TODO Auto-generated method stub
 		noticeDAO.insertNotice(notice);
 	}
 	
@@ -52,13 +50,11 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 
 	@Override
 	public void modNotice(NoticeVO notice) {
-		// TODO Auto-generated method stub
 		noticeDAO.updateNotice(notice);
 	}
 
 	@Override
 	public NoticeVO viewNotice(int noticeNO) {
-		// TODO Auto-generated method stub
 		NoticeVO noticeVO = noticeDAO.selectNotice(noticeNO);
 		return noticeVO;
 	}

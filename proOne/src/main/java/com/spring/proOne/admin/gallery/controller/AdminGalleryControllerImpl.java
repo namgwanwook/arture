@@ -39,8 +39,6 @@ public class AdminGalleryControllerImpl implements AdminGalleryController{
 	@Override
 	@RequestMapping(value="/galleryList.do" ,method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView galleryList(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
-		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
@@ -54,7 +52,6 @@ public class AdminGalleryControllerImpl implements AdminGalleryController{
 	@Override
 	@RequestMapping(value="/galleryView.do" ,method = RequestMethod.POST)
 	public ModelAndView galleryView(@RequestParam("galleryNO") int galleryNO, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
@@ -73,7 +70,6 @@ public class AdminGalleryControllerImpl implements AdminGalleryController{
 		// applyForm의 applyNO에 따른 이미지 파일정보 가져오기
 		List<ImageVO> imagesList = adminApplyService.getImages(galleryNO);
 		mav.addObject("imagesList", imagesList);
-		System.out.println("imagesList regDate : " + imagesList.get(0).getRegDate());
 		
 		return mav;
 	}

@@ -43,9 +43,6 @@ public class applyFormControllerImpl implements applyFormController{
 	applyFormService applyFormService;
 	@Autowired
 	ArticleVO articleVO;
-
-	
-	
 	
 	private List<String> upload(MultipartHttpServletRequest multipartRequest) throws Exception{
 		multipartRequest.setCharacterEncoding("utf-8");
@@ -96,20 +93,21 @@ public class applyFormControllerImpl implements applyFormController{
 		while(enu.hasMoreElements()) {
 			String name= (String)enu.nextElement();
 			String value= multipartRequest.getParameter(name);
-			System.out.println("어플라이폼 값 확인 ------>name:"+name+", value:"+value);
-			articleMap.put(name, value);
+			
+			//sql injection 방어
+			String match = "[< > ( ) ' \" ; = + | & - ]";
+			String filvalue =  value.replaceAll(match, " ");
+			
+			articleMap.put(name, filvalue);
 		}
 		
 		//id 구해오기
 		HttpSession session = multipartRequest.getSession();
 		String id =((MemberVO)session.getAttribute("member")).getId();
-		System.out.println("ID를 왜 구해오는거죠??? " + id);
 		articleMap.put("id", id);
 		
 		// 첨부된 파일 리스트를 upload Method를 이용해서 받아옴
-		List<String> fileList = upload(multipartRequest);
-		System.out.println("첨부된 파일 리스트 --->>" + fileList);
-		
+		List<String> fileList = upload(multipartRequest);		
 		
 		List<ImageVO> imageFileList = new ArrayList<ImageVO>();
 		System.out.println("ImageVO의 imageFileList-------->>"+imageFileList);
@@ -119,7 +117,6 @@ public class applyFormControllerImpl implements applyFormController{
 				ImageVO imageVO = new ImageVO();
 				imageVO.setImageFileName(fileName);
 				imageFileList.add(imageVO);
-				System.out.println(imageVO.getImageFileName());
 			}
 			articleMap.put("imageFileName", imageFileList.get(0).getImageFileName());
 			articleMap.put("imageFileList", imageFileList);
@@ -137,7 +134,6 @@ public class applyFormControllerImpl implements applyFormController{
 				for(ImageVO imageVO : imageFileList) {
 					imageFileName = imageVO.getImageFileName();
 					
-					System.out.println("이미지 파일 잘 들어가나요? "+ imageFileName);
 					File srcFile = new File(GALLERY_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
 					
 					System.out.println("srcFile : " + srcFile);
@@ -182,52 +178,4 @@ public class applyFormControllerImpl implements applyFormController{
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
-	
-	//필요없음
-//	@Override
-//	@RequestMapping(value="/applyForm/viewArticle.do", method=RequestMethod.GET)
-//	public ModelAndView viewArticle(int applyNO, HttpServletRequest request, HttpServletResponse response)
-//			throws Exception {
-//		String viewName = (String)request.getAttribute("viewName");
-//		articleVO = applyFormService.viewArticle(applyNO);
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName(viewName);
-//		mav.addObject("article", articleVO);
-//		return mav;
-//	}
-
-
-//
-//	@Override
-//	@RequestMapping(value="/applyForm/removeArticle.do", method= RequestMethod.POST)
-//	@ResponseBody
-//	public ResponseEntity removeArticle(@RequestParam("applyNO") int applyNO, HttpServletRequest request, HttpServletResponse response)
-//			throws Exception {
-//		response.setContentType("text/html;charset=utf-8");
-//		String message;
-//		ResponseEntity resEnt = null;
-//		HttpHeaders responseHeaders = new HttpHeaders();
-//		responseHeaders.add("Content-Type",	"text/html;charset=utf-8");
-//		try {
-//			applyFormService.removeArticle(applyNO);
-//			File destDir = new File(GALLERY_IMAGE_REPO+"\\"+applyNO);
-//			FileUtils.deleteDirectory(destDir);
-//			
-//			message = "<script>";
-//			message += " alert('삭제 되었습니다.');";
-//			message += " location.href='" + request.getContextPath()+"/board/listArticles.do';";
-//			message += " </script>";
-//			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-//		} catch(Exception e) {
-//			message = "<script>";
-//			message += " alert('삭제가 취소되었습니다.');";
-//			message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
-//			message += " </script>";
-//			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-//			e.printStackTrace();
-//		}
-//		return resEnt;
-//	}
-	
 }

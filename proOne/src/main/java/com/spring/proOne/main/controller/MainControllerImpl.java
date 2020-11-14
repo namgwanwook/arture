@@ -66,28 +66,16 @@ public class MainControllerImpl implements MainController{
 		List<GalleryVO> galleryList = galleryService.listGallerys();
 		mav.addObject("galleryList", galleryList);
 		
-		System.out.println("galleryList :" +galleryList);
-		
-		
 		// 갤러리 좋아요 값 받아오기
 		List<MainVO> galleryLike = mainService.likegallery();
 		int like = galleryLike.get(0).getGalleryLike();
 		int kingNum = galleryLike.get(0).getGalleryNO();
-		System.out.println(like+"..................."+kingNum);
 		//좋아요값으로 겔러리 가져오기
 		GalleryVO kingallery = galleryService.selectDetailGallery(kingNum);
 
 		mav.addObject("like",like);
 		mav.addObject("galleryLike",kingallery);
-		/*
-		 * List Like = mainService.likegallery(galleryLike.get(0));
-		 * mav.addObject("galleryLike", galleryLike); System.out.println("MCgalleryLike"
-		 * + galleryLike);
-		 */
-		
-		
-		
-		System.out.println(viewName);
+
 		mav.setViewName(viewName);
 		return mav;
 	}

@@ -56,17 +56,13 @@ public class AdminNoticeControllerImpl implements AdminNoticeController{
 		
 		
 		mav.addObject("listsMap", listsMap);
-		
-		//List<NoticeVO> noticeList = (List<NoticeVO>) noticeService.listNotieces(pagingMap);
-		
-		//mav.addObject("noticeList", noticeList);
 		return mav;
 	}
 	
 	@Override
 	@RequestMapping(value="/addNewNotice.do" ,method = RequestMethod.POST)
 	public ModelAndView addNewNotice(@ModelAttribute("notice") NoticeVO notice, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
+
 		request.setCharacterEncoding("utf-8");
 		noticeService.addNotice(notice);
 		ModelAndView mav = new ModelAndView("redirect:/admin/notice/noticeList.do");
@@ -76,7 +72,7 @@ public class AdminNoticeControllerImpl implements AdminNoticeController{
 	@Override
 	@RequestMapping(value="/removeNotice.do" ,method=RequestMethod.POST)
 	public ModelAndView removeNotice(@RequestParam("noticeNO" ) int no, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
+
 		request.setCharacterEncoding("utf-8");
 		noticeService.removeNotice(no);
 		ModelAndView mav = new ModelAndView("redirect:/admin/notice/noticeList.do");
@@ -86,7 +82,7 @@ public class AdminNoticeControllerImpl implements AdminNoticeController{
 	@Override
 	@RequestMapping(value="/modNotice.do" ,method = RequestMethod.POST)
 	public ModelAndView modNotice(@ModelAttribute("notice") NoticeVO notice, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
+
 		request.setCharacterEncoding("utf-8");
 		System.out.println("----------  mod   ---------------");
 		System.out.println("no : " + notice.getNo());
@@ -102,7 +98,7 @@ public class AdminNoticeControllerImpl implements AdminNoticeController{
 	@Override
 	@RequestMapping(value="/noticeView.do" ,method = RequestMethod.POST)
 	public ModelAndView noticeView(@RequestParam("noticeNO") int noticeNO, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
+
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		

@@ -28,7 +28,6 @@ public class AdminMemberControllerImpl implements AdminMemberController{
 	@Override
 	@RequestMapping(value="/memberList.do" ,method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView memberList(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
 		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -49,7 +48,6 @@ public class AdminMemberControllerImpl implements AdminMemberController{
 	@Override
 	@RequestMapping(value="/removeMember.do" ,method=RequestMethod.POST)
 	public ModelAndView removeMember(@RequestParam("temp_ID" ) String ID, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		adminMemberService.removeMember(ID);
 		ModelAndView mav = new ModelAndView("redirect:/admin/member/memberList.do");

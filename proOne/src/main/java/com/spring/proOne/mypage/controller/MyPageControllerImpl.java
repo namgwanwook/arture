@@ -164,7 +164,7 @@ public class MyPageControllerImpl implements MyPageController {
 
 	}
 
-	@Override
+	@Override//프로필 이미지 수정
 	@RequestMapping(value="/mypage/modprofileimage.do" ,method = {RequestMethod.POST,RequestMethod.GET})//프로필 이미지 수정
 	public ResponseEntity modprofileimage(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
@@ -228,7 +228,11 @@ public class MyPageControllerImpl implements MyPageController {
 		while(enu.hasMoreElements()){
 			String name=(String)enu.nextElement();
 			String value=multipartRequest.getParameter(name);
-			usermap.put(name,value); //여기서 usermap에 값들을 저장해준다. id 값과 image 값은 따로 가져오지않기떄문에 put으로 넣어준다
+			//sql injection 방어
+			String match = "[< > ( ) ' \" ; = + | & - # ]";
+			String filvalue =  value.replaceAll(match, " ");
+	
+			usermap.put(name,filvalue); //여기서 usermap에 값들을 저장해준다. id 값과 image 값은 따로 가져오지않기떄문에 put으로 넣어준다
 		}
 		
 		String id = (String) usermap.get("id");

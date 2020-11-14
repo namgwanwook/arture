@@ -135,13 +135,6 @@
 			where id=#{id}
 	</update>	
 	
-<!-- 회원탈퇴  -->	
- <delete id="deleteMember"  parameterType="String">
-    <![CDATA[
-      delete from o_member
-      where id=#{id}
-    ]]>      
- </delete>
  <!-- 좋아요 삭제 -->
  <delete id="deletefavorite" parameterType="String">
  	<![CDATA[
@@ -158,32 +151,12 @@
  	]]>	
 </delete> 
 
+<!-- 내 게시글삭제 -->
 <delete id="deletemygallery" parameterType="favoriteVO">
  	<![CDATA[
  		delete from o_gallery
  		where id=#{id} and galleryNO=#{galleryNO}
  	]]>	
 </delete> 
-
-<!-- 프로필 삭제  -->
- <delete id="deleteProfileImage" parameterType="String">
- <![CDATA[
- 		delete profileImage from o_member
- 		where id=#{id}
- 	]]>	
- </delete>
-<!--  
-  <select id="selectNewImageFileNO" resultType="int"  >
-    <![CDATA[
-      SELECT  nvl(max(imageFileNO),0) from t_imageFile		
-    ]]>
-  </select>
-
-  <select  id="selectImageFileList" resultMap="imgResult" parameterType="int">
-    <![CDATA[
-      SELECT * from t_imageFile
-      where articleNO=#{articleNO}	
-    ]]>
-  </select>  -->
   
 </mapper>

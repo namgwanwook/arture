@@ -56,7 +56,6 @@ function auto_grow(element) {
 </script>
 <style>
 
-/* adsffffffffffffffffffffffffffffffffffffffff */
 .thumbnail {
   height: 430px;
   width: 330px;
@@ -132,7 +131,7 @@ textarea.autosize::-webkit-scrollbar {
 
 		<div class="inner">
 			<img
-				src="${contextPath }/mainImage.do?galleryNO=${galleryList.get(0).galleryNO }&imageFileName=${galleryList.get(0).imageFileName }">
+				src="${contextPath }/imageList.do?galleryNO=${galleryList.get(0).galleryNO }&imageFileName=${galleryList.get(0).imageFileName }">
 			<div class="vertical-center">
 
 				<p class="cta">
@@ -145,7 +144,7 @@ textarea.autosize::-webkit-scrollbar {
 	<section class="panel panel1" data-section-name="second">
 		<div class="inner">
 			<img
-				src="${contextPath }/mainImage.do?galleryNO=${galleryList.get(1).galleryNO }&imageFileName=${galleryList.get(1).imageFileName }">
+				src="${contextPath }/imageList.do?galleryNO=${galleryList.get(1).galleryNO }&imageFileName=${galleryList.get(1).imageFileName }">
 
 			<div class="vertical-center">
 				<p class="cta">
@@ -158,7 +157,7 @@ textarea.autosize::-webkit-scrollbar {
 	<section class="panel panel2" data-section-name="third">
 		<div class="inner">
 			<img
-				src="${contextPath }/mainImage.do?galleryNO=${galleryList.get(2).galleryNO }&imageFileName=${galleryList.get(2).imageFileName }">
+				src="${contextPath }/imageList.do?galleryNO=${galleryList.get(2).galleryNO }&imageFileName=${galleryList.get(2).imageFileName }">
 
 			<div class="vertical-center">
 				<p class="cta">
@@ -178,7 +177,7 @@ textarea.autosize::-webkit-scrollbar {
 						<!-- 갤러리 폼 -->
 			     	 	<div class="thumbnail">
 							<a class="gallery-form" href="${contextPath }/gallery_detail/galleryDetail.do?galleryNO=${galleryLike.galleryNO }"> 
-			      				<img class="gallery-img" src="${contextPath }/mainImage.do?galleryNO=${galleryLike.galleryNO }&imageFileName=${galleryLike.imageFileName }" alt="이미지" >
+			      				<img class="gallery-img" src="${contextPath }/imageList.do?galleryNO=${galleryLike.galleryNO }&imageFileName=${galleryLike.imageFileName }" alt="이미지" >
 							</a><!-- end gallery-form -->
 							
 			         		<div class="gallery-caption">			         		
@@ -191,8 +190,6 @@ textarea.autosize::-webkit-scrollbar {
 				        	</div><!-- end caption -->
 				      	</div><!-- end thumnail -->
 	 
-							<%-- <img src="${contextPath }/mainImage.do?galleryNO=${galleryLike.get(0).galleryNO }&imageFileName=${galleryList.get(0).imageFileName }"> --%>
-
 				</div>
 	
 	

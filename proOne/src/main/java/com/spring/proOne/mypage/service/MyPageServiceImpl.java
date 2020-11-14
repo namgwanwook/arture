@@ -35,12 +35,6 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public void deleteMyInfo(String id) throws Exception {//회원탈퇴-좋아요 삭제
-		myPageDAO.deleteMyInfo(id);
-		myPageDAO.deletefavorite(id);		
-	}
-
-	@Override
 	public List<GalleryVO> myFavorite(String id) throws Exception {//좋아요누른게시글 불러오기
 		List<GalleryVO> myFavoritelist =myPageDAO.myFavorite(id);
 		return myFavoritelist;
@@ -70,7 +64,6 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public void deletemygallery(FavoriteVO favoriteVO) throws Exception {//내 게시글 삭제
 		myPageDAO.deletemygallery(favoriteVO);
-		
 	}
 
 	@Override

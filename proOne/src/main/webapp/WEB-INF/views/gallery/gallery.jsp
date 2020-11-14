@@ -61,6 +61,12 @@
        	}else if(value == null || value == ""){
        		alert("검색어를 입력해주세요.")
        	}
+        //injection 방어
+       	var expText = /[<>=%]/;
+        if(value.match(expText)){
+        	alert("특수문자를 입력할 순 없습니다")
+        	return;
+        }
         
         /* thumbnail에 갯수만큼 반복을 돌림 */
         for(i=0;i<item.length;i++){

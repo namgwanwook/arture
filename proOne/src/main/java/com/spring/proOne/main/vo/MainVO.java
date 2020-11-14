@@ -7,11 +7,6 @@ public class MainVO {
 	private int galleryNO;
 	private int galleryLike;
 	
-	public MainVO() {
-		System.out.println("MainVO 생성자");
-	}
-	
-	
 	public int getGalleryNO() {
 		return galleryNO;
 	}

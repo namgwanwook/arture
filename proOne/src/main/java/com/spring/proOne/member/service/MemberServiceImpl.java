@@ -1,7 +1,5 @@
 package com.spring.proOne.member.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -17,22 +15,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	MemberDAO memberDAO;
-	
-	@Override
-	public List listMembers() throws DataAccessException {
-		List membersList = null;
-		membersList = memberDAO.selectAllMemberList();
-		return membersList;
-	}
 
 	@Override
 	public int addMember(MemberVO memberVO) throws DataAccessException {
 		return memberDAO.insertMember(memberVO);
-	}
-
-	@Override
-	public int removeMember(String id) throws DataAccessException {
-		return memberDAO.deleteMember(id);
 	}
 
 	@Override
@@ -46,8 +32,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO selectMemberById(String id) throws DataAccessException {
-		return memberDAO.selectById(id);
+	public MemberVO selectMemberById(String id) throws Exception {
+		return memberDAO.selectMemberById(id);
 	}
 
 }

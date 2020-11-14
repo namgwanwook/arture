@@ -47,18 +47,6 @@ public class MemberControllerImpl implements MemberController {
 		
 		return mav;
 	}
-	
-
-
-	@Override
-	@RequestMapping(value = "/member/removeMember.do", method = RequestMethod.GET)
-	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		request.setCharacterEncoding("utf-8");
-		memberService.removeMember(id);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
-		return null;
-	}
 
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)

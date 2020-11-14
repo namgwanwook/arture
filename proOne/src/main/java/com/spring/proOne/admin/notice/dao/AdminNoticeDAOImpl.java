@@ -51,13 +51,11 @@ public class AdminNoticeDAOImpl implements AdminNoticeDAO{
 
 	@Override
 	public NoticeVO selectNotice(int noticeNO) {
-		// TODO Auto-generated method stub
 		NoticeVO result = sqlSession.selectOne("mapper.admin_notice.selectNotice", noticeNO);
 		return result;
 	}
 	@Override
 	public int selectTotNotices() {
-		// TODO Auto-generated method stub
 		int totNotices = sqlSession.selectOne("mapper.admin_notice.countNotices");
 		return totNotices;
 	}
