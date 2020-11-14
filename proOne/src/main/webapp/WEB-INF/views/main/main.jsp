@@ -228,20 +228,7 @@ textarea.autosize::-webkit-scrollbar {
 									<p class="n_date">${noticeList.get(1).writeDate }</p>
 								</li>
 							</ul>
-						</c:when>
-	
-					</c:choose>
-			
-				</div><!-- 공지사항 -->
-			</div><!-- 공지사항, comming soon wrap -->
-			<div id="mainFooter">
-			<h1>footer test</h1>
-		</div>
-		</div><!-- inner 박스 -->
-		
-		
-	</section>
-	
+							
 	<!-- Modal 1 -->
 <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -282,6 +269,20 @@ textarea.autosize::-webkit-scrollbar {
       </div>
     </div>
   </div>
-</div>
+</div>													
+						</c:when>
+					</c:choose>
+			
+				</div><!-- 공지사항 -->
+			</div><!-- 공지사항, comming soon wrap -->
+			<div id="mainFooter">
+			<h1>footer test</h1>
+		</div>
+		</div><!-- inner 박스 -->
+		
+		
+	</section>
+	
+
 </body>
 </html>
