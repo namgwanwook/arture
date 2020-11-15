@@ -28,14 +28,12 @@ public class AdminApplycheckServiceImpl implements AdminApplycheckService{
 
 	@Override
 	public ArticleVO getApplyForm(int applyNO) {
-		// TODO Auto-generated method stub
 		ArticleVO getApply = adminApplycheckDAO.selectApplycation(applyNO);
 		return getApply;
 	}
 
 	@Override
 	public List<ImageVO> getImages(int applyNO) {
-		// TODO Auto-generated method stub
 		List<ImageVO> getApplyImages = adminApplycheckDAO.selectApplyImages(applyNO);
 		return getApplyImages;
 	}
@@ -44,8 +42,6 @@ public class AdminApplycheckServiceImpl implements AdminApplycheckService{
 	public int acceptApplyForm(int applyNO) {
 		int result = adminApplycheckDAO.insertToGallery(applyNO);
 		int result2 = adminApplycheckDAO.deleteApplyform(applyNO);
-		System.out.println("applycheck SERVICE ACCEPT result : " + result);
-		System.out.println("applycheck SERVICE ACCEPT result2 : " + result2);
 		return result;
 	}
 	
@@ -55,18 +51,13 @@ public class AdminApplycheckServiceImpl implements AdminApplycheckService{
 		try {
 			result = adminApplycheckDAO.deleteApplyform(applyNO);
 		}catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("여기가 문제");
+			System.out.println("adminApplycheckService /// deleteApplyform 실패!!!!");
 		}
 		try {
 			result2 = adminApplycheckDAO.deleteImageFile(applyNO);
 		}catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("여기가222 문제");
+			System.out.println("adminApplycheckService /// deleteImageFile 실패!!!!");
 		}
-		
-		System.out.println("applycheck SERVICE REJECT result : " + result);
-		System.out.println("applycheck SERVICE REJECT result2 : " + result2);
 		return result;
 	}
 }

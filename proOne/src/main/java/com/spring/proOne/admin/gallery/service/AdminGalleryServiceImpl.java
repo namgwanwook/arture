@@ -33,7 +33,6 @@ public class AdminGalleryServiceImpl implements AdminGalleryService{
 
 	@Override
 	public GalleryVO getGallery(int galleyNO) {
-		// TODO Auto-generated method stub
 		GalleryVO getGallery = adminGalleryDAO.selectGallery(galleyNO);
 		return getGallery;
 	}
@@ -44,18 +43,13 @@ public class AdminGalleryServiceImpl implements AdminGalleryService{
 		try {
 			result = adminGalleryDAO.deleteGallery(galleryNO);
 		}catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("여기가 문제");
+			System.out.println("AdminGalleryService /// deleteGallery 실패!!!");
 		}
 		try {
 			result2 = adminApplycheckDAO.deleteImageFile(galleryNO);
 		}catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("여기가222 문제");
+			System.out.println("AdminGalleryService /// deleteImageFile 실패!!!");
 		}
-		
-		System.out.println("applycheck SERVICE REJECT result : " + result);
-		System.out.println("applycheck SERVICE REJECT result2 : " + result2);
 		return result;
 	}
 }

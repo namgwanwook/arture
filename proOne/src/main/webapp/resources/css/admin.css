@@ -1,10 +1,10 @@
 @charset "UTF-8";
 /* common */
-	a:link{
+	.gul:link{
 		color: black;
 	}
-	a:visited{
-		color: #ddd;
+	.gul:visited{
+		color: #848484;
 	}
 	
 	td.pl20{
@@ -16,7 +16,7 @@
 		padding:30px 0;
 	}
 	table{
-		width: 90%;
+		width: 80%;
 		height:auto;
     	margin: 0 auto;
 		border-top:3px solid #000;
@@ -37,14 +37,32 @@
 	table tr td.l_name{
 		padding-left:18px;
 	}
+	.put{
+		float: left;
+	    width: 95%;
+	    border-style: none;
+	    background: #fff; 
+	    resize: none;
+	}
+	.admin_btn{
+	    border-style: none;
+	    background: #cbcbcb; 
+	    padding: 3px 8px;
+	}
+	.admin_btn:hover{
+	    border-style: none;
+	    background: #bbbbbb; 
+	    padding: 3px 8px;
+	}
 /* noticeList */
    .cls1 {text-decoration:none;}
    .cls2{ text-align:center; font-size:30px; }
    
 /* noticeView */
 	.notice_view_form{
-		margin-top: 10px;
+		margin-top: 10px;	
 	}
+	
    
 /* membersList */
 	.profileImage {

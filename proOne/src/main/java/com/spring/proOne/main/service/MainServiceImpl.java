@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.proOne.gallery.vo.GalleryVO;
 import com.spring.proOne.main.dao.MainDAO;
+import com.spring.proOne.main.vo.MainVO;
 
 @Service("mainService")
 public class MainServiceImpl implements MainService {
@@ -36,7 +37,19 @@ public class MainServiceImpl implements MainService {
 		return selectedGalleries;
 	}
 	
-	
+	@Override
+	public List galleryLike() throws Exception {
+		
+		List<MainVO> galleryLike = mainDAO.selectLike();
+		
+		return galleryLike;
+		
+	}
+
+	@Override
+	public List likegallery() throws Exception {
+		return mainDAO.likegallery();
+	}
 
 	
 }

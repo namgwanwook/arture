@@ -24,7 +24,7 @@ public class AdminNoticeDAOImpl implements AdminNoticeDAO{
 	@Override
 	public List<NoticeVO> selectAllList(Map pagingMap) {
 		List<NoticeVO> articlesList = new ArrayList();
-		articlesList = sqlSession.selectList("mapper.admin_notice.selectAllNotices", pagingMap);
+		articlesList = sqlSession.selectList("mapper.admin_notice.selectSomeNotices", pagingMap);
 		System.out.println("pageingMap.section "+pagingMap.get("section"));
 		System.out.println("pageingMap.pageNum "+pagingMap.get("pageNum"));
 		System.out.println("size : " + articlesList.size());
@@ -51,13 +51,11 @@ public class AdminNoticeDAOImpl implements AdminNoticeDAO{
 
 	@Override
 	public NoticeVO selectNotice(int noticeNO) {
-		// TODO Auto-generated method stub
 		NoticeVO result = sqlSession.selectOne("mapper.admin_notice.selectNotice", noticeNO);
 		return result;
 	}
 	@Override
 	public int selectTotNotices() {
-		// TODO Auto-generated method stub
 		int totNotices = sqlSession.selectOne("mapper.admin_notice.countNotices");
 		return totNotices;
 	}

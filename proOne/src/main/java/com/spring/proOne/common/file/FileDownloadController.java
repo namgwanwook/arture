@@ -63,31 +63,6 @@ public class FileDownloadController {
 	      out.close();
 	   }
 	
-	@RequestMapping("/mainImage.do")
-	protected void mainImage(@RequestParam("imageFileName") String imageFileName,
-							@RequestParam("galleryNO") int galleryNO,
-							HttpServletResponse response) throws Exception {
-		OutputStream out = response.getOutputStream();
-		String filePath=GALLERY_IMAGE_REPO_PATH+"\\"+galleryNO+"\\"+imageFileName;
-		File image = new File(filePath);
-		
-		System.out.println("경로 받아오기!!! : "+filePath);
-		
-		response.setHeader("Cache-Control","no-cache");
-		response.addHeader("Content-disposition", "attachment; fileName="+imageFileName);
-		FileInputStream in=new FileInputStream(image); 
-		byte[] buffer=new byte[1024*8];
-		while(true){
-			int count=in.read(buffer); 
-			if(count==-1) 
-				break;
-			out.write(buffer,0,count);
-		}
-		in.close();
-		out.close();
-		
-	}
-	
 	@RequestMapping("/downProfile.do")
 	   protected void downProfile(@RequestParam("profileImage") String profileImage,
 	         @RequestParam("id") String prifileId,

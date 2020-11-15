@@ -20,6 +20,7 @@
      #preview{
      	width: 70%;
      }
+     
 </style>
 </head>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
@@ -49,14 +50,15 @@ function fn_remove_gallery(url, galleryNO){
 
 </script>
 <body>
+	<h1 class="label">승인된 작품 관리</h1>
 	<form name="frmArticle" method="post"  >
 		<table  border=0  align="center">
   			<tr>
    				<td width=150 align="center">
-      			접수 번호
+      			갤러리 번호
    				</td>
    				<td >
-    				<input type="text"  value="${gallery.galleryNO }"  disabled />
+    				<input class="put" type="text"  value="${gallery.galleryNO }"  disabled />
    				</td>
   			</tr>
 			<tr>
@@ -64,15 +66,39 @@ function fn_remove_gallery(url, galleryNO){
      			 제목 
    				</td>
    				<td>
-    				<input type=text value="${gallery.title }"  name="title"  id="i_title" disabled />
+    				<input class="put" type=text value="${gallery.title }"  name="title"  id="i_title" disabled />
    				</td>   
+  			</tr>
+  			<tr>
+				<td width="150" align="center">
+     			 작성자 
+   				</td>
+   				<td>
+    				<input class="put" type=text value="${gallery.id }"  name="title"  id="i_title" disabled />
+   				</td>   
+  			</tr>
+  			<tr>
+   				<td width=150 align="center">
+      			카테고리
+   				</td>
+   				<td >
+    				<input class="put" type="text"  value="${gallery.category }"  disabled />
+   				</td>
+  			</tr>
+  			<tr>
+   				<td width=150 align="center">
+      			해시태그
+   				</td>
+   				<td >
+    				<input class="put" type="text"  value="#${gallery.hashtag }"  disabled />
+   				</td>
   			</tr>
   			<tr>
     			<td width="150" align="center">
      			 내용
    				</td>
    				<td>
-    				<textarea rows="20" cols="60"  name="content"  id="i_content"  disabled />${gallery.content }</textarea>
+    				<textarea class="put" rows="20" cols="60"  name="content"  id="i_content"  disabled />${gallery.content }</textarea>
     				
    				</td>  
   			</tr>
@@ -83,7 +109,7 @@ function fn_remove_gallery(url, galleryNO){
 	      		등록일자
 			   	</td>
 			   	<td>
-			   		<input type=text name="writeDate" value="${imagesList.get(0).regDate}" disabled />
+			   		<input class="put" type=text name="writeDate" value="${imagesList.get(0).regDate}" disabled />
 			   	</td>   
   			</tr>
 			<c:if test="${not empty imagesList && imagesList!='null' }">
@@ -93,7 +119,7 @@ function fn_remove_gallery(url, galleryNO){
 							이미지${status.count }
 						</td>
 						<td>
-							<input type="hidden" name="originalFileName" value="${item.imageFileName }" /> 
+							<input class="put" type="hidden" name="originalFileName" value="${item.imageFileName }" /> 
 							<img src="${contextPath}/imageList.do?galleryNO=${gallery.galleryNO}&imageFileName=${item.imageFileName}" id="preview" /><br>
 						</td>
 					</tr>
@@ -103,8 +129,8 @@ function fn_remove_gallery(url, galleryNO){
 
 			<tr  id="tr_btn">
 		   		<td colspan="2" align="center">
-			      	<input type=button value="갤러리 삭제" onClick="fn_remove_gallery('${contextPath}/admin/gallery/removeGallery.do', ${gallery.galleryNO })">
-			    	<input type=button value="목록" onClick="backToList(this.form)">
+			      	<input type=button class="admin_btn" value="갤러리 삭제" onClick="fn_remove_gallery('${contextPath}/admin/gallery/removeGallery.do', ${gallery.galleryNO })">
+			    	<input type=button class="admin_btn" value="목록" onClick="backToList(this.form)">
 		   		</td>
 		  	</tr>
 		</table>

@@ -14,15 +14,4 @@ public interface AdminGalleryDAO {
 
 	int deleteGallery(int galleryNO);
 
-
-//	List<ImageVO> selectApplyImages(int applyNO);
-//
-//	int insertToGallery(int applyNO);
-//
-//	int deleteApplyform(int applyNO);
-//
-//	int deleteImageFile(int applyNO);
-
-	
-
 }

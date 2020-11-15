@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.proOne.gallery.dao.GalleryDAO;
+import com.spring.proOne.gallery.vo.GalleryVO;
 
 @Service("galleryService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -25,16 +26,13 @@ public class GalleryServiceImpl implements GalleryService {
 	}
 	
 	public int like(int galleryNO) throws DataAccessException {
-		int like;
-		like = galleryDAO.selectlike(galleryNO);
-		System.out.println("라이크값s" + like);
-		return like;
+		return galleryDAO.selectlike(galleryNO);
 	}
 
 	@Override
-	public List detailGallery(int num) throws DataAccessException {
-		List detailgallery = null;
-		detailgallery = galleryDAO.selectDetailGallery(num);
-		return detailgallery;
+	public GalleryVO selectDetailGallery(int num) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return galleryDAO.selectDetailGallery(num);
 	}
+
 }

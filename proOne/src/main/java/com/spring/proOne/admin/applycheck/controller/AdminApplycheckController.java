@@ -14,7 +14,7 @@ public interface AdminApplycheckController {
 
 	ModelAndView applyView(int applyNO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	ModelAndView acceptApplyForm(int applyNO, HttpServletRequest request, HttpServletResponse response)	throws Exception;
+	ResponseEntity acceptApplyForm(int applyNO, HttpServletRequest request, HttpServletResponse response)	throws Exception;
 
 	ResponseEntity rejectApplyForm(int applyNO, HttpServletRequest request, HttpServletResponse response)	throws Exception;
 

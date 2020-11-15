@@ -11,6 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,37 +59,57 @@ public class AdminNoticeControllerImpl implements AdminNoticeController{
 		
 		
 		mav.addObject("listsMap", listsMap);
-		
-		//List<NoticeVO> noticeList = (List<NoticeVO>) noticeService.listNotieces(pagingMap);
-		
-		//mav.addObject("noticeList", noticeList);
 		return mav;
 	}
 	
 	@Override
 	@RequestMapping(value="/addNewNotice.do" ,method = RequestMethod.POST)
-	public ModelAndView addNewNotice(@ModelAttribute("notice") NoticeVO notice, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
+	public ResponseEntity addNewNotice(@ModelAttribute("notice") NoticeVO notice, HttpServletRequest request, HttpServletResponse response) throws Exception{
+
 		request.setCharacterEncoding("utf-8");
 		noticeService.addNotice(notice);
 		ModelAndView mav = new ModelAndView("redirect:/admin/notice/noticeList.do");
-		return mav;
+		
+		response.setContentType("text/html;charset=utf-8");
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type",	"text/html;charset=utf-8");
+		
+		message = "<script>";
+		message += " alert('공지사항을 등록하였습니다.');";
+		message += " location.href='" + request.getContextPath()+"/admin/notice/noticeList.do';";
+		message += " </script>";
+		resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		
+		return resEnt;
 	}
 	
 	@Override
 	@RequestMapping(value="/removeNotice.do" ,method=RequestMethod.POST)
-	public ModelAndView removeNotice(@RequestParam("noticeNO" ) int no, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
+	public ResponseEntity removeNotice(@RequestParam("noticeNO" ) int no, HttpServletRequest request, HttpServletResponse response) throws Exception{
+
 		request.setCharacterEncoding("utf-8");
 		noticeService.removeNotice(no);
 		ModelAndView mav = new ModelAndView("redirect:/admin/notice/noticeList.do");
-		return mav;
+		response.setContentType("text/html;charset=utf-8");
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type",	"text/html;charset=utf-8");
+		
+		message = "<script>";
+		message += " alert('해당 공지사항을 삭제하였습니다.');";
+		message += " location.href='" + request.getContextPath()+"/admin/notice/noticeList.do';";
+		message += " </script>";
+		resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		return resEnt;
 	}
 	
 	@Override
 	@RequestMapping(value="/modNotice.do" ,method = RequestMethod.POST)
 	public ModelAndView modNotice(@ModelAttribute("notice") NoticeVO notice, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
+
 		request.setCharacterEncoding("utf-8");
 		System.out.println("----------  mod   ---------------");
 		System.out.println("no : " + notice.getNo());
@@ -102,7 +125,7 @@ public class AdminNoticeControllerImpl implements AdminNoticeController{
 	@Override
 	@RequestMapping(value="/noticeView.do" ,method = RequestMethod.POST)
 	public ModelAndView noticeView(@RequestParam("noticeNO") int noticeNO, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
+
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		

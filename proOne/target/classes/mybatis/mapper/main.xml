@@ -14,10 +14,21 @@
 		<result property="id" column="id"/>
 	</resultMap>
 	
+	<resultMap id="likegallery" type="mainVO" >
+		<result property="galleryNO" column="galleryNO"/>
+		<result property="galleryLike" column="CNT"/>	
+	</resultMap>
+	
 	<select id="selectGalleryInfo" resultMap="mainGalleryList">
 		<![CDATA[
-			select galleryNO, imageFileName from o_gallery
+			select galleryNO, imageFileName,title,id,category, hashtag from o_gallery ORDER BY galleryNO desc
 		]]>
 	</select>
+	
+	<!-- 좋아요 개수 검색 -->
+	<select id="likegallery" resultMap="likegallery">
+		select galleryNO, count(galleryNO) as cnt from o_favorite group by galleryNO order by cnt desc
+	</select>
+
 	
 </mapper>

@@ -73,32 +73,32 @@
          </tr>
          <tr>
             <td align="right">제목</td>
-            <td colspan=2 align="left"><input  name="title" type="text" size="20" maxlength="150"/></td>
+            <td colspan=2 align="left"><input  name="title" type="text" size="20" maxlength="150" required="required"/></td>
          </tr>
          <tr>
             <td aligh="right" valign="top">컨텐츠</td>
-            <td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea></td>
+            <td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000" required="required"></textarea></td>
          </tr>
          <tr>
             <td align="right">HashTag</td>
-            <td colspan=2 align="left"><input name="hashtag" type="text" size="20" maxlength="150"/></td>
+            <td colspan=2 align="left"><input name="hashtag" type="text" size="20" maxlength="150" required="required"/></td>
          </tr>
          <tr>
             <label for="category">
                카테고리
             </label>
-            <select id="category" name="category">
+            <select id="category" name="category" required="required">
                <option value="">-- 선택하세요 --</option>
-                  <option value="category_child1">순수 미술</option>
-                  <option value="category_child2">디자인</option>
-                  <option value="category_child3">공예</option>
-                  <option value="category_child4">사진</option>
-                  <option value="category_child5">패션</option>
-                  <option value="category_child6">기타</option>
+                  <option value="순수 미술">순수 미술</option>
+                  <option value="디자인">디자인</option>
+                  <option value="공예">공예</option>
+                  <option value="사진">사진</option>
+                  <option value="패션">패션</option>
+                  <option value="기타">기타</option>
             </select>
          </tr>
          <tr>
-            <td align="center"><input multiple="multiple" type="file" name="file" accept="image/png,image/jpg,image/jpeg" /></td>
+            <td align="center"><input multiple="multiple" type="file" name="file" accept="image/png,image/jpg,image/jpeg" required="required"/></td>
          </tr>
          <tr>
             <td align="right"></td>

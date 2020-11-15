@@ -16,11 +16,6 @@ import com.spring.proOne.applyForm.vo.ArticleVO;
 public class applyFormServiceImpl implements applyFormService{
 	@Autowired
 	applyFormDAO applyFormDAO;
-	
-	/*
-	 * @Override public List listArticles() throws Exception { List<ArticleVO>
-	 * articlesList = applyFormDAO.selectAllArticlesList(); return articlesList; }
-	 */
 
 	@Override
 	public int addNewArticle(Map<String, Object> articleMap) {
@@ -30,22 +25,5 @@ public class applyFormServiceImpl implements applyFormService{
 		
 		// 아무튼 applyNO넘겨줘야함
 		return applyNO;
-	}
-	
-//	@Override
-//	public ArticleVO viewArticle(int applyNO) {
-//		ArticleVO articleVO = applyFormDAO.selectArticle(applyNO);
-//		return articleVO;
-//	}
-
-//	@Override
-//	public void modArticle(Map<String, Object> articleMap) {
-//		applyFormDAO.updateArticle(articleMap);
-//	}
-
-	
-
-
-
-		
+	}		
 }

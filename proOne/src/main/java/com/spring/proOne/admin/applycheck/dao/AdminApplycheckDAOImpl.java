@@ -22,16 +22,13 @@ public class AdminApplycheckDAOImpl implements AdminApplycheckDAO{
 
 	@Override
 	public ArticleVO selectApplycation(int applyNO) {
-		// TODO Auto-generated method stub
 		ArticleVO getApply = sqlSession.selectOne("mapper.admin_applycheck.selectApplycation", applyNO);
 		return getApply;
 	}
 
 	@Override
 	public List<ImageVO> selectApplyImages(int applyNO) {
-		// TODO Auto-generated method stub
 		List<ImageVO> getApplyImages = sqlSession.selectList("mapper.admin_applycheck.selectImageFileList", applyNO);
-		System.out.println("DAO getApplyImages : " + getApplyImages.get(0));
 		return getApplyImages;
 	}
 	@Override
@@ -43,7 +40,6 @@ public class AdminApplycheckDAOImpl implements AdminApplycheckDAO{
 	@Override
 	public int deleteApplyform(int applyNO) {
 		int result = sqlSession.delete("mapper.admin_applycheck.deleteApplyform", applyNO);
-		System.out.println("apply DAO deleteApplyForm 확인");
 		return result;
 	}
 	

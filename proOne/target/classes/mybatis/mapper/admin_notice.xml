@@ -11,7 +11,14 @@
         <result property="writeDate" column="writeDate" />
 	</resultMap> 
 
+	
 	<select id="selectAllNotices" resultMap="noticeResult" parameterType="java.util.Map">
+      <![CDATA[
+         select * from o_notice order by noticeno desc 
+      ]]>
+	</select>
+	
+	<select id="selectSomeNotices" resultMap="noticeResult" parameterType="java.util.Map">
       <![CDATA[
          select noticeno, title, content, writedate 
          from (select rownum as rnum, noticeno, title, content, writedate from o_notice order by noticeno desc) 

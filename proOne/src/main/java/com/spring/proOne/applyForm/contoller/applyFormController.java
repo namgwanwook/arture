@@ -10,6 +10,4 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface applyFormController {
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
-	//public ModelAndView viewArticle(@RequestParam("applyNO") int applyNO, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
 }

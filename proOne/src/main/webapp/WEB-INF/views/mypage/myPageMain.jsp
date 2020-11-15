@@ -24,155 +24,10 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <title>Insert title here</title>
-<style>
-.mypage {
-	width: 80%;
-	height: auto;
-	margin: 0px auto;
-}
 
-/* Modal */
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-	background-color: gray;
-	margin: 15% auto;
-	padding: 20px;
-	border: 1px solid black;
-	width: 30%;
-}
-/* The Close Button */
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-	position: fixed;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-td{
-	vertical-align:top;
-}
-.aside{
-	 text-align: end;
-}
-.modinput{
-	width: 100%;
-	margin: 0px 0px 7px 15px;
-	resize: none;
-}
-/*end Modal */
-
-/* profileimage */
-#m_preview {
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	position: absolute;
-}
-
-.profileimage {
-	width: 60%;
-	height: auto;
-	margin: auto;
-	background: pink;
-}
-
-/* profileimage */
-.mypage .myinfo {
-	width: 100%;
-	height: auto;
-}
-
-.mypage .myinfo .imageWrapper {
-	width: 20%;
-	float: left;
-}
-
-.imageWrapper #profile {
-	width: 100%;
-	height: 100%;
-	cursor: pointer;
-}
-
-.imageWrapper button {
-	background: #fff;
-	width: 150px;
-	border-radius: 50%;
-	height: 150px;
-	overflow: hidden;
-	border: 1px solid #ddd;
-}
-
-.mypage .myinfo .userinfo {
-	width: 50%;
-	float: left;
-	text-align: left;
-}
-
-#username {
-	font-size: 25px;
-	line-height: 60px;
-}
-
-i {
-	font-size: 18px;
-	cursor: pointer;
-}
-
-.mypage .myinfo .userinfo ul {
-	display: inline-block;
-	margin: 20px 0px;
-}
-
-.mypage .myinfo .userinfo ul li {
-	float: left;
-	margin-right: 30px;
-}
-
-.title_box {
-	float: left;
-	width: 100%;
-	height: 35px;
-	border-bottom: 2px solid #fff;
-}
-
-.title_box p {
-	text-align: left;
-	font-size: 25px;
-	font-weight: bold;
-}
-#image_box{
-	 width:20%;
-	 margin:2.5%;
-	 float:left;
-}
-p{
-	padding-top : 4px;
-}
-.thumbnail{
-	text-align: left;
-}
-
-</style>
 
 <script type="text/javascript">
+
 function fn_remove(url,id,galleryNO){
 	var answer=confirm("삭제하시겠습니까?");
 	if(answer==true){
@@ -265,7 +120,7 @@ window.onclick = function(event) {
 					name="profileImage" enctype="multipart/form-data"
 					onchange="readURL(this)" style="display: none" />
 				<button onclick="inputimage()">
-					<img id="profile" src="${contextPath}/downProfile.do?profileImage=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"></img>
+					<img id="profile" src="${contextPath}/downProfile.do?profileImage=${member.profileImage}&id=${member.id}"></img>
 				</button>
 			</div>
 			<section class="userinfo">
@@ -291,7 +146,7 @@ window.onclick = function(event) {
 
 <div id="myModal" class="modal">
 	<div class="modal-content">
-		<form name="modUserInfo" method="post" action="${contextPath}/mypage/modUserInfo.do" enctype="multipart/form-data">
+		<form name="modUserInfo" method="post" action="${contextPath}/mypage/modUserInfo.do" enctype="multipart/form-data" autocomplete=off>
 			<table>
 				<tr>
 					<td class="aside">이름</td>
@@ -340,7 +195,7 @@ window.onclick = function(event) {
 		<br>
 		<br>
 		<br>
-		<div class="title_box">
+		<div class="title_box mt60">
 			<p>My Gallery</p>
 		</div>
 
@@ -353,9 +208,7 @@ window.onclick = function(event) {
 						<div class="caption">
 							<a
 								href="${contextPath }/gallery_detail/galleryDetail.do?galleryNO=${myGallery.galleryNO}">
-								<img
-								src="${contextPath }/download.do?fileName=${myGallery.imageFileName}&id=${myGallery.galleryNO }"
-								height="240px" width="290px">
+								<img src="${contextPath }/download.do?fileName=${myGallery.imageFileName}&id=${myGallery.galleryNO }">
 							</a>
 							<p>제목:${myGallery.title }</p>
 							<p>아이디: ${myGallery.id }</p>
@@ -377,7 +230,7 @@ window.onclick = function(event) {
 		<br>
 
 
-		<div class="title_box">
+		<div class="title_box mt40">
 			<p>Favorite</p>
 		</div>
 
@@ -390,9 +243,7 @@ window.onclick = function(event) {
 							<div class="caption">
 								<a
 									href="${contextPath }/gallery_detail/galleryDetail.do?galleryNO=${favorite.galleryNO}">
-									<img
-									src="${contextPath }/download.do?fileName=${favorite.imageFileName}&id=${favorite.galleryNO }"
-									height="240px" width="290px">
+									<img src="${contextPath }/download.do?fileName=${favorite.imageFileName}&id=${favorite.galleryNO }" height="240px" width="290px">
 								</a>
 							</div>
 						</div>

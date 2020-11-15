@@ -22,12 +22,12 @@
 	
 	<!-- 갤러리 정보 검색 -->
 	<select id="selectGalleryList" resultMap="galResult">	
-		select * from o_gallery					
+		select * from o_gallery order by galleryNO desc
 	</select>
 	
 	<!-- 좋아요 값 검색 -->
 	<select id="selectLike" resultType="int" parameterType="int">
-		select count(*) from o_favorite where galleryNO = #{like} 	
+		select count(*) from o_favorite where galleryNO = #{galleryNO} 	
 	</select>
 	
 	<!-- detail 이미지리스트 -->
@@ -38,7 +38,7 @@
 	 	]]>
 	</select>
 	
-	<!-- detail 겔러리 불러오기  -->
+	<!-- 좋아요 겔러리 불러오기  -->
 		<select id="selectGallery" resultType="galleryVO" parameterType="int">
 	    <![CDATA[
 	      SELECT * from o_gallery

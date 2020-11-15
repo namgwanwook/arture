@@ -39,8 +39,6 @@ public class AdminGalleryControllerImpl implements AdminGalleryController{
 	@Override
 	@RequestMapping(value="/galleryList.do" ,method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView galleryList(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
-		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
@@ -54,26 +52,16 @@ public class AdminGalleryControllerImpl implements AdminGalleryController{
 	@Override
 	@RequestMapping(value="/galleryView.do" ,method = RequestMethod.POST)
 	public ModelAndView galleryView(@RequestParam("galleryNO") int galleryNO, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
 		// galleyNO에 따른 galley 에 저장된 값 가져오기
 		GalleryVO gallery = adminGalleryService.getGallery(galleryNO);
-		System.out.println("받아온 gallery 정보");
-		System.out.println("galleryNO : "+ gallery.getGalleryNO());
-		System.out.println("title : "+ gallery.getTitle() );
-		System.out.println("content : "+ gallery.getContent() );
-		System.out.println("imageFileName : "+ gallery.getImageFileName() );
-		System.out.println("category : "+ gallery.getCategory() );
-		System.out.println("hashtag : "+ gallery.getHashtag() );
-		System.out.println("id : "+ gallery.getId() );
 		mav.addObject("gallery", gallery);
 		
 		// applyForm의 applyNO에 따른 이미지 파일정보 가져오기
 		List<ImageVO> imagesList = adminApplyService.getImages(galleryNO);
 		mav.addObject("imagesList", imagesList);
-		System.out.println("imagesList regDate : " + imagesList.get(0).getRegDate());
 		
 		return mav;
 	}

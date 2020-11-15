@@ -31,14 +31,10 @@ public class applyFormDAOImpl implements applyFormDAO{
 		List<ImageVO> imageFileList = (ArrayList)articleMap.get("imageFileList");
 		
 		int applyNO = sqlSession.selectOne("mapper.applyForm.selectNewapplyNO",articleMap.get("id"));
-		System.out.println("이미지 파일 리스트에 넣을 applyNO : " + applyNO);
 		
 		for (int i=0; i< imageFileList.size();i++) {
 			System.out.println("i : "+i);
 			imageFileList.get(i).setApplyNO(applyNO);
-	
-			System.out.println("각각의 getApplyNO "+imageFileList.get(i).getApplyNO());
-			System.out.println("각각의 getImageFileName "+imageFileList.get(i).getImageFileName());
 		}
 		
 		for (ImageVO Ivo : imageFileList) {

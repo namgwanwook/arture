@@ -37,7 +37,6 @@ public class GalleryDetailControllerImpl implements GalleryDetailController{
 			throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		galleryVO = galleryDetailService.viewGalleryDetail(galleryNO);
-		System.out.println("galleryNO : "+galleryNO);
 		String id = galleryVO.getId();
 		MemberVO memberVO = memberService.selectMemberById(id);
 		Map galleryMap = galleryDetailService.viewGalleryImages(galleryNO);
@@ -49,16 +48,4 @@ public class GalleryDetailControllerImpl implements GalleryDetailController{
 		mav.addObject("galleryMap", galleryMap);
 		return mav;
 	}
-	
-	// 다중이미지 보여주기
-	/*
-	 * @RequestMapping(value="/gallery_detail/galleryDetail.do" ,method =
-	 * RequestMethod.GET) public ModelAndView galleryDetail(@RequestParam("galleryNO")
-	 * int galleryNO, HttpServletRequest request, HttpServletResponse response)
-	 * throws Exception{ String viewName = (String)request.getAttribute("viewName");
-	 * Map galleryMap=galleryDetailService.viewGalleryDetail(galleryNO);
-	 * ModelAndView mav = new ModelAndView(); mav.setViewName(viewName);
-	 * mav.addObject("galleryMap", galleryMap); return mav; }
-	 */
-
 }

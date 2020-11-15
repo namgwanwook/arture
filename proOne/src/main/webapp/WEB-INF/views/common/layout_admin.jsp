@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"%>
-    <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
+<link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
 <style>
 	body {
 		-ms-overflow-style: none; 
@@ -41,11 +43,47 @@
         float: left;
         border: 0px solid #bcbcbc;
       }
+   
       #footer {
-        clear: both;
-         background-color: black;
-      }
-      
+		clear: both;
+		color: #fff;
+		border-top:1px solid #464646;
+		background-color: #000;
+	}
+	
+	#footer .f_sitemap {
+		width: 100%;
+		margin: 0 auto;
+		padding: 40px 0 20px 0;
+	}
+	
+	#footer .f_sitemap li {
+		display: inline;
+		border-left: 1px solid #555;
+		padding: 0 15px;
+	}
+	
+	#footer .f_sitemap li:first-child {
+		border-left: none;
+	}
+	
+	#footer .f_sitemap li a {
+		color: #fff;
+		opacity: 0.7;
+		text-decoration: none;
+	}
+	
+	#footer .f_sitemap li a:hover {
+		opacity: 1;
+	}
+	
+	#footer .f_copy {
+		display: block;
+		width: 100%;
+		text-align:center;
+		height: 30px;
+		font-size: 16px;
+	}
     </style>
 
 <title><tiles:insertAttribute name="title"/></title>
