@@ -115,7 +115,7 @@
 			
 			<p class="gd_content">${gallery.content }</p>
 			
-			<p class="gd_hashtag">${gallery.hashtag }</p>
+			<p class="gd_hashtag">#${gallery.hashtag }</p>
 			 
 		</div>
 		

@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${contextPath}/resources/css/member.css"/>
   <meta charset="UTF-8">
 <title>로그인창</title>

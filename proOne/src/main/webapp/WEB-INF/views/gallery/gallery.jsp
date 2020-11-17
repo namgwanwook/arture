@@ -13,13 +13,9 @@
 	
 	<!-- style.css로 링크 연결 -->
 	<link rel="stylesheet" href="${contextPath }/resources/css/gallery.css">
-		
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"> 
-	
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	</head>
-<body>
 	<script>
 	/* selectBox에서 선택한 값을 저장하는 변수 */
 	var choice;
@@ -101,13 +97,17 @@
 				$(".nonActive").slice(0,6).removeClass("nonActive");
 			
 				if($(".nonActive").length <= 0){
-					alert("없음");
+					alert("갤러리가 더 이상 존재하지 않습니다.");
 				}
 			});
 			
 		});
 		
 	</script>
+	
+	
+	</head>
+<body>
 
 	<section>
 		<!-- 검색창 -->
@@ -119,9 +119,10 @@
 				<option>해시태그</option>
 				<option>아이디</option>
 			</select>
-	   		<input type="text" placeholder="Search" id="keyword">
-	   		
-   			<i class="fa fa-search fa-2x" aria-hidden="true" onclick="filter()"></i>		   			
+	   		<input type="text" placeholder="검색어를 입력하세요" id="keyword">
+	   		<span class="searchBtn">
+   			<i class="fa fa-search fa-2x" aria-hidden="true" onclick="filter()"></i>		  
+   			</span> 			
 		</div><!-- end search -->
 		
 			
@@ -139,17 +140,19 @@
 					</a><!-- end gallery-form -->
 					
 	         		<div class="gallery-caption">			         		
-		            	<p>제목:<span class="g_title">${galleryList.title}</span></p>
-		            	<p>아이디:<span class="g_id">${galleryList.id}</span></p>
-			        	<p>카테고리:<span class="g_category">${galleryList.category}</span></p>
-			        	<p>해시태그:<span class="g_hashtag">${galleryList.hashtag}</span></p>			        				        
+		            	<p><span class="g_title">${galleryList.title}</span></p>
+		            	<p>by. <span class="g_id">${galleryList.id}</span></p>
+			        	<p><i class="fas fa-tag"></i><span class="g_category"> ${galleryList.category}</span></p>
+			        	<p>#<span class="g_hashtag">${galleryList.hashtag}</span></p>			        				        
 			        	<!-- 좋아요 값 출력 -->
-				    	<p><span style="color:red"><i class="fas fa-heart"></i></span> ${like.get(likeNum-1)}</p>
+				    	<p><span style="color:rgb(255, 87, 121)"><i class="fas fa-heart"></i></span> ${like.get(likeNum-1)}</p>
 		        	</div><!-- end caption -->
 		      	</div><!-- end thumnail -->
 		      	
 			</c:forEach>
-		<button id="load">더보기 버튼</button>	
+		<div class="moreBtn">
+			<button id="load">MORE</button>
+		</div>	
 		</div><!-- end thumnail-form -->
 	</section><!-- end section -->	
 </body>

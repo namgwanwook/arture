@@ -38,6 +38,7 @@ public class MemberControllerImpl implements MemberController {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("redirect:/member/loginForm.do");
+		
 		try {
 			memberService.addMember(member);
 			

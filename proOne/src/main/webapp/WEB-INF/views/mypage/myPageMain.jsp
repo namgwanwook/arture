@@ -24,173 +24,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <title>Insert title here</title>
-<style>
-.mt40{
-	margin-top:40px;
-}
-.mt60{
-	margin-top:60px;
-}
-.mypage {
-	width: 80%;
-	height: auto;
-	margin: 0px auto;
-}
 
-/* Modal */
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-	background-color: gray;
-	margin: 15% auto;
-	padding: 20px;
-	border: 1px solid black;
-	width: 30%;
-}
-/* The Close Button */
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-	position: fixed;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-td{
-	vertical-align:top;
-}
-.aside{
-	 text-align: end;
-}
-.modinput{
-	width: 100%;
-	margin: 0px 0px 7px 15px;
-	resize: none;
-}
-/*end Modal */
-
-/* profileimage */
-#m_preview {
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	position: absolute;
-}
-
-.profileimage {
-	width: 60%;
-	height: auto;
-	margin: auto;
-	background: pink;
-}
-
-/* profileimage */
-.mypage .myinfo {
-	width: 100%;
-	height: auto;
-}
-
-.mypage .myinfo .imageWrapper {
-	width: 20%;
-	float: left;
-}
-
-.imageWrapper #profile {
-	width: 100%;
-	height: 100%;
-	cursor: pointer;
-}
-
-.imageWrapper button {
-	background: #fff;
-	width: 150px;
-	border-radius: 50%;
-	height: 150px;
-	overflow: hidden;
-	border: 1px solid #ddd;
-}
-
-.mypage .myinfo .userinfo {
-	width: 50%;
-	float: left;
-	text-align: left;
-}
-
-#username {
-	font-size: 25px;
-	line-height: 60px;
-}
-
-i {
-	font-size: 18px;
-	cursor: pointer;
-}
-
-.mypage .myinfo .userinfo ul {
-	display: inline-block;
-	margin: 20px 0px;
-}
-
-.mypage .myinfo .userinfo ul li {
-	float: left;
-	margin-right: 30px;
-}
-
-.title_box {
-	float: left;
-	width: 100%;
-	height: 35px;
-	border-bottom: 2px solid #fff;
-}
-
-.title_box p {
-	text-align: left;
-	font-size: 25px;
-	font-weight: bold;
-}
-#image_box{
-	 width:20%;
-	 margin:2.5%;
-	 float:left;
-}
-p{
-	padding-top : 4px;
-}
-.thumbnail{
-	text-align: left;
-}
-.thumbnail .caption a {
-	display: block;
-    width: 100%;
-    height: 230px;
-    margin-bottom: 20px;
-    overflow:hidden;
-}
-.thumbnail .caption p {
-	line-height: 20px;
-    padding-left: 5px;
-}
-    
-.thumbnail .caption a img {
-	height:100%;
-}
-</style>
 
 <script type="text/javascript">
 
@@ -316,39 +150,40 @@ window.onclick = function(event) {
 			<table>
 				<tr>
 					<td class="aside">이름</td>
-					<td><input class="modinput" type="text" size="50" value="${member.name }"	disabled name="name" /></td>
+					<td class="td2"><input class="modinput" type="text" size="50" value="${member.name }"	disabled name="name" /></td>
 				</tr>
 				<tr>
 					<td class="aside">성별</td>
-					<td><input class="modinput" type="text" size="50" value="${member.gender }" maxlength="100" name="gender" disabled /></td>
+					<td class="td2"><input class="modinput" type="text" size="50" value="${member.gender }" maxlength="100" name="gender" disabled /></td>
 				</tr>
 				<tr>
 					<td class="aside">이메일</td>
-					<td><input class="modinput" type="text" size="50" value="${member.email }" maxlength="100" name="email" /></td>
+					<td class="td2"><input class="modinput" type="text" size="50" value="${member.email }" maxlength="100" name="email" /></td>
 				</tr>
 				<tr>
 					<td class="aside">Instagrm</td>
-					<td><input class="modinput" type="text" size="50" value="${member.sns_i }" maxlength="100" name="sns_i" /></td>
+					<td class="td2"><input class="modinput" type="text" size="50" value="${member.sns_i }" maxlength="100" name="sns_i" /></td>
 				</tr>
 				<tr>
 					<td class="aside">facebook</td>
-					<td><input class="modinput" type="text" size="50" value="${member.sns_f }" maxlength="100" name="sns_f" /></td>
+					<td class="td2"><input class="modinput" type="text" size="50" value="${member.sns_f }" maxlength="100" name="sns_f" /></td>
 				</tr>
 				<tr>
 					<td class="aside">blog</td>
-					<td><input class="modinput" type="text" size="50" value="${member.sns_b }" maxlength="100" name="sns_b" /></td>
+					<td class="td2"><input class="modinput" type="text" size="50" value="${member.sns_b }" maxlength="100" name="sns_b" /></td>
 				</tr>
 					<td class="aside"><p>소개</p></td>
-					<td><textarea class="modinput" name="profileText" rows="10" cols="52" resize="none" maxlength="4000">${member.profileText }</textarea></td>
+					<td class="td2"><textarea class="modinput" name="profileText" rows="10" cols="52" resize="none" maxlength="4000">${member.profileText }</textarea></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td>
+					<td colspan="2">
 						<input type="hidden" value="${member.profileImage }" name="profileImage" id="goduke" /> 
 						<input type="hidden" value="${member.id }" name="id" id="id" /> 
 						<input type="hidden" value="${member.pwd }" name="pwd" id="pwd" />
+						<div class="_center">
 						<i class="fas fa-user-circle" onclick="Goduke()"></i> 
-						<input type=submit value="수정하기" />
+						<input class="submitBtn" type=submit value="수정하기" />
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -366,8 +201,6 @@ window.onclick = function(event) {
 		</div>
 
 		<c:forEach var="myGallery" items="${myGallery}">
-
-
 			<div class="row">
 				<div class="col-sm-6 col-md-4" id="image_box">
 					<div class="thumbnail">
@@ -379,21 +212,18 @@ window.onclick = function(event) {
 							<p>제목:${myGallery.title }</p>
 							<p>아이디: ${myGallery.id }</p>
 							<p>카테고리: ${myGallery.category }</p>
-							<p>해시태크: ${myGallery.hashtag }</p>	
-						</div>
-						<c:set var="likeNum" value="${ likeNum + 1}"/>
+							<p>해시태그: ${myGallery.hashtag }</p>	
+							<p>
+								<c:set var="likeNum" value="${ likeNum + 1}"/>
 						<i class="fas fa-heart"> ${like.get(likeNum-1)}</i><i class="far fa-trash-alt" onClick="fn_remove('${contextPath}/mypage/deletemygallery.do','${myGallery.id}','${myGallery.galleryNO}')"></i>
+							</p>
+						</div>
+						
 					</div>
 				</div>
 			</div>
 
-
-
 		</c:forEach>
-
-		<br>
-		<br>
-		<br>
 
 
 		<div class="title_box mt40">
@@ -419,6 +249,9 @@ window.onclick = function(event) {
 			</div>
 		</c:forEach>
 		
+		<div class="title_box mt100">
+			
+		</div>
 	</div>
 
 </body>

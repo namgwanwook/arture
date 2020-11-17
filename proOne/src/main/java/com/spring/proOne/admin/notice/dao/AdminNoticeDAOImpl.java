@@ -25,9 +25,7 @@ public class AdminNoticeDAOImpl implements AdminNoticeDAO{
 	public List<NoticeVO> selectAllList(Map pagingMap) {
 		List<NoticeVO> articlesList = new ArrayList();
 		articlesList = sqlSession.selectList("mapper.admin_notice.selectSomeNotices", pagingMap);
-		System.out.println("pageingMap.section "+pagingMap.get("section"));
-		System.out.println("pageingMap.pageNum "+pagingMap.get("pageNum"));
-		System.out.println("size : " + articlesList.size());
+		
 		return articlesList;
 	}
 	

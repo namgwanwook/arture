@@ -43,7 +43,7 @@ function fn_goto_galleryView(url, galleryNO){
 
 </script>
 <body>
-<h1 class="label">admin - 승인된 작품 목록입니다</h1>
+<h1 class="label">승인된 작품 관리</h1>
 <table align="center" >
 		<tr class="list_title">
 			<td width="10%">NO.</td>
@@ -66,7 +66,7 @@ function fn_goto_galleryView(url, galleryNO){
 						<td width="10%">${gallery.galleryNO}</td>
 						<td align='left' width="55%">
 							<span style="padding-right: 30px"></span>
-							<a class='cls1'	href="#" onclick="fn_goto_galleryView('${contextPath}/admin/gallery/galleryView.do', ${gallery.galleryNO})">${gallery.title }</a>
+							<a class='cls1 gul'	href="#" onclick="fn_goto_galleryView('${contextPath}/admin/gallery/galleryView.do', ${gallery.galleryNO})">${gallery.title }</a>
 						</td>
 						<td width="15%">${gallery.id }</td>				
 					</tr>

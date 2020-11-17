@@ -14,85 +14,27 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/member.css"/>
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 <script>
-function validate() {
-    var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
-    var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    // 이메일이 적합한지 검사할 정규식
-
-    var id = document.getElementById("_member_id");
-    var idCheck = document.getElementById("id");
-    var pwd = document.getElementById("pwd");
-    var email = document.getElementById("email");
-
-
-    // ------------ 이메일 까지 -----------
-
+	
+    
+function fn_overlapped(){
+	var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+	var id = document.getElementById("_member_id");
     if(!check(re,id,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력해주세요")) {
         return false;
-    }
-
-    if(!check(re,pwd,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력해주세요")) {
-        return false;
-    }
-    if(join.id.value=="") {
-        alert("아이디 중복확인을 해주세요");
-        join.id.focus();
-        return false;
-    }
-    if(join.pwd.value != join.pwdCheck.value) {
-        alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
-        join.checkpw.value = "";
-        join.checkpw.focus();
-        return false;
-    }
-
-    if(email.value=="") {
-        alert("이메일을 입력해 주세요");
-        email.focus();
-        return false;
-    }
-    
-    if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
-        return false;
-    }
-
-    if(join.name.value=="") {
-        alert("이름을 입력해 주세요");
-        join.name.focus();
-        return false;
-    }
-    alert("회원가입이 완료되었습니다. 로그인 해주세요.");
-}
-
-function check(re, what, message) {
-    if(re.test(what.value)) {
-        return true;
-    }
-    alert(message);
-    what.value = "";
-    what.focus();
-    //return false;
-}
-
-function fn_overlapped(){
-    var _id=$("#_member_id").val();
-    if(_id==''){
-   	 alert("ID를 입력하세요");
-   	 return;
     }
     $.ajax({
        type:"post",
        async:false,  
        url:"${contextPath}/member/overlapped.do",
        dataType:"text",
-       data: {id:_id},
+       data: {id:id.value},
        success:function (data,textStatus){
           if(data=='false'){
        	    alert("사용가능한 ID입니다.");
        	    $('#btnOverlapped').css("background-color","#ff5779");
        	 	$('#btnOverlapped').prop("disabled", true);
        	    $('#_member_id').prop("disabled", true);
-       	    $('#id').val(_id);
+       	    $('#id').val(id.value);
           }else{
         	  alert("이미 사용중인 ID입니다.");
           }
@@ -105,6 +47,50 @@ function fn_overlapped(){
        }
     });  //end ajax	 
  }	
+ 
+function validate() {
+	    var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+	    var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	    // 이메일이 적합한지 검사할 정규식
+		var id = document.getElementById("_member_id");
+	    var idCheck = document.getElementById("id");
+	    var pwd = document.getElementById("pwd");
+	    var pwdCheck = document.getElementById("pwdCheck");
+	    var email = document.getElementById("email");
+
+    // ------------ 이메일 까지 -----------
+
+    if(!check(re,id,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력해주세요")) {
+        return false;
+    }else if(!check(re,pwd,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력해주세요")) {
+        return false;
+    }else if(join.id.value=="") {
+        alert("아이디 중복확인을 해주세요");
+        join.id.focus();
+        return false;
+    }else if(pwd.value != pwdCheck.value) {
+        alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+        join.pwdCheck.value = "";
+        join.pwdCheck.focus();
+        return false;
+    }else if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
+        return false;
+    }
+    alert("회원가입이 완료되었습니다. 로그인 해주세요.");
+    return true;
+    
+}
+
+function check(re, what, message) {
+    if(re.test(what.value)) {
+        return true;
+    }
+    alert(message);
+    what.value = "";
+    what.focus();
+    //return false;
+}
+
  
  $(function(){
 	 
@@ -127,7 +113,7 @@ function fn_overlapped(){
 		}
 	 });
 	 
- });
+ }); 
 </script>
 
 <title>회원 가입창</title>
@@ -139,7 +125,7 @@ function fn_overlapped(){
 
 <body>
 	<div id="joinWrapper">
-		<form name="join" method="post" onsubmit="return validate();" action="${contextPath}/member/addMember.do" autocomplete="off">
+		<form name="join" method="post" onsubmit="return validate()" action="${contextPath}/member/addMember.do"  autocomplete="off">
 		<table>
 		   <tr>
 		      <td><p>아이디</p></td>

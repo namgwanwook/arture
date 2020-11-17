@@ -66,14 +66,15 @@ function fn_accept_application(url, applyNO){
 }
 </script>
 <body>
+	<h1 class="label">신청된 작품 관리</h1>
 	<form name="frmArticle" method="post"  >
 		<table  border=0  align="center">
   			<tr>
    				<td width=150 align="center">
-      			접수 번호
+      			신청 번호
    				</td>
    				<td >
-    				<input type="text"  value="${application.applyNO }"  disabled />
+    				<input class="put" type="text"  value="${application.applyNO }"  disabled />
    				</td>
   			</tr>
 			<tr>
@@ -81,15 +82,39 @@ function fn_accept_application(url, applyNO){
      			 제목 
    				</td>
    				<td>
-    				<input type=text value="${application.title }"  name="title"  id="i_title" disabled />
+    				<input class="put" type=text value="${application.title }"  name="title"  id="i_title" disabled />
    				</td>   
+  			</tr>
+  			<tr>
+				<td width="150" align="center">
+     			 작성자 
+   				</td>
+   				<td>
+    				<input class="put" type=text value="${application.id }"  name="title"  id="i_title" disabled />
+   				</td>   
+  			</tr>
+  			<tr>
+   				<td width=150 align="center">
+      			카테고리
+   				</td>
+   				<td >
+    				<input class="put" type="text"  value="${application.category }"  disabled />
+   				</td>
+  			</tr>
+  			<tr>
+   				<td width=150 align="center">
+      			해시태그
+   				</td>
+   				<td >
+    				<input class="put" type="text"  value="#${application.hashtag }"  disabled />
+   				</td>
   			</tr>
   			<tr>
     			<td width="150" align="center">
      			 내용
    				</td>
    				<td>
-    				<textarea rows="20" cols="60"  name="content"  id="i_content"  disabled />${application.content }</textarea>
+    				<textarea class="put" rows="20" cols="60"  name="content"  id="i_content"  disabled />${application.content }</textarea>
     				
    				</td>  
   			</tr>
@@ -100,7 +125,7 @@ function fn_accept_application(url, applyNO){
 	      		등록일자
 			   	</td>
 			   	<td>
-			   		<input type=text name="writeDate" value="${imagesList.get(0).regDate}" disabled />
+			   		<input class="put" type=text name="writeDate" value="${imagesList.get(0).regDate}" disabled />
 			   	</td>   
   			</tr>
 			<c:if test="${not empty imagesList && imagesList!='null' }">
@@ -111,7 +136,7 @@ function fn_accept_application(url, applyNO){
 						</td>
 						<td>
 							<input type="hidden" name="originalFileName" value="${item.imageFileName }" /> 
-							<img src="${contextPath}/imageList.do?galleryNO=${application.applyNO}&imageFileName=${item.imageFileName}" id="preview" /><br>
+							<img class="put" src="${contextPath}/imageList.do?galleryNO=${application.applyNO}&imageFileName=${item.imageFileName}" id="preview" /><br>
 						</td>
 					</tr>
 					
@@ -120,9 +145,9 @@ function fn_accept_application(url, applyNO){
 
 			<tr  id="tr_btn">
 		   		<td colspan="2" align="center">
-			      	<input type=button value="승인" onClick="fn_accept_application('${contextPath}/admin/applycheck/acceptApplyForm.do', ${application.applyNO })">
-			      	<input type=button value="거절" onClick="fn_reject_application('${contextPath}/admin/applycheck/rejectApplyForm.do', ${application.applyNO })">
-			    	<input type=button value="목록" onClick="backToList(this.form)">
+			      	<input type=button class="admin_btn" value="승인" onClick="fn_accept_application('${contextPath}/admin/applycheck/acceptApplyForm.do', ${application.applyNO })">
+			      	<input type=button class="admin_btn" value="거절" onClick="fn_reject_application('${contextPath}/admin/applycheck/rejectApplyForm.do', ${application.applyNO })">
+			    	<input type=button class="admin_btn" value="목록" onClick="backToList(this.form)">
 		   		</td>
 		  	</tr>
 		</table>

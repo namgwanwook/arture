@@ -1,5 +1,6 @@
 package com.spring.proOne.mypage.dao;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -93,6 +94,29 @@ public class MyPageDAOImpl implements MyPageDAO{
 	public void deletemygallery(FavoriteVO favoriteVO) throws DataAccessException {
 		sqlSession.delete("mapper.mypage.deletemygallery",favoriteVO);
 		sqlSession.delete("mapper.mypage.deletefavorite",favoriteVO.getGalleryNO());
+		sqlSession.delete("mapper.admin_member.deleteimagelist", favoriteVO.getGalleryNO());
+			
+		String path = "C:\\o_image\\galleryimage\\"+favoriteVO.getGalleryNO();
+			File folder = new File(path);
+			try {
+			    while(folder.exists()) {
+				File[] folder_list = folder.listFiles(); //파일리스트 얻어오기
+						
+				for (int j = 0; j < folder_list.length; j++) {
+					folder_list[j].delete(); //파일 삭제 
+					System.out.println("파일이 삭제되었습니다.");
+							
+				}
+						
+				if(folder_list.length == 0 && folder.isDirectory()){ 
+					folder.delete(); //대상폴더 삭제
+					System.out.println("폴더가 삭제되었습니다.");
+				}
+		            }
+			 } catch (Exception e) {
+				e.getStackTrace();
+			}
+		
 	}
 
 	@Override//좋아요확인

@@ -8,6 +8,16 @@
 <head>
 <link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
 <link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
+<style>
+	.notice_td{
+		width: 20%
+	}
+	.notice_put{
+		float: left;
+		margin-left: 20px;
+		width: 70%;
+	}
+</style>
 <meta charset="UTF-8">
 <title>공지사항 작성창</title>
 </head>
@@ -31,24 +41,23 @@ function check(){
   
 </script>
 <body>
-	<h1 style="text-align:center">글쓰기</h1>
+	<h1 class="label">공지사항 글쓰기</h1>
 	<form name="noticeForm" method="post" >
     	<table border="0" align="center">
     		
 		    <tr>
-		    	<td align="right">제목 : </td>
-		    	<td><input type="text" size="65" maxlength="500" name="title" /></td>
+		    	<td class="notice_td" align="right">제목 : </td>
+		    	<td><input class="notice_put" type="text" size="65" maxlength="500" name="title" /></td>
 			</tr>
 			<tr>
 			 	<td align="right" valign="top"><br>내용 : </td>
-				<td><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea> </td>
+				<td><textarea class="notice_put" name="content" rows="10" cols="65" maxlength="4000"></textarea> </td>
 	     	</tr>
 	     	
 		    <tr>
-		    	<td align="right"> </td>
-		      	<td>
-		       		<input type="button" value="글쓰기" onClick="check()"/>
-		       		<input type=button value="취소" onClick="backToList(this.form)" />
+		      	<td colspan="2">
+		       		<input type="button" class="admin_btn" value="글쓰기" onClick="check()"/>
+		       		<input type=button class="admin_btn" value="취소" onClick="backToList(this.form)" />
 		      	</td>
 	     	</tr>
     </table>

@@ -72,13 +72,26 @@ public class AdminApplycheckControllerImpl implements AdminApplycheckController{
 	
 	@Override
 	@RequestMapping(value="/acceptApplyForm.do" ,method = RequestMethod.POST)
-	public ModelAndView acceptApplyForm(@RequestParam("applyNO") int applyNO, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ResponseEntity acceptApplyForm(@RequestParam("applyNO") int applyNO, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView("redirect:/admin/applycheck/applyList.do");
+		
+		response.setContentType("text/html;charset=utf-8");
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type",	"text/html;charset=utf-8");
+		
 		
 		// 데이터 이동 및 apply삭제
 		adminApplycheckService.acceptApplyForm(applyNO);
 		
-		return mav;
+		message = "<script>";
+		message += " alert('해당 신청서를 승인하였습니다.');";
+		message += " location.href='" + request.getContextPath()+"/admin/applycheck/applyList.do';";
+		message += " </script>";
+		resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		
+		return resEnt;
 	}
 	
 	@Override

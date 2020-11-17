@@ -57,14 +57,6 @@ public class AdminGalleryControllerImpl implements AdminGalleryController{
 		
 		// galleyNO에 따른 galley 에 저장된 값 가져오기
 		GalleryVO gallery = adminGalleryService.getGallery(galleryNO);
-		System.out.println("받아온 gallery 정보");
-		System.out.println("galleryNO : "+ gallery.getGalleryNO());
-		System.out.println("title : "+ gallery.getTitle() );
-		System.out.println("content : "+ gallery.getContent() );
-		System.out.println("imageFileName : "+ gallery.getImageFileName() );
-		System.out.println("category : "+ gallery.getCategory() );
-		System.out.println("hashtag : "+ gallery.getHashtag() );
-		System.out.println("id : "+ gallery.getId() );
 		mav.addObject("gallery", gallery);
 		
 		// applyForm의 applyNO에 따른 이미지 파일정보 가져오기

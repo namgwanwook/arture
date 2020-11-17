@@ -8,6 +8,14 @@
 <head>
 <link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
 <link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
+<style type="text/css">
+	.td_detail{
+	    background: #fafafa;
+	}
+	
+	
+
+</style>
 <meta charset="UTF-8">
 <title>회원 리스트</title>
 
@@ -120,8 +128,7 @@ function fn_remove(ID){
 		      form.method="post";
 		      form.action=url;
 		      form.submit();
-		   }else{
-		   console.log('NO 잘 생각했어');}
+		   }
 	}
 	else if($(where_del).val() == '취소'){
 		$(where+' .put_pwd').attr("disabled", true);
@@ -136,9 +143,9 @@ function fn_remove(ID){
 <h1 class="label">회원 관리</h1>
 	<table id="contents" >
 		<tr class="list_title">
-			<td width="60%" align="left" class="l_name">이름</td>
-			<td width="15%">가입날짜</td>
-			<td width="25%">관리</td>
+			<td width="60%" align="left" class="l_name">NAME</td>
+			<td width="15%">JOIN DATE</td>
+			<td width="25%">MORE</td>
 		</tr>
 		<c:choose>
 			<c:when test="${memberList == null || memberList.size() == 0 }">
@@ -166,20 +173,18 @@ function fn_remove(ID){
 					<tr align="center" class="tr_detail">
 						<td colspan="3" class="td_detail">
 							<!-- 자세히 누르면 나오는 div -->
-							<div style="background-color: ivory" class="div_${member.id}">
-								비밀번호 : <input type="password" class="put_pwd" value ="${member.pwd }" disabled><br>
-								소개 : <input type="text" value ="${member.profileText }" disabled><br>
+							<div class="div_${member.id}">
+								비밀번호 : <input type="password" class="put_pwd" value ="${member.pwd }" disabled>
+								소개 : <input type="text" value ="${member.profileText }" readonly>
 								성별 : <input type="radio" class="male" value="male" disabled="disabled"> 남성
-									 <input type="radio" class="female" value="female" disabled="disabled"> 여성
-									 
-								<%-- ${member.gender } --%><br>
+									 <input type="radio" class="female" value="female" disabled="disabled"> 여성<br>
 								SNS : 
-								<lable><input type="checkbox" name="sns" class="sns_i" value="${member.sns_i}" disabled="disabled"> Instagram <input type="text" disabled="disabled" value="${member.sns_i}"></lable>
-								<lable><input type="checkbox" name="sns" class="sns_f" value="${member.sns_f}" disabled="disabled"> FaceBook <input type="text" disabled="disabled" value="${member.sns_f}"></lable>
-								<lable><input type="checkbox" name="sns" class="sns_b" value="${member.sns_b}" disabled="disabled"> BLOG <input type="text" disabled="disabled" value="${member.sns_b}"></lable>
+								<lable><input type="checkbox" name="sns" class="sns_i" value="${member.sns_i}" disabled="disabled"> Instagram <input type="text" readonly value="${member.sns_i}"></lable>
+								<lable><input type="checkbox" name="sns" class="sns_f" value="${member.sns_f}" disabled="disabled"> FaceBook <input type="text" readonly value="${member.sns_f}"></lable>
+								<lable><input type="checkbox" name="sns" class="sns_b" value="${member.sns_b}" disabled="disabled"> BLOG <input type="text" readonly value="${member.sns_b}"></lable>
 								<br>
-								<input type="button" class="btn_mod" value="수정" onclick="fn_modify(${member.id})">
-								<input type="button" class="btn_delete_cancel" value="삭제" onclick="fn_remove(${member.id})">
+								<input type="button" class="btn_mod admin_btn"  value="수정" onclick="fn_modify(${member.id})">
+								<input type="button" class="btn_delete_cancel admin_btn" value="삭제" onclick="fn_remove(${member.id})">
 							</div>
 						</td>				
 					</tr>

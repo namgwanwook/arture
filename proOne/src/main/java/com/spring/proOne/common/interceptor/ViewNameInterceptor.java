@@ -15,11 +15,12 @@ public class ViewNameInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
+		
 		try {
 			String viewName = getViewName(request);
 			MemberVO membervo = (MemberVO) session.getAttribute("member");
-			
+			System.out.println("viewName : "+viewName);
 			if(viewName.matches(".*mypage.*")||viewName.matches(".*applyForm.*")||viewName.matches(".*admin.*")) {
 				if(membervo.getId().isEmpty()) {
 					viewName = "forward:/member/loginForm.do";
@@ -35,6 +36,14 @@ public class ViewNameInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 		return true;
+//		try {
+//			String viewName = getViewName(request);
+//			request.setAttribute("viewName", viewName);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return true;
+		
 	}
 
 	@Override

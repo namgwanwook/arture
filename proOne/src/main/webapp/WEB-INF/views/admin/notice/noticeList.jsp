@@ -57,13 +57,13 @@ function fn_write() {
 }
 </script>
 <body>
-<h1 class="label">공지사항</h1>
+<h1 class="label">공지사항 관리</h1>
 <table>
 		<tr class="list_title">
-			<td width="10%">글번호</td>
-			<td width="55%">제목</td>
-			<td width="15%">작성일</td>
-			<td width="10%">삭제</td>
+			<td width="10%">NO</td>
+			<td width="55%">TITLE</td>
+			<td width="15%">Date Created</td>
+			<td width="10%">Delete</td>
 		</tr>
 		<c:choose>
 			<c:when test="${noticesList == NULL || noticesList.size() == 0 }">
@@ -80,11 +80,11 @@ function fn_write() {
 					<tr align="center">
 						<td width="10%">${notice.no}</td>
 						<td align='left' width="55%"><span
-							style="padding-right: 30px"></span> <a class='cls1'
+							style="padding-right: 30px"></span> <a class='cls1 gul'
 							href="#" onclick="fn_pass_data('${contextPath}/admin/notice/noticeView.do', ${notice.no})">${notice.title }</a>
 						</td>
 						<td width="15%">${notice.writeDate }</td>
-						<td width="10%"><input type=button value="삭제" onclick="fn_remove_notice('${contextPath}/admin/notice/removeNotice.do', ${notice.no})"></td>				
+						<td width="10%"><input type=button class="admin_btn" value="삭제" onclick="fn_remove_notice('${contextPath}/admin/notice/removeNotice.do', ${notice.no})"></td>				
 					</tr>
 				</c:forEach>
 			</c:when>
@@ -127,7 +127,7 @@ function fn_write() {
     </c:if>
 </div>    
 	<div class="cls2">
-		<form name="writeForm"><input type="button" onclick="fn_write()" value="글쓰기"></form>
+		<form name="writeForm"><input type="button" class="admin_btn" onclick="fn_write()" value="글쓰기"></form>
 	</div>
 </body>
 </html>
