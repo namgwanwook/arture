@@ -91,14 +91,15 @@
 		$(function(){
 			$(".thumbnail").addClass("nonActive");
 			$(".nonActive").slice(0,6).show();
-			$("#load").click(function(e){
-				console.log($(".nonActive").length);
-				e.preventDefault();
-				$(".nonActive").slice(0,6).removeClass("nonActive");
+			$(".nonActive").slice(0,6).removeClass("nonActive");
 			
+			$("#load").click(function(e){
 				if($(".nonActive").length <= 0){
 					alert("갤러리가 더 이상 존재하지 않습니다.");
+					return;
 				}
+				e.preventDefault();
+				$(".nonActive").slice(0,6).removeClass("nonActive");
 			});
 			
 		});

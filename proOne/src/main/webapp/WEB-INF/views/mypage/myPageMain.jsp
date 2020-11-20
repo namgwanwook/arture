@@ -14,7 +14,12 @@
 <!DOCTYPE html>
 
 <html>
-
+<style>
+	.thumbnail .caption a img {
+	width: 100%;
+    object-fit: cover;
+}
+</style>
 <head>
 
 <meta charset="UTF-8">
@@ -239,7 +244,7 @@ window.onclick = function(event) {
 							<div class="caption">
 								<a
 									href="${contextPath }/gallery_detail/galleryDetail.do?galleryNO=${favorite.galleryNO}">
-									<img src="${contextPath }/download.do?fileName=${favorite.imageFileName}&id=${favorite.galleryNO }" height="240px" width="290px">
+									<img src="${contextPath }/download.do?fileName=${favorite.imageFileName}&id=${favorite.galleryNO }">
 								</a>
 							</div>
 						</div>
