@@ -1,6 +1,8 @@
 package com.spring.proOne.admin.notice.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,13 @@ public class AdminNoticeDAOImpl implements AdminNoticeDAO{
 	@Override
 	public List<NoticeVO> selectAllList() {
 		List<NoticeVO> articlesList = sqlSession.selectList("mapper.admin_notice.selectAllNotices");
+		return articlesList;
+	}
+	@Override
+	public List<NoticeVO> selectAllList(Map pagingMap) {
+		List<NoticeVO> articlesList = new ArrayList();
+		articlesList = sqlSession.selectList("mapper.admin_notice.selectSomeNotices", pagingMap);
+		
 		return articlesList;
 	}
 	
@@ -40,8 +49,12 @@ public class AdminNoticeDAOImpl implements AdminNoticeDAO{
 
 	@Override
 	public NoticeVO selectNotice(int noticeNO) {
-		// TODO Auto-generated method stub
 		NoticeVO result = sqlSession.selectOne("mapper.admin_notice.selectNotice", noticeNO);
 		return result;
+	}
+	@Override
+	public int selectTotNotices() {
+		int totNotices = sqlSession.selectOne("mapper.admin_notice.countNotices");
+		return totNotices;
 	}
 }

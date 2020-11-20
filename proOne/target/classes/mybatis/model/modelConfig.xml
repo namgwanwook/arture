@@ -4,6 +4,7 @@
 
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.spring.proOne.main.vo.MainVO"  alias="mainVO" />
 		<typeAlias type="com.spring.proOne.member.vo.MemberVO"  alias="memberVO" />
 		<typeAlias type="com.spring.proOne.gallery.vo.GalleryVO"  alias="galleryVO" />
 		<typeAlias type="com.spring.proOne.gallery.vo.ImageVO"  alias="imageVO" />

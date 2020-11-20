@@ -7,6 +7,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${contextPath }/resources/css/reset.css">
+<link rel="stylesheet" href="${contextPath }/resources/css/admin.css">
 <meta charset="UTF-8">
 <title>공지사항 세부사항</title>
 <style>
@@ -22,7 +24,7 @@ function backToList(obj){
 	obj.submit();
   }
 function fn_enable(){
-	document.getElementById("tr_btn_modify").style.display="block";
+	document.getElementById("tr_btn_modify").style.display="contents";
 	document.getElementById("tr_btn").style.display="none";
 	document.getElementById("i_title").disabled=false;
 	document.getElementById("i_content").disabled=false;
@@ -51,57 +53,58 @@ function fn_remove_article(url, noticeNO){
 }
 </script>
 <body>
-	<form name="frmArticle" method="post"  >
+	<h1 class="label">공지사항 상세페이지</h1>
+	<form name="frmArticle" class="notice_view_form"  method="post"  >
 		<table  border=0  align="center">
   			<tr>
-   				<td width=150 align="center" bgcolor=#FF9933>
+   				<td width=150 align="center" >
       			글번호
    				</td>
    				<td >
-    				<input type="text"  value="${notice.no }"  disabled />
+    				<input class="put" type="text"  value="${notice.no }"  readonly />
     				<input type="hidden" name="no" value="${notice.no}"  />
    				</td>
   			</tr>
 			<tr>
-				<td width="150" align="center" bgcolor="#FF9933">
+				<td width="150" align="center">
      			 제목 
    				</td>
    				<td>
-    				<input type=text value="${notice.title }"  name="title"  id="i_title" disabled />
+    				<input class="put" type=text value="${notice.title }"  name="title"  id="i_title" disabled />
    				</td>   
   			</tr>
   			<tr>
-    			<td width="150" align="center" bgcolor="#FF9933">
+    			<td width="150" align="center">
      			 내용
    				</td>
    				<td>
-    				<textarea rows="20" cols="60"  name="content"  id="i_content"  disabled />${notice.content }</textarea>
+    				<textarea class="put" rows="20" cols="60"  name="content"  id="i_content"  disabled />${notice.content }</textarea>
     				
    				</td>  
   			</tr>
  
 
   			<tr>
-	   			<td width="150" align="center" bgcolor="#FF9933">
+	   			<td width="150" align="center">
 	      		등록일자
 			   	</td>
 			   	<td>
-			   		<input type=text name="writeDate" value="${notice.writeDate}" disabled />
+			   		<input class="put" type=text name="writeDate" value="${notice.writeDate}" readonly />
 			   		<input type="hidden" name="writeDate" value="${notice.writeDate}"  />
 			   	</td>   
   			</tr>
   			<tr id="tr_btn_modify"  align="center">
-  				<td colspan="2"   >
-  					<input type=button value="수정반영하기" onClick="fn_modify_article(frmArticle)">
-		           	<input type=button value="취소"  onClick="backToList(frmArticle)">
+  				<td colspan="2"  align="center">
+  					<input type=button class="admin_btn" value="수정반영하기" onClick="fn_modify_article(frmArticle)">
+		           	<input type=button class="admin_btn" value="취소"  onClick="backToList(frmArticle)">
 			   	</td>   
 		  	</tr>
     
 		  	<tr  id="tr_btn">
 		   		<td colspan="2" align="center">
-			      	<input type=button value="수정하기" onClick="fn_enable()">
-			      	<input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/admin/notice/removeNotice.do?', ${notice.no})">
-			    	<input type=button value="목록"  onClick="backToList(this.form)">
+			      	<input type=button class="admin_btn" value="수정하기" onClick="fn_enable()">
+			      	<input type=button class="admin_btn" value="삭제하기" onClick="fn_remove_article('${contextPath}/admin/notice/removeNotice.do', ${notice.no})">
+			    	<input type=button class="admin_btn" value="목록"  onClick="backToList(this.form)">
 		   		</td>
 		  	</tr>
 		</table>

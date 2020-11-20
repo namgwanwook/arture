@@ -23,13 +23,7 @@ public class ImageVO {
 		return imageFileName;
 	}
 	public void setImageFileName(String imageFileName) {
-		try {
-			if(imageFileName!= null && imageFileName.length()!=0) {
-				this.imageFileName = URLEncoder.encode(imageFileName,"UTF-8");
-			}
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		this.imageFileName = imageFileName;
 	}
 	public Date getRegDate() {
 		return regDate;

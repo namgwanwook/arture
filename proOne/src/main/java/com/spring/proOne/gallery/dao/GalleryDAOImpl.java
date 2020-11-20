@@ -25,18 +25,14 @@ public class GalleryDAOImpl implements GalleryDAO {
 	 
 
 	@Override
-	public List selectDetailGallery(int num) throws DataAccessException {
-		List<GalleryVO> detailgallery = null;
-		detailgallery = sqlSession.selectList("mapper.gallery.selectGallery",num);
-		return detailgallery;
+	public GalleryVO selectDetailGallery(int num) throws DataAccessException {
+		return sqlSession.selectOne("mapper.gallery.selectGallery",num);
 	}
 
 	@Override
 	public int selectlike(int galleryNO) throws DataAccessException {		
-		int like;
-			like = sqlSession.selectOne("mapper.gallery.selectLike",galleryNO);
-			System.out.println(like); 
-		return like;
+		return sqlSession.selectOne("mapper.gallery.selectLike",galleryNO);
 	}
+	
 	
 }

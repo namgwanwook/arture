@@ -12,6 +12,6 @@ public interface AdminMemberDAO {
 
 	int modPwd(MemberVO temp);
 
-	int deleteNotice(String id) throws DataAccessException;
+	void deleteNotice(String id) throws DataAccessException;
 
 }

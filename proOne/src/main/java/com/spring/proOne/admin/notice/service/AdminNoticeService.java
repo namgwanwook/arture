@@ -1,6 +1,7 @@
 package com.spring.proOne.admin.notice.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -10,6 +11,8 @@ public interface AdminNoticeService {
 
 	List<NoticeVO> listNotieces() throws Exception;
 
+	Map listNotieces(Map pagingMap) throws Exception;
+
 	void addNotice(NoticeVO notice) throws Exception;
 
 	void removeNotice(int no) throws DataAccessException;
@@ -17,5 +20,6 @@ public interface AdminNoticeService {
 	void modNotice(NoticeVO notice);
 
 	NoticeVO viewNotice(int noticeNO);
+
 
 }

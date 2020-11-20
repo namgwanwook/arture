@@ -13,7 +13,4 @@ import com.spring.proOne.gallery.vo.GalleryVO;
 public interface GalleryController {
 	//갤러리 페이지로 이동
 	public ModelAndView GalleryList(HttpServletRequest request, HttpServletResponse response)throws Exception;
-	
-	//상세 페이지로 이동
-	public ModelAndView detailPage(int num, HttpServletRequest request, HttpServletResponse response)throws Exception;
 }

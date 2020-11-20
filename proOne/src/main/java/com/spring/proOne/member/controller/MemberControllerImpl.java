@@ -32,76 +32,29 @@ public class MemberControllerImpl implements MemberController {
 	HttpSession session;
 
 	@Override
-	@RequestMapping(value="/member/listMembers.do", method=RequestMethod.GET)
-	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView();
-		
-		if(session.getAttribute("isLogOn") != null) {
-			List membersList = memberService.listMembers();
-			mav.addObject("membersList", membersList);
-			mav.setViewName(viewName);
-		} else {
-			mav.setViewName("redirect:/member/loginForm.do");
-		}
-		return mav;
-	}
-
-	@Override
 	@RequestMapping(value="/member/addMember.do", method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
-		String message = null;
-		ResponseEntity res = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html;charset=utf-8");
+		ModelAndView mav = new ModelAndView("redirect:/member/loginForm.do");
+		
 		try {
-			System.out.println(request.getContextPath());
 			memberService.addMember(member);
-			message = "<script>";
-			message += " alert('회원가입이 완료되었습니다. 로그인 해주세요.')";
-			message += " </script>";
 			
 		} catch(Exception e) {
-			System.out.println(request.getContextPath());
-			message  = "<script>";
-		    message +=" alert('오류가 발생하였습니다. 다시 시도해주세요.');";
-		    //message += " location.href='"+request.getContextPath()+"/member/memberForm.do';";
-		    message += " </script>";
 			e.printStackTrace();
 		}
 		
 		return mav;
-		/*
-		 * res = new ResponseEntity(message, responseHeaders, HttpStatus.OK); return
-		 * res;
-		 */
-	}
-	
-
-
-	@Override
-	@RequestMapping(value = "/member/removeMember.do", method = RequestMethod.GET)
-	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		request.setCharacterEncoding("utf-8");
-		memberService.removeMember(id);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
-		return null;
 	}
 
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(member);
-		System.out.println("멤버컨트롤러 로그인 아이디확인"+memberVO.getId());
 		if(memberVO != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", memberVO);
@@ -111,11 +64,11 @@ public class MemberControllerImpl implements MemberController {
 			if(action!=null) {
 				mav.setViewName("redirect:"+action);
 			}else {
-				mav.setViewName("redirect:/member/listMembers.do");
+				mav.setViewName("redirect:/main/main.do");
 			}
 		}else {
 			rAttr.addAttribute("result","loginFailed");
-			mav.setViewName("redirect:/main/main.do");
+			mav.setViewName("redirect:/member/loginForm.do");
 		}
 		return mav;
 	}
@@ -127,7 +80,6 @@ public class MemberControllerImpl implements MemberController {
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
-		System.out.println("들어오나요??");
 		mav.setViewName("redirect:/main/main.do");
 		return mav;
 	}

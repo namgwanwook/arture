@@ -6,10 +6,6 @@ import org.springframework.stereotype.Component;
 public class FavoriteVO {
 	private String id;
 	private int galleryNO;
-	
-	public FavoriteVO(){
-		System.out.println("FavoriteVO 생성");
-	}
 
 	public String getId() {
 		return id;

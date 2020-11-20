@@ -3,41 +3,63 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 수정할게 많음 -->
-
 <mapper namespace="mapper.admin_applycheck">
-	<resultMap id="adminMemberResult" type="MemberVO">
+	<resultMap id="adminApplyListResult" type="articleVO">
+		<result property="applyNO" column="applyNO" />
+		<result property="title" column="title" />
 		<result property="id" column="id" />
-        <result property="pwd" column="pwd" />
-        <result property="name" column="name" />
-        <result property="gender" column="gender" />
-        <result property="email" column="email" />
-        <result property="profileImage" column="profileImage" />
-        <result property="profileText" column="profileText" />
-        <result property="sns_i" column="sns_i" />
-        <result property="sns_f" column="sns_f" />
-        <result property="sns_b" column="sns_b" />
-        <result property="joinDate" column="joinDate" />
 	</resultMap> 
+	
+	<resultMap id="adminApplyContentsResult" type="articleVO">
+		<result property="applyNO" column="applyNO" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="category" column="category" />
+		<result property="hashtag" column="hashtag" />
+		<result property="id" column="id" />
+	</resultMap>
+	
+	<resultMap id="adminApplyImageResult" type="imageVO">
+		<result property="imageNO" column="imageNO" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="regDate" column="regDate" />
+		<result property="applyNO" column="applyNO" />
+	</resultMap>
 
-	<select id="selectAllMembers" resultMap="adminMemberResult">
+	<select id="selectAllLists" resultMap="adminApplyListResult">
       <![CDATA[
-         select * from o_member	order by joinDate desc	 	
+         select * from o_applyform	order by applyNO	 	
       ]]>
 	</select>
 	
-	<update id="updatePwd" parameterType="MemberVO">
-		<![CDATA[
-	     update o_member
-	     set pwd=#{pwd}
-	     where
-	     id=#{id}
+	<select id="selectApplycation" resultMap="adminApplyListResult" parameterType="int">
+      <![CDATA[
+         select * from o_applyform where applyNO = #{applyNO}	 	
       ]]>
-	</update>
+	</select>
 	
-	<delete id="deleteMember" parameterType="String">
+	<select id="selectImageFileList" resultMap="adminApplyImageResult" parameterType="int">
 		<![CDATA[
-			delete from o_member where id=#{id}
+			select * from o_imagefile where applyNO = #{applyNO}
+		]]>
+	</select>
+	
+	<insert id="insertGallery" parameterType="int">
+		<![CDATA[
+			insert into o_gallery(galleryNO, title, content, imagefilename, category, hashtag, id) select * from o_applyform where applyNO = #{applyNO}
+		]]>
+	</insert>
+	
+	<delete id="deleteApplyform" parameterType="int">
+		<![CDATA[
+			delete from o_applyform where applyNO = #{applyNO}
+		]]>
+	</delete>
+	
+	<delete id="deleteImageFile" parameterType="int">
+		<![CDATA[
+			delete from o_imagefile where applyNO = #{applyNO}
 		]]>
 	</delete>
     

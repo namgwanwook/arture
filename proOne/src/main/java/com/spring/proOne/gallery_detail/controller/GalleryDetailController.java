@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface GalleryDetailController {
-	public ModelAndView galleryDetail(@RequestParam("galleryNO") int galleryNO,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView galleryDetail( @RequestParam("galleryNO") int galleryNO,HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

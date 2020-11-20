@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>e-mail:admin@test.com</p>
-	<p>회사주소 : 서울시 강동구</p>
-	<p>찾아오시는 길 : <a href="#">약도</a></p>
+	<ul class="f_sitemap">
+		<li><a href="${contextPath }/main/main.do">MAIN</a></li>
+		<li><a href="${contextPath }/gallery/gallery.do">GALLERY</a></li>
+		<li><a href="${contextPath }/applyForm/applyForm.do">CONTACT US</a></li>
+	</ul>
+	<p class="f_copy">COPYRIGHT © 2020 ARTURE. ALL RIGHTS RESERVED.</p>
 </body>
 </html>

@@ -1,7 +1,5 @@
 package com.spring.proOne.member.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -13,24 +11,10 @@ import com.spring.proOne.member.vo.MemberVO;
 public class MemberDAOImpl implements MemberDAO{
 	@Autowired
 	SqlSession sqlSession;
-	
-	
-	@Override
-	public List selectAllMemberList() throws DataAccessException {
-		List<MemberVO> membersList = null;
-		membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
-		return membersList;
-	}
 
 	@Override
 	public int insertMember(MemberVO memberVO) throws DataAccessException {
 		int result = sqlSession.insert("mapper.member.insertMember", memberVO);
-		return result;
-	}
-
-	@Override
-	public int deleteMember(String id) throws DataAccessException {
-		int result = sqlSession.delete("mapper.mamber.deleteMember" , id);
 		return result;
 	}
 
@@ -47,10 +31,7 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public MemberVO selectById(String id) throws DataAccessException {
-		MemberVO vo = sqlSession.selectOne("mapper.member.selectMemberById",id);
-		return vo;
+	public MemberVO selectMemberById(String id) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.selectMemberById", id);
 	}
-
-
 }
