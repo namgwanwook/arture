@@ -12,36 +12,38 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${contextPath}/resources/css/common.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <title>헤더</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
+$(document).ready(function () {
 	$(".menu-btn").click(function () {
 		$(".menu-btn").toggleClass("active");
 		$(".overlay").toggleClass("active");
 		$(".menu-container").toggleClass("active");
 	});
 	
-	const cursor = curDot();
+	/* const cursor = curDot();
 	
 	cursor.over(".line-1", {
 		borderColor: "rgba(255,255,255,.38)",
 		broderWidth: 2
-	});
+	}); */
+});
 </script>
 </head>
 <body>
 	<div id="headerWrapper">
-		<div class="menu">
+ 		<div class="menu">
 			<section class="landing-page">
-				<div class="menu-btn"></div>
+				<div class="menu-btn"><i class="fas fa-bars"></i></div>
 				<div class="overlay"></div>
 				<div class="menu-container">
 					<ul class="menu-wrapper">
-						<li><a href="">Home</a></li>
-						<li><a href="">About</a></li>
-						<li><a href="">Services</a></li>
-						<li><a href="">Team</a></li>
-						<li><a href="">Contact</a></li>
+						<li><a href="${contextPath }/main/main.do">Main</a></li>
+						<li><a href="${contextPath }/gallery/gallery.do">Gallery</a></li>
+						<li><a href="${contextPath }/mypage/myPageMain.do?id=${member.id}">Profile</a></li>
+						<li><a href="${contextPath }/applyForm/applyForm.do">Contact</a></li>
 					</ul>
 					<div class="menu-underlay"></div>
 				</div>
@@ -57,7 +59,7 @@
 			<c:choose>
 					<c:when test="${isLogOn == true && member != null }">
 						<img src="${contextPath}/thumbnails.do?fileName=${member.profileImage}&id=${member.id}&originalFileName=${member.profileImage}"/>
-						<a href="${contextPath }/mypage/myPageMain.do?id=${member.id}"><span>${member.name}'s Profile</span></a>
+						<a href="${contextPath }/mypage/myPageMain.do"><span>${member.name}'s Profile</span></a>
 						<a href="${contextPath }/member/logout.do">Log Out</a>
 						<c:if test="${member.id == 'admin'}">
 							<a href="${contextPath }/admin/notice/noticeList.do" class="admin">Admin</a>

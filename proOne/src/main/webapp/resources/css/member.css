@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+input:focus {
+	outline:none;
+}
 
 /* 로그인창 CSS */
 	#loginWrapper{
@@ -27,19 +29,21 @@
 	}
 	#loginWrapper form td.td1{
 		border:none;
-		background-color:#f9224e;
+		background-color:#f4496c;
 	}
 	#loginWrapper form td.td1 input{
 		background-color:transparent;
+		width:300px;
 		border:none;
 		color:#fff;
 		font-size:18px;
 		line-height:50px;
+		cursor:pointer;
 	}
 	#loginWrapper form input.input1{
 		width:80%;
 		height:50px;
-		background-color:transparent;
+		background-color:transparent!important;
 		border:none;
 		color:#fff;
 	}
@@ -67,11 +71,11 @@
 	#joinWrapper form td input{
 		display:block;
 		width: 500px;
-		height:30px;
+		height:40px;
 		border:none;
 		border-bottom:3px solid gray;
 		background-color:transparent;
-		margin-bottom:10px;
+		margin-bottom:30px;
 		color:#fff;
 	}
 	#joinWrapper form td input:focus{
@@ -83,7 +87,7 @@
 		margin:0 auto;
 		border:none;
 		border-radius:50px;
-		background-color:#f9224e;
+		background-color:#f4496c;
 		font-size:18px;
 		line-height:50px;
 		border-bottom:none;
@@ -94,6 +98,10 @@
 		display:inline-block;
 		width:50px;
 		height:20px;
+		margin-top: 25px;
+	}
+	#joinWrapper form input.radio span{
+		margin-top:10px;
 	}
 	#joinWrapper form input.overlapped_btn{
 		display:inline-block;

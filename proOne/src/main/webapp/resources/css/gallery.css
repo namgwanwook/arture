@@ -8,9 +8,9 @@ header,footer{
 	background-color: gray;
 }
 section{
-	width: 70%;
+	width: 80%;
+	margin:0 auto;
 	padding-top: 50px;
-	margin-left: 15%;
 	overflow: hidden;
 }
 .row{
